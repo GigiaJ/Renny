@@ -8,7 +8,7 @@ float calculateEnemyFuturePositionCenter(float distanceTravelledDuringCast, floa
 
 void applyActiveCastInfo(DWORD address) {
 	if (address != NULL) {
-		spellCastData = (SpellCastDataBase*)(address);
+		spellCastData = (spellCastDataBase*)(address);
 	}
 }
 
@@ -16,21 +16,21 @@ void getListOfEnemyChamps(object* myPlayer)
 {
 	int enemyTeam = 0;
 
-	if (myPlayer->team == 200) {
+	if (myPlayer->mTeam == 200) {
 		enemyTeam = 100;
 	}
 	else {
 		enemyTeam = 200;
 	}
 
-	for (int i = 0; i < objMgr->ArrayHighestIndex; i++) {
-		if (objMgr->objectManagerArray[i] != NULL) {
-			object* TemporaryObject = objMgr->objectManagerArray[i];
-			if (TemporaryObject->team == enemyTeam)
+	for (int i = 0; i < objMgr->mArrayHighestIndex; i++) {
+		if (objMgr->mObjectManagerArray[i] != NULL) {
+			object* TemporaryObject = objMgr->mObjectManagerArray[i];
+			if (TemporaryObject->mTeam == enemyTeam)
 			{
 				if (TemporaryObject->mIsTargetable)
 				{
-					if (TemporaryObject->champion == 5121)
+					if (TemporaryObject->mUnitType == 5121)
 					{
 						listOfEnemyChamps.push_back(TemporaryObject);
 					}
@@ -43,9 +43,9 @@ void getListOfEnemyChamps(object* myPlayer)
 bool isMoving(object* targetChamp)
 {
 	bool isChampMoving = false;
-	firstPosition = targetChamp->unitPos;
+	firstPosition = targetChamp->mUnitPos;
 	Sleep(33);
-	secondPosition = targetChamp->unitPos;
+	secondPosition = targetChamp->mUnitPos;
 	if (firstPosition.x != secondPosition.x) {
 		isChampMoving = true;
 	}
@@ -58,17 +58,17 @@ bool isMoving(object* targetChamp)
 object* getClosestEnemy(object* myPlayer, float range) {
 	object* closestEnemy = nullptr;
 	float closestDistance = static_cast<float>(15000000.0);
-	Vector myPos = myPlayer->unitPos;
+	Vector myPos = myPlayer->mUnitPos;
 	std::vector<object*>::iterator iter;
 	for (iter = listOfEnemyChamps.begin(); iter != listOfEnemyChamps.end(); iter++) {
-		Vector enemyPos = (*iter)->unitPos;
+		Vector enemyPos = (*iter)->mUnitPos;
 		float differenceX = myPos.x - enemyPos.x;
 		differenceX = static_cast<float>(std::fabs(differenceX));
 		float differenceZ = myPos.z - enemyPos.z;
 		differenceZ = static_cast<float>(std::fabs(differenceZ));
 		float distanceFromMe = differenceX + differenceZ;
 		//((*iter)->mHP) / ((*iter)->mMaxHP)
-		if (distanceFromMe < closestDistance && ((*iter)->isDead == false) && ((*iter)->isVisible) && (range >= distanceFromMe))
+		if (distanceFromMe < closestDistance && ((*iter)->mIsDead == false) && ((*iter)->isVisible) && (range >= distanceFromMe))
 		{
 			closestEnemy = (*iter);
 			closestDistance = distanceFromMe;

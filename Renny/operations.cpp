@@ -31,22 +31,22 @@ namespace Operations {
 		DWORD SpellPtr;
 		Vector Empty;
 
-		Vector predictedLocation = enemyChamp->unitPos;
+		Vector predictedLocation = enemyChamp->mUnitPos;
 		Empty.x = 0;
 		Empty.y = 0;
 		Empty.z = 0;
 		Vector* pEmpty = &Empty;
 		object* myPlayer = (object*)lPlayer;
-		Vector myPos = myPlayer->unitPos;
+		Vector myPos = myPlayer->mUnitPos;
 		float ping = 0.024f * 2.0f;
 		SpellBook = (lPlayer + 0x1B90);
-		SpellPtr = *(DWORD*)myPlayer->SpellInstArray[slot];
-		float missileSpeed = (myPlayer->SpellInstArray[slot]->SpellData->SpellInfo->MissileSpeed);
-		float missileWidth = (myPlayer->SpellInstArray[slot]->SpellData->SpellInfo->MissileWidth);
-		float castTime = (myPlayer->SpellInstArray[slot]->SpellData->SpellInfo->CastTime);
+		SpellPtr = *(DWORD*)myPlayer->mSpellInstArray[slot];
+		float missileSpeed = (myPlayer->mSpellInstArray[slot]->mSpellData->mSpellInfo->mMissileSpeed);
+		float missileWidth = (myPlayer->mSpellInstArray[slot]->mSpellData->mSpellInfo->mMissileWidth);
+		float castTime = (myPlayer->mSpellInstArray[slot]->mSpellData->mSpellInfo->mCastTime);
 		float moveSpeed = enemyChamp->mMoveSpeed;
-		float directionX = enemyChamp->FacingX;
-		float directionZ = enemyChamp->FacingZ;
+		float directionX = enemyChamp->mDirectionFaced.x;
+		float directionZ = enemyChamp->mDirectionFaced.z;
 
 		if (missileSpeed > 0) {
 			if (enemyMoving) {
@@ -71,11 +71,11 @@ namespace Operations {
 	void IssueAttackOrder(object* enemyChamp) {
 		int orderType = 3; //AttackType
 		object* myPlayer = (object*)lPlayer;
-		Vector myPos = myPlayer->unitPos;
-		Vector enemyPos = enemyChamp->unitPos;
+		Vector myPos = myPlayer->mUnitPos;
+		Vector enemyPos = enemyChamp->mUnitPos;
 		float moveSpeed = myPlayer->mMoveSpeed;
-		float directionX = myPlayer->FacingX;
-		float directionZ = myPlayer->FacingZ;
+		float directionX = myPlayer->mDirectionFaced.x;
+		float directionZ = myPlayer->mDirectionFaced.x;
 		Vector targetPosition = {};
 
 		if (enemyChamp != nullptr) {
@@ -88,9 +88,9 @@ namespace Operations {
 	void IssueMoveOrder() {
 		int orderType = 2; //AttackType
 		object* myPlayer = (object*)lPlayer;
-		Vector myPos = myPlayer->unitPos;
+		Vector myPos = myPlayer->mUnitPos;
 		oCursor* myMouse = (oCursor*)oMouse;
-		Vector mousePos = myMouse->mousePos;
+		Vector mousePos = myMouse->mMousePos;
 
 		fnIssueOrder(myPlayer, orderType, &mousePos, nullptr, 0, 0, 0);
 	}

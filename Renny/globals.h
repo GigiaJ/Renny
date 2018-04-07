@@ -11,7 +11,7 @@ extern DWORD base;
 extern objectManager* objMgr;
 extern DWORD lPlayer;
 extern DWORD oMouse;
-extern SpellCastDataBase* spellCastData;
+extern spellCastDataBase* spellCastData;
 extern Vector firstPosition;
 extern Vector secondPosition;
 extern std::vector<object*> listOfEnemyChamps;

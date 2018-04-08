@@ -7,6 +7,8 @@ struct Vector
 	float z;
 };
 
+
+
 class object;
 class objectManager;
 class activeSpell;
@@ -15,7 +17,6 @@ class spellData;
 class spellInst;
 class oCursor;
 class spellInfo;
-class N00003FF9;
 
 class object
 {
@@ -180,41 +181,41 @@ public:
 	float mSecondaryARRegenRateRep; //0x1170 
 	unsigned char pad_0x1174[0xC]; //0x1174
 	float mSecondaryARBaseRegenRateRep; //0x1180 
-	unsigned char pad_0x1184[0xB4]; //0x1184
-	float mGold; //0x1238 
-	unsigned char pad_0x123C[0xC]; //0x123C
-	float mGoldTotal; //0x1248 
-	unsigned char pad_0x124C[0xC]; //0x124C
-	float mMinimumGold; //0x1258 
-	unsigned char pad_0x125C[0x158]; //0x125C
-	Vector mDirectionFaced; //0x13B4 
-	unsigned char pad_0x13C0[0xD00]; //0x13C0
+	unsigned char pad_0x1184[0xB8]; //0x1184
+	float mGold; //0x123C 
+	unsigned char pad_0x1240[0xC]; //0x1240
+	float mGoldTotal; //0x124C 
+	unsigned char pad_0x1250[0xC]; //0x1250
+	float mMinimumGold; //0x125C 
+	unsigned char pad_0x1260[0x158]; //0x1260
+	Vector mDirectionFaced; //0x13B8 
+	unsigned char pad_0x13C4[0xCFC]; //0x13C4
 	spellInst* mSpellInstArray[4]; //0x20C0 
-	unsigned char pad_0x40D0[0x15E4]; //0x40D0
-	int mEvolvePoints; //0x56B4 
-	unsigned char pad_0x56B8[0xC]; //0x56B8
-	int mEvolveFlag; //0x56C4 
-	unsigned char pad_0x56C8[0xC]; //0x56C8
-	float mExp; //0x56D4 
-	unsigned char pad_0x56D8[0xC]; //0x56D8
-	float mLevelRef; //0x56E4 
-	unsigned char pad_0x56E8[0xC]; //0x56E8
-	bool mSkillUpLevelDeltaReplicate; //0x56F4 
-	unsigned char pad_0x56F5[0x903]; //0x56F5
-	int mNumNeutralMinionsKilled; //0x5FF8 
-	unsigned char pad_0x5FFC[0x20]; //0x5FFC
-	int mInputLocks; //0x601C 
-	unsigned char pad_0x6020[0xC]; //0x6020
-	int mHealthBarCharacterIDForIcon; //0x602C 
-	unsigned char pad_0x6030[0x530]; //0x6030
-	float mPhysicalDamageTaken; //0x6560 
-	unsigned char pad_0x6564[0xC]; //0x6564
-	float mMagicDamageTaken; //0x6570 
-	unsigned char pad_0x6574[0xC]; //0x6574
-	float mTrueDamageTaken; //0x6580 
-	unsigned char pad_0x6584[0x374]; //0x6584
+	unsigned char pad_0x40D0[0x15EC]; //0x40D0
+	int mEvolvePoints; //0x56BC 
+	unsigned char pad_0x56C0[0xC]; //0x56C0
+	int mEvolveFlag; //0x56CC 
+	unsigned char pad_0x56D0[0xC]; //0x56D0
+	float mExp; //0x56DC 
+	unsigned char pad_0x56E0[0xC]; //0x56E0
+	float mLevelRef; //0x56EC 
+	unsigned char pad_0x56F0[0xC]; //0x56F0
+	bool mSkillUpLevelDeltaReplicate; //0x56FC 
+	unsigned char pad_0x56FD[0x903]; //0x56FD
+	int mNumNeutralMinionsKilled; //0x6000 
+	unsigned char pad_0x6004[0x20]; //0x6004
+	int mInputLocks; //0x6024 
+	unsigned char pad_0x6028[0xC]; //0x6028
+	int mHealthBarCharacterIDForIcon; //0x6034 
+	unsigned char pad_0x6038[0x530]; //0x6038
+	float mPhysicalDamageTaken; //0x6568 
+	unsigned char pad_0x656C[0xC]; //0x656C
+	float mMagicDamageTaken; //0x6578 
+	unsigned char pad_0x657C[0xC]; //0x657C
+	float mTrueDamageTaken; //0x6588 
+	unsigned char pad_0x658C[0x374]; //0x658C
 
-}; //Size=0x68F8
+}; //Size=0x6900
 
 class objectManager
 {
@@ -263,7 +264,6 @@ public:
 	unsigned char pad_0x03D8[0x4]; //0x03D8
 	float mManaCost; //0x03DC 
 	unsigned char pad_0x03E0[0x460]; //0x03E0
-
 
 }; //Size=0x0840
 
@@ -326,11 +326,4 @@ public:
 	unsigned char pad_0x04E8[0x58]; //0x04E8
 
 }; //Size=0x0540
-
-class N00003FF9
-{
-public:
-	unsigned char pad_0x0000[0x4]; //0x0000
-
-}; //Size=0x0004
 

@@ -14,6 +14,7 @@ extern DWORD oMouse;
 extern spellCastDataBase* spellCastData;
 extern Vector firstPosition;
 extern Vector secondPosition;
+extern Vector secondDirectionFaced;
 extern std::vector<object*> listOfEnemyChamps;
 
 extern int firstSpell;

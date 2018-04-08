@@ -8,6 +8,8 @@ DWORD oMouse = *(DWORD*)(base + 0x1589A94);
 spellCastDataBase* spellCastData;
 Vector firstPosition = {};
 Vector secondPosition = {};
+Vector secondDirectionFaced = {};
+
 std::vector<object*> listOfEnemyChamps = {};
 
 int firstSpell = 0;

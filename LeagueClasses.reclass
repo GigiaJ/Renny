@@ -12,7 +12,7 @@
 "/>
     <Footer Text=""/>
     <Notes Text=""/>
-    <Class Name="object" Type="28" Comment="" Offset="957232216" strOffset="&quot;League of Legends.exe&quot; + *2E31A7C" Code="">
+    <Class Name="object" Type="28" Comment="" Offset="948500120" strOffset="&quot;League of Legends.exe&quot; + *2E31A7C" Code="">
         <Node Name="N00000E1B" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N00000E1C" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N00000E1D" Type="4" Size="4" bHidden="false" Comment=""/>
@@ -1190,6 +1190,7 @@
         <Node Name="N000025E3" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N000025E4" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N000025E5" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001BCC" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N000025E6" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="mGold" Type="13" Size="4" bHidden="false" Comment=""/>
         <Node Name="N000025E8" Type="4" Size="4" bHidden="false" Comment=""/>
@@ -2071,7 +2072,6 @@
         <Node Name="N0000300F" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N00003010" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N00003011" Type="4" Size="4" bHidden="false" Comment=""/>
-        <Node Name="N00003012" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N00003013" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N00003014" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N00003015" Type="4" Size="4" bHidden="false" Comment=""/>
@@ -2122,6 +2122,8 @@
         <Node Name="mSpellInstArray" Type="27" Size="8208" bHidden="false" Comment="" Total="4">
             <Array Name="spellInst" Type="28" Size="2052" Comment=""/>
         </Node>
+        <Node Name="N00001BCD" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001BCE" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N00003046" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N00003047" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N00003048" Type="4" Size="4" bHidden="false" Comment=""/>
@@ -7138,8 +7140,5 @@ static spellInst* getSpellInst(DWORD lPlayer, int slot) {
         <Node Name="N00003FD3" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N00003FD4" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N00003FD5" Type="4" Size="4" bHidden="false" Comment=""/>
-    </Class>
-    <Class Name="N00003FF9" Type="28" Comment="" Offset="4194304" strOffset="400000" Code="">
-        <Node Name="N00003FFA" Type="4" Size="4" bHidden="false" Comment=""/>
     </Class>
 </ReClass>

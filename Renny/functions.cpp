@@ -2,7 +2,29 @@
 #include "functions.h"
 #include "hooks.h"
 
-float calculateEnemyFuturePositionCenter(float distanceTravelledDuringCast, float sumSquared, float missileSpeed, float missileWidth, float moveSpeed, float direction, float castTime) {
+bool isPositive(float number) {
+	return (number > 0);
+}
+bool isNegative(float number) {
+	return (number < 0);
+}
+bool isZero(float number) {
+	return (number == 0);
+}
+
+float modifySign(float numberToCheck, float numberToModify) {
+	if (isNegative(numberToCheck)) {
+		return (numberToModify * -1.0f);
+	}
+	if (isPositive(numberToCheck)) {
+		return numberToModify;
+	}
+	if (isZero(numberToCheck)) {
+		return 0;
+	}
+}
+
+float calculateEnemyFuturePosition(float distanceTravelledDuringCast, float sumSquared, float missileSpeed, float missileWidth, float moveSpeed, float direction, float castTime) {
 	return (((distanceTravelledDuringCast + ((sumSquared / missileSpeed) * moveSpeed))) * direction);
 }
 
@@ -46,6 +68,7 @@ bool isMoving(object* targetChamp)
 	firstPosition = targetChamp->mUnitPos;
 	Sleep(33);
 	secondPosition = targetChamp->mUnitPos;
+	secondDirectionFaced = targetChamp->mDirectionFaced;
 	if (firstPosition.x != secondPosition.x) {
 		isChampMoving = true;
 	}

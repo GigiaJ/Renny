@@ -8,7 +8,7 @@ namespace Operations
 
 	void Init();
 
-	void CastSpell(object* enemyChamp, int slot, bool enemyMoving);
+	void CastSpell(object* enemyChamp, int slot);
 
 	void IssueAttackOrder(object* enemyChamp);
 

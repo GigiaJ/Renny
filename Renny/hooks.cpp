@@ -3,13 +3,15 @@
 #include "hooks.h"
 
 
-int hookLength = 5;
+int hookLength = 11;
 DWORD hookAddress = base + 0x1CF81B;
 DWORD BackAddy1 = hookAddress + hookLength;
 int hookLength2 = 10;
 DWORD hookAddress2 = base + 0x1E3CCB;
 DWORD BackAddy2 = hookAddress2 + hookLength2;
-
+int hookLength3 = 9;
+DWORD hookAddress3 = base + 0x549910;
+DWORD BackAddy3 = hookAddress3 + hookLength3;
 
 bool Hook(void * toHook, void * ourFunct, int len) {
 	if (len < 5) {
@@ -36,13 +38,11 @@ void applyHooks() {
 	if (doOnce) {
 		doOnce = false;
 
-		int hookLength = 5;
-		DWORD hookAddress = base + 0x1CF81B;
-		Hook((void*)hookAddress, onSpellCast, hookLength);
+	//	Hook((void*)hookAddress, onSpellCast, hookLength);
 
-		int hookLength2 = 10;
-		DWORD hookAddress2 = base + 0x1E3CCB;
-		Hook((void*)hookAddress2, onAutoAttack, hookLength2);
+	Hook((void*)hookAddress2, onAutoAttack, hookLength2);
+
+	// Hook((void*)hookAddress3, onCast, hookLength3);
 	}
 }
 
@@ -51,13 +51,11 @@ void __declspec(naked) onAutoAttack() {
 		pushad
 	}
 
-
-	__asm {
-		popad
-		push dword ptr ss : [esp + 0Ch]
-	}
-
 	DWORD autoAttackInfo;
+
+
+
+	__asm push dword ptr ss : [esp + 0Ch]
 
 	__asm {
 		mov edx, ebx
@@ -68,7 +66,9 @@ void __declspec(naked) onAutoAttack() {
 
 	applyActiveCastInfo(autoAttackInfo);
 
+
 	__asm {
+		popad
 		lea ecx, [ebx + 1B90h]
 	}
 
@@ -83,6 +83,7 @@ void __declspec(naked) onSpellCast() {
 		popad
 		lea eax, dword ptr ss : [esp + 2Ch]
 		push eax
+		
 	}
 
 	DWORD* spellCastInfo;
@@ -96,5 +97,37 @@ void __declspec(naked) onSpellCast() {
 
 	applyActiveCastInfo(*spellCastInfo);
 
+	__asm {
+		lea ecx, dword ptr ss : [ebp - 1268h]
+	}
 	__asm jmp BackAddy1
+}
+
+void __declspec(naked) onCast() {
+	__asm {
+		pushad
+	}
+
+	DWORD* spellCastInfo;
+
+	__asm {
+		mov edx, [esp + 1Ch]
+		mov spellCastInfo, edx
+
+	}
+
+	applyActiveCastInfo(*spellCastInfo);
+
+	__asm {
+
+		popad
+
+		push edi
+		mov edi, dword ptr ss : [esp + 8h]
+		mov edx, dword ptr ds : [edi]
+		test edx, edx
+
+		jmp BackAddy3
+	}
+
 }

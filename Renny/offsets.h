@@ -17,6 +17,7 @@ class spellData;
 class spellInst;
 class oCursor;
 class spellInfo;
+class AIManager;
 
 class object
 {
@@ -183,7 +184,8 @@ public:
 	float mSecondaryARBaseRegenRateRep; //0x1180 
 	unsigned char pad_0x1184[0xB8]; //0x1184
 	float mGold; //0x123C 
-	unsigned char pad_0x1240[0xC]; //0x1240
+	unsigned char pad_0x1240[0x8]; //0x1240
+	AIManager* mAIManager; //0x1248 
 	float mGoldTotal; //0x124C 
 	unsigned char pad_0x1250[0xC]; //0x1250
 	float mMinimumGold; //0x125C 
@@ -326,4 +328,23 @@ public:
 	unsigned char pad_0x04E8[0x58]; //0x04E8
 
 }; //Size=0x0540
+
+class AIManager
+{
+public:
+	unsigned char pad_0x0000[0x194]; //0x0000
+	float mCurrentMovementSpeed; //0x0194 
+	bool mIsMoving; //0x0198 
+	unsigned char pad_0x0199[0xB]; //0x0199
+	Vector mLastPosition; //0x01A4 
+	Vector mNextPosition; //0x01B0 
+	unsigned char pad_0x01BC[0x100]; //0x01BC
+	Vector mCurrentPosition; //0x02BC 
+	unsigned char pad_0x02C8[0x94]; //0x02C8
+	Vector mDashEndPosition; //0x035C 
+	unsigned char pad_0x0368[0x2C]; //0x0368
+	bool mIsDashing; //0x0394 
+	unsigned char pad_0x0395[0x6F]; //0x0395
+
+}; //Size=0x0404
 

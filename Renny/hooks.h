@@ -6,6 +6,6 @@ void onAutoAttack();
 
 void onSpellCast();
 
-void onAutoAttack();
+void onCast();
 
 void applyHooks();

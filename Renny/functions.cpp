@@ -12,6 +12,10 @@ bool isZero(float number) {
 	return (number == 0);
 }
 
+float resetDelay(float delay) {
+	return (delay + vGameTime);
+}
+
 float modifySign(float numberToCheck, float numberToModify) {
 	if (isNegative(numberToCheck)) {
 		return (numberToModify * -1.0f);
@@ -22,6 +26,7 @@ float modifySign(float numberToCheck, float numberToModify) {
 	if (isZero(numberToCheck)) {
 		return 0;
 	}
+	return NULL;
 }
 
 float calculateEnemyFuturePosition(float distanceTravelledDuringCast, float sumSquared, float missileSpeed, float missileWidth, float moveSpeed, float direction, float castTime) {
@@ -29,6 +34,12 @@ float calculateEnemyFuturePosition(float distanceTravelledDuringCast, float sumS
 }
 
 void applyActiveCastInfo(DWORD address) {
+	/*
+	std::ofstream myfile;
+	myfile.open("C:\\Users\\gigia\\Desktop\\Script Development\\output.txt");
+	myfile << address;
+	myfile.close();
+	*/
 	if (address != NULL) {
 		spellCastData = (spellCastDataBase*)(address);
 	}
@@ -60,22 +71,6 @@ void getListOfEnemyChamps(object* myPlayer)
 			}
 		}
 	}
-}
-
-bool isMoving(object* targetChamp)
-{
-	bool isChampMoving = false;
-	firstPosition = targetChamp->mUnitPos;
-	Sleep(33);
-	secondPosition = targetChamp->mUnitPos;
-	secondDirectionFaced = targetChamp->mDirectionFaced;
-	if (firstPosition.x != secondPosition.x) {
-		isChampMoving = true;
-	}
-	if (firstPosition.z != secondPosition.z) {
-		isChampMoving = true;
-	}
-	return isChampMoving;
 }
 
 object* getClosestEnemy(object* myPlayer, float range) {

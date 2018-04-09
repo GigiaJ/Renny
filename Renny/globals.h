@@ -6,16 +6,17 @@
 #include <fstream>
 #include <chrono>
 #include <thread>
+#include <future>
 
 extern DWORD base;
 extern objectManager* objMgr;
 extern DWORD lPlayer;
 extern DWORD oMouse;
 extern spellCastDataBase* spellCastData;
-extern Vector firstPosition;
-extern Vector secondPosition;
-extern Vector secondDirectionFaced;
+extern float vGameTime;
+
 extern std::vector<object*> listOfEnemyChamps;
+extern volatile int loopCounter;
 
 extern int firstSpell;
 extern int secondSpell;

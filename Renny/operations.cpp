@@ -44,6 +44,8 @@ namespace Operations {
 		float missileSpeed = (myPlayer->mSpellInstArray[slot]->mSpellData->mSpellInfo->mMissileSpeed);
 		float missileWidth = (myPlayer->mSpellInstArray[slot]->mSpellData->mSpellInfo->mMissileWidth);
 		float castTime = (myPlayer->mSpellInstArray[slot]->mSpellData->mSpellInfo->mCastTime);
+		float castRadius = (myPlayer->mSpellInstArray[slot]->mSpellData->mSpellInfo->mCastRadius);
+		float myUnitSize = myPlayer->mEdgePos2.x - myPlayer->mEdgePos1.x;
 		float moveSpeed = enemyChamp->mMoveSpeed;
 
 		if (missileSpeed > 0) {
@@ -60,34 +62,32 @@ namespace Operations {
 				}
 
 				float enemyHitBoxSize = enemyChamp->mEdgePos2.x - enemyChamp->mEdgePos1.x;
+				float absoluteTotalDistanceFromEachother = absVectorDistance(myPos, enemyPos);
 
-				float distanceFromEachotherX = myPos.x - enemyPos.x;
-				float distanceFromEachotherZ = myPos.z - enemyPos.z;
-				float absoluteDistanceFromEachotherX = static_cast<float>(std::fabs(distanceFromEachotherX));
-				float absoluteDistanceFromEachotherZ = static_cast<float>(std::fabs(distanceFromEachotherZ));
-				float absoluteTotalDistanceFromEachother = absoluteDistanceFromEachotherX + absoluteDistanceFromEachotherZ;
 				float distanceTravelledDuringCast = castTime * moveSpeed;
 				float distTrav = static_cast<float>(std::pow(static_cast<double>(distanceTravelledDuringCast), static_cast<double>(2)));
 				float distFromEach = static_cast<float>(std::pow(static_cast<double>(absoluteTotalDistanceFromEachother), static_cast<double>(2)));
 				float sumOfDistances = distTrav + distFromEach;
 				float sumSquared = static_cast<float>(std::sqrt(sumOfDistances));
-				
+
 				float futurePositionX = calculateEnemyFuturePosition(distanceTravelledDuringCast, sumSquared, missileSpeed, missileWidth, moveSpeed, enemyChamp->mDirectionFaced.x, castTime);
 				float futurePositionZ = calculateEnemyFuturePosition(distanceTravelledDuringCast, sumSquared, missileSpeed, missileWidth, moveSpeed, enemyChamp->mDirectionFaced.z, castTime);
 
-				float clipTowardsX = modifySign(futurePositionX, enemyHitBoxSize) / 2.0f;
-				float  clipTowardsZ = modifySign(futurePositionZ, enemyHitBoxSize) / 2.0f;
-				
+				float clipTowardsX = (enemyChamp->mDirectionFaced.x * enemyHitBoxSize) / 2.0f;// modifySign(futurePositionX, enemyHitBoxSize) / 2.0f;
+				float  clipTowardsZ = (enemyChamp->mDirectionFaced.z * enemyHitBoxSize) / 2.0f;//modifySign(futurePositionZ, enemyHitBoxSize) / 2.0f;
+
 				clipTowardsX = -clipTowardsX;
 				clipTowardsZ = -clipTowardsZ;
 
-				float removeMissileWidthX = modifySign(clipTowardsX, (missileWidth - 2));
-				float removeMissileWidthZ = modifySign(clipTowardsZ, (missileWidth - 2));
+				float removeMissileWidthX = missileWidth / 2.0f;
+				float removeMissileWidthZ = missileWidth / 2.0f;
 
-				predictedLocation.x = enemyPos.x + futurePositionX + clipTowardsX + removeMissileWidthX;
-				predictedLocation.y = enemyPos.y;
-				predictedLocation.z = enemyPos.z + futurePositionZ + clipTowardsZ + removeMissileWidthZ;
 
+				if (castRadius < absoluteTotalDistanceFromEachother) {
+					predictedLocation.x = enemyPos.x + futurePositionX + clipTowardsX + removeMissileWidthX;
+					predictedLocation.y = enemyPos.y;
+					predictedLocation.z = enemyPos.z + futurePositionZ + clipTowardsZ + removeMissileWidthZ;
+				}
 			}
 		}
 		fnCastSpell(SpellBook, SpellPtr, slot, &predictedLocation, pEmpty, 0);

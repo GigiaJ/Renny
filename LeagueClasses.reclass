@@ -5228,7 +5228,8 @@
         <Node Name="N0000288D" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N0000288E" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N0000288F" Type="4" Size="4" bHidden="false" Comment=""/>
-        <Node Name="casterIndex" Type="10" Size="4" bHidden="false" Comment=""/>
+        <Node Name="casterIndex" Type="11" Size="2" bHidden="false" Comment=""/>
+        <Node Name="N000039D5" Type="6" Size="2" bHidden="false" Comment=""/>
         <Node Name="N00002891" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N00002892" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N00002893" Type="4" Size="4" bHidden="false" Comment=""/>
@@ -5246,7 +5247,8 @@
         <Node Name="N00002EE0" Type="7" Size="1" bHidden="false" Comment=""/>
         <Node Name="N00002EE3" Type="7" Size="1" bHidden="false" Comment=""/>
         <Node Name="N00002EE1" Type="7" Size="1" bHidden="false" Comment=""/>
-        <Node Name="mTargetIndex" Type="10" Size="4" bHidden="false" Comment=""/>
+        <Node Name="mTargetIndex" Type="11" Size="2" bHidden="false" Comment=""/>
+        <Node Name="N000039D7" Type="6" Size="2" bHidden="false" Comment=""/>
         <Node Name="N000028A4" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N000028A5" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N000028A6" Type="4" Size="4" bHidden="false" Comment=""/>

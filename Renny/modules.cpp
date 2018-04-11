@@ -6,20 +6,26 @@ float secondSpellDelay = 0.0f;
 float thirdSpellDelay = 0.0f;
 float fourthSpellDelay = 0.0f;
 
-float attackDelay = 0;
-float moveDelay = 0;
+float attackDelay = 0.0f; //Delay before you can attack again
+float moveDelay = 0.0f; //Time it takes auto to end
+
+float windUpTime = 0.0f;
+float animationTime = 0.0f;
 
 bool firstSpellAwaitingReset = true;
 bool secondSpellAwaitingReset = true;
 
 
 void autododge(object* myPlayer) {
+	float distanceApart = absVectorDistance(myPlayer->mUnitPos, objMgr->mObjectManagerArray[spellCastData->casterIndex]->mUnitPos);
+	if (spellCastData->mSpellData->mSpellInfo->mMaxRange < distanceApart) {
 
+	}
 }
 
 void autoComboer(object* myPlayer) {
 	if ((comboerDelay - myPlayer->mSpellInstArray[firstSpell]->mCurrentCDR + 1) <= vGameTime) {
-		object* champToCombo = getClosestEnemy(myPlayer, myPlayer->mSpellInstArray[firstSpell]->mSpellData->mSpellInfo->mMaxRange);
+		object* champToCombo = getClosestEnemy(myPlayer, myPlayer->mSpellInstArray[firstSpell]->mSpellData->mSpellInfo->mMaxRange, myPlayer->mSpellInstArray[firstSpell]->mSpellData->mSpellInfo->mCastRadius);
 		if (champToCombo != nullptr) {
 			//Test::IssueAttackOrder(champToCombo);
 
@@ -54,41 +60,31 @@ void autoComboer(object* myPlayer) {
 }
 
 void orbwalker(object* myPlayer) {
-	float windUpTime;
-	float animationTime;
-	float myAttackRange = myPlayer->mAttackRange;
-
-	object* champToOrbWalk = getClosestEnemy(myPlayer, myAttackRange);
-	if (attackDelay <= vGameTime) {
-		if (champToOrbWalk != nullptr) {
+	if (autoAttackData != NULL) {
+		Vector spellPos = autoAttackData->mStartPosition;
+		Vector myPos = myPlayer->mUnitPos;
+		float difference = (spellPos.x - myPos.x) + (spellPos.z - myPos.z);
+		if (difference == 0) {
+			windUpTime = autoAttackData->mWindUpTime;
+			animationTime = autoAttackData->mAnimationTime;
+		}
+	}
+	object* champToOrbWalk = getClosestEnemy(myPlayer, myPlayer->mAttackRange, (myPlayer->mEdgePos2.x - myPlayer->mEdgePos1.x));
+	if (champToOrbWalk != nullptr) {
+		if (attackDelay <= vGameTime) {
 			Operations::IssueAttackOrder(champToOrbWalk);
-			Vector spellPos = spellCastData->mStartPosition;
-			Vector myPos = myPlayer->mUnitPos;
-			float ping = 0.025f;
-			float difference = (spellPos.x - myPos.x) + (spellPos.z - myPos.z);
+
+
+			float ping = 0.050f;
+
 			float modifier = myPlayer->mAttackSpeedMod;
 
-			if (difference == 0) {
-				windUpTime = spellCastData->mWindUpTime;
-				animationTime = spellCastData->mAnimationTime;
-			}
-
-			attackDelay = resetDelay((windUpTime * 2) + ping);
-			moveDelay = resetDelay((animationTime / modifier) + windUpTime);
-			//Attack (orderType 3
-			//resetAndCountFor(dwDelay1);
-			/*
-			Move (orderType 2)
-			Test::IssueOrder(nullptr, 2);
-			Auto-dodge use
-			*/
-		}
-		else {
-			moveDelay = .250f;
+			moveDelay = resetDelay(windUpTime + ping);
+			attackDelay = resetDelay(animationTime);
 		}
 	}
 	if (moveDelay <= vGameTime) {
 		Operations::IssueMoveOrder();
+		moveDelay = resetDelay(0.200f);
 	}
-
 }

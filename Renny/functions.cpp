@@ -33,17 +33,23 @@ float calculateEnemyFuturePosition(float distanceTravelledDuringCast, float sumS
 	return (((distanceTravelledDuringCast + ((sumSquared / missileSpeed) * moveSpeed))) * direction);
 }
 
-void applyActiveCastInfo(DWORD address) {
-	/*
-	std::ofstream myfile;
-	myfile.open("C:\\Users\\gigia\\Desktop\\Script Development\\output.txt");
-	myfile << address;
-	myfile.close();
-	*/
-	if (address != NULL) {
-		spellCastData = (spellCastDataBase*)(address);
-	}
+
+float absVectorDistance(Vector firstVector, Vector secondVector) {
+	float distanceFromEachotherX = firstVector.x - secondVector.x;
+	float distanceFromEachotherZ = secondVector.z - secondVector.z;
+	float absoluteDistanceFromEachotherX = static_cast<float>(std::fabs(distanceFromEachotherX));
+	float absoluteDistanceFromEachotherZ = static_cast<float>(std::fabs(distanceFromEachotherZ));
+	return  absoluteDistanceFromEachotherX + absoluteDistanceFromEachotherZ;
 }
+
+void applyActiveAutoCastInfo(DWORD address) {
+		spellCastData = (spellCastDataBase*)(address);
+}
+
+void applyActiveSpellCastInfo(DWORD address) {
+	spellCastData = (spellCastDataBase*)(address);
+}
+
 
 void getListOfEnemyChamps(object* myPlayer)
 {
@@ -73,23 +79,20 @@ void getListOfEnemyChamps(object* myPlayer)
 	}
 }
 
-object* getClosestEnemy(object* myPlayer, float range) {
+object* getClosestEnemy(object* myPlayer, float range, float castRadius) {
 	object* closestEnemy = nullptr;
 	float closestDistance = static_cast<float>(15000000.0);
 	Vector myPos = myPlayer->mUnitPos;
 	std::vector<object*>::iterator iter;
 	for (iter = listOfEnemyChamps.begin(); iter != listOfEnemyChamps.end(); iter++) {
 		Vector enemyPos = (*iter)->mUnitPos;
-		float differenceX = myPos.x - enemyPos.x;
-		differenceX = static_cast<float>(std::fabs(differenceX));
-		float differenceZ = myPos.z - enemyPos.z;
-		differenceZ = static_cast<float>(std::fabs(differenceZ));
-		float distanceFromMe = differenceX + differenceZ;
+		float unitSize = (*iter)->mEdgePos2.x - (*iter)->mEdgePos1.x;
+		float distanceApart = absVectorDistance(myPos, enemyPos);
 		//((*iter)->mHP) / ((*iter)->mMaxHP)
-		if (distanceFromMe < closestDistance && ((*iter)->mIsDead == false) && ((*iter)->isVisible) && (range >= distanceFromMe))
+		if (distanceApart < closestDistance && ((*iter)->mIsDead == false) && ((*iter)->isVisible) && ((range + unitSize + castRadius) >= distanceApart))
 		{
 			closestEnemy = (*iter);
-			closestDistance = distanceFromMe;
+			closestDistance = distanceApart;
 		}
 	}
 

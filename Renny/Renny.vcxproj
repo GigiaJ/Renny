@@ -23,7 +23,10 @@
     <ClCompile Include="functions.cpp" />
     <ClCompile Include="globals.cpp" />
     <ClCompile Include="hooks.cpp" />
-    <ClCompile Include="modules.cpp" />
+    <ClCompile Include="modules\comboer.cpp" />
+    <ClCompile Include="modules\moduleFunctions.cpp" />
+    <ClCompile Include="modules\orbwalker.cpp" />
+    <ClCompile Include="modules\autododge.cpp" />
     <ClCompile Include="operations.cpp" />
     <ClCompile Include="Renny.cpp" />
     <ClCompile Include="stdafx.cpp" />
@@ -32,7 +35,7 @@
     <ClInclude Include="functions.h" />
     <ClInclude Include="globals.h" />
     <ClInclude Include="hooks.h" />
-    <ClInclude Include="modules.h" />
+    <ClInclude Include="modules\modules.h" />
     <ClInclude Include="offsets.h" />
     <ClInclude Include="operations.h" />
     <ClInclude Include="stdafx.h" />

@@ -217,6 +217,9 @@ public:
 	float mTrueDamageTaken; //0x6588 
 	unsigned char pad_0x658C[0x374]; //0x658C
 
+	float getUnitSize() {
+		return (this->mEdgePos2.x - this->mEdgePos1.x);
+	}
 }; //Size=0x6900
 
 class objectManager

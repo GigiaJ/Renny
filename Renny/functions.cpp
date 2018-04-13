@@ -12,9 +12,7 @@ bool isZero(float number) {
 	return (number == 0);
 }
 
-float resetDelay(float delay) {
-	return (delay + vGameTime);
-}
+
 
 float modifySign(float numberToCheck, float numberToModify) {
 	if (isNegative(numberToCheck)) {
@@ -33,13 +31,18 @@ float calculateEnemyFuturePosition(float distanceTravelledDuringCast, float sumS
 	return (((distanceTravelledDuringCast + ((sumSquared / missileSpeed) * moveSpeed))) * direction);
 }
 
-
 float absVectorDistance(Vector firstVector, Vector secondVector) {
-	float distanceFromEachotherX = firstVector.x - secondVector.x;
-	float distanceFromEachotherZ = secondVector.z - secondVector.z;
+	float distanceFromEachotherX = secondVector.x - firstVector.x;
+	float distanceFromEachotherZ =  secondVector.z - firstVector.z;
 	float absoluteDistanceFromEachotherX = static_cast<float>(std::fabs(distanceFromEachotherX));
 	float absoluteDistanceFromEachotherZ = static_cast<float>(std::fabs(distanceFromEachotherZ));
 	return  absoluteDistanceFromEachotherX + absoluteDistanceFromEachotherZ;
+}
+
+float absObjectDistanceApart(object* unitOne, object*unitTwo) {
+	float unitSizesAdded = (unitOne->getUnitSize() / 2) + (unitTwo->getUnitSize() / 2);
+	float absoluteCentersApart = absVectorDistance(unitOne->mUnitPos, unitTwo->mUnitPos);
+	return (absoluteCentersApart + unitSizesAdded);
 }
 
 void applyActiveAutoCastInfo(DWORD address) {
@@ -82,14 +85,12 @@ void getListOfEnemyChamps(object* myPlayer)
 object* getClosestEnemy(object* myPlayer, float range, float castRadius) {
 	object* closestEnemy = nullptr;
 	float closestDistance = static_cast<float>(15000000.0);
-	Vector myPos = myPlayer->mUnitPos;
 	std::vector<object*>::iterator iter;
 	for (iter = listOfEnemyChamps.begin(); iter != listOfEnemyChamps.end(); iter++) {
-		Vector enemyPos = (*iter)->mUnitPos;
-		float unitSize = (*iter)->mEdgePos2.x - (*iter)->mEdgePos1.x;
-		float distanceApart = absVectorDistance(myPos, enemyPos);
+		float unitSize = (*iter)->getUnitSize();
+		float distanceApart = absObjectDistanceApart(myPlayer, (*iter));
 		//((*iter)->mHP) / ((*iter)->mMaxHP)
-		if (distanceApart < closestDistance && ((*iter)->mIsDead == false) && ((*iter)->isVisible) && ((range + unitSize + castRadius) >= distanceApart))
+		if (distanceApart < closestDistance && ((*iter)->mIsDead == false) && ((*iter)->isVisible) && (range >= distanceApart))
 		{
 			closestEnemy = (*iter);
 			closestDistance = distanceApart;

@@ -61,12 +61,12 @@ namespace Operations {
 					enemyPos = enemyChamp->mAIManager->mDashEndPosition;
 				}
 
-				float enemyHitBoxSize = enemyChamp->mEdgePos2.x - enemyChamp->mEdgePos1.x;
-				float absoluteTotalDistanceFromEachother = absVectorDistance(myPos, enemyPos);
+				float enemyHitBoxSize = enemyChamp->getUnitSize();
+				float absoluteUnitDistanceApart = absObjectDistanceApart(myPlayer, enemyChamp);//absVectorDistance(myPos, enemyPos);
 
 				float distanceTravelledDuringCast = castTime * moveSpeed;
 				float distTrav = static_cast<float>(std::pow(static_cast<double>(distanceTravelledDuringCast), static_cast<double>(2)));
-				float distFromEach = static_cast<float>(std::pow(static_cast<double>(absoluteTotalDistanceFromEachother), static_cast<double>(2)));
+				float distFromEach = static_cast<float>(std::pow(static_cast<double>(absoluteUnitDistanceApart), static_cast<double>(2)));
 				float sumOfDistances = distTrav + distFromEach;
 				float sumSquared = static_cast<float>(std::sqrt(sumOfDistances));
 
@@ -83,7 +83,7 @@ namespace Operations {
 				float removeMissileWidthZ = missileWidth / 2.0f;
 
 
-				if (castRadius < absoluteTotalDistanceFromEachother) {
+				if (castRadius < absoluteUnitDistanceApart) {
 					predictedLocation.x = enemyPos.x + futurePositionX + clipTowardsX + removeMissileWidthX;
 					predictedLocation.y = enemyPos.y;
 					predictedLocation.z = enemyPos.z + futurePositionZ + clipTowardsZ + removeMissileWidthZ;

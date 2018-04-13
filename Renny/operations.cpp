@@ -48,7 +48,7 @@ namespace Operations {
 		float myUnitSize = myPlayer->mEdgePos2.x - myPlayer->mEdgePos1.x;
 		float moveSpeed = enemyChamp->mMoveSpeed;
 
-		if (missileSpeed > 0) {
+		if (missileSpeed > 0.0f) {
 			if (enemyChamp->mAIManager->mIsMoving || enemyChamp->mAIManager->mIsDashing) {
 
 				Vector enemyPos = {};
@@ -110,13 +110,10 @@ namespace Operations {
 		fnIssueOrder(myPlayer, orderType, &targetPosition, enemyChamp, 0, 0, 0);
 	}
 
-	void IssueMoveOrder() {
-		int orderType = 2; //AttackType
-		object* myPlayer = (object*)lPlayer;
-		Vector myPos = myPlayer->mUnitPos;
-		oCursor* myMouse = (oCursor*)oMouse;
-		Vector mousePos = myMouse->mMousePos;
 
-		fnIssueOrder(myPlayer, orderType, &mousePos, nullptr, 0, 0, 0);
+	void IssueMoveOrder(Vector positionToMoveTo) {
+		int orderType = 2; //MoveType
+		object* myPlayer = (object*)lPlayer;
+		fnIssueOrder(myPlayer, orderType, &positionToMoveTo, nullptr, 0, 0, 0);
 	}
 }

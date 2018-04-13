@@ -12,7 +12,17 @@ bool isZero(float number) {
 	return (number == 0);
 }
 
+int setEnemyTeam(object* myPlayer) {
+	int enemyTeam = 0;
 
+	if (myPlayer->mTeam == 200) {
+		enemyTeam = 100;
+	}
+	else {
+		enemyTeam = 200;
+	}
+	return enemyTeam;
+}
 
 float modifySign(float numberToCheck, float numberToModify) {
 	if (isNegative(numberToCheck)) {
@@ -56,15 +66,7 @@ void applyActiveSpellCastInfo(DWORD address) {
 
 void getListOfEnemyChamps(object* myPlayer)
 {
-	int enemyTeam = 0;
-
-	if (myPlayer->mTeam == 200) {
-		enemyTeam = 100;
-	}
-	else {
-		enemyTeam = 200;
-	}
-
+	int enemyTeam = setEnemyTeam(myPlayer);
 	for (int i = 0; i < objMgr->mArrayHighestIndex; i++) {
 		if (objMgr->mObjectManagerArray[i] != NULL) {
 			object* TemporaryObject = objMgr->mObjectManagerArray[i];

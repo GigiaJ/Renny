@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ReClass>
     <!--ReClassEx-->
-    <TypeDef tdHex="unsigned char" tdInt64="__int64" tdInt32="int" tdInt16="__int16" tdInt8="bool" tdQWORD="DWORD64" tdDWORD="DWORD" tdWORD="WORD" tdBYTE="unsigned char" tdFloat="float" tdDouble="double" tdVec2="Vector2" tdVec3="Vector" tdQuat="Vector4" tdMatrix="matrix3x4_t" tdPChar="char*" tdPWChar="wchar_t*"/>
+    <TypeDef tdHex="unsigned char" tdInt64="__int64" tdInt32="int" tdInt16="short" tdInt8="bool" tdQWORD="DWORD64" tdDWORD="DWORD" tdWORD="WORD" tdBYTE="unsigned char" tdFloat="float" tdDouble="double" tdVec2="Vector2" tdVec3="Vector" tdQuat="Vector4" tdMatrix="matrix3x4_t" tdPChar="char*" tdPWChar="wchar_t*"/>
     <Header Text="struct Vector
 {
 	float x;
@@ -12,7 +12,9 @@
 "/>
     <Footer Text=""/>
     <Notes Text=""/>
-    <Class Name="object" Type="28" Comment="" Offset="927600688" strOffset="&quot;League of Legends.exe&quot; + *2E31A7C" Code="">
+    <Class Name="object" Type="28" Comment="" Offset="937746512" strOffset="&quot;League of Legends.exe&quot; + *2E31A7C" Code="	float getUnitSize() {
+		return (this-&gt;mEdgePos2.x - this-&gt;mEdgePos1.x);
+	}">
         <Node Name="N00000E1B" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N00000E1C" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N00000E1D" Type="4" Size="4" bHidden="false" Comment=""/>
@@ -5219,7 +5221,7 @@
         <Node Name="N000023A7" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N000023A8" Type="4" Size="4" bHidden="false" Comment=""/>
     </Class>
-    <Class Name="spellCastDataBase" Type="28" Comment="" Offset="936042600" strOffset="37CAE068" Code="">
+    <Class Name="spellCastDataBase" Type="28" Comment="" Offset="58978220" strOffset="0383EFAC" Code="">
         <Node Name="mSpellData" Type="8" Size="4" bHidden="false" Comment="" Pointer="spellData"/>
         <Node Name="N00002889" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="mSpellLevel" Type="10" Size="4" bHidden="false" Comment=""/>
@@ -5240,9 +5242,7 @@
         <Node Name="N0000289C" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N0000289D" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N0000289E" Type="4" Size="4" bHidden="false" Comment=""/>
-        <Node Name="N0000289F" Type="4" Size="4" bHidden="false" Comment=""/>
-        <Node Name="N000028A0" Type="4" Size="4" bHidden="false" Comment=""/>
-        <Node Name="N000028A1" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="mDirectionFacedAtCast" Type="23" Size="12" bHidden="false" Comment=""/>
         <Node Name="mHasTarget" Type="12" Size="1" bHidden="false" Comment=""/>
         <Node Name="N00002EE0" Type="7" Size="1" bHidden="false" Comment=""/>
         <Node Name="N00002EE3" Type="7" Size="1" bHidden="false" Comment=""/>
@@ -7317,7 +7317,9 @@ static spellInst* getSpellInst(DWORD lPlayer, int slot) {
         <Node Name="N00003849" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N0000384A" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N0000384B" Type="4" Size="4" bHidden="false" Comment=""/>
-        <Node Name="mCurrentPosition" Type="23" Size="12" bHidden="false" Comment=""/>
+        <Node Name="mCurrentPosition" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D2F" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D31" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N0000384F" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N00003850" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N00003851" Type="4" Size="4" bHidden="false" Comment=""/>

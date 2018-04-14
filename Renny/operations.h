@@ -14,5 +14,7 @@ namespace Operations
 
 	void IssueMoveOrder(Vector positionToMoveTo);
 
+	bool isWall(Vector position);
+
 }
 

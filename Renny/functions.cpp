@@ -56,7 +56,7 @@ float absObjectDistanceApart(object* unitOne, object*unitTwo) {
 }
 
 void applyActiveAutoCastInfo(DWORD address) {
-		spellCastData = (spellCastDataBase*)(address);
+		autoAttackData = (spellCastDataBase*)(address);
 }
 
 void applyActiveSpellCastInfo(DWORD address) {
@@ -92,7 +92,8 @@ object* getClosestEnemy(object* myPlayer, float range, float castRadius) {
 		float unitSize = (*iter)->getUnitSize();
 		float distanceApart = absObjectDistanceApart(myPlayer, (*iter));
 		//((*iter)->mHP) / ((*iter)->mMaxHP)
-		if (distanceApart < closestDistance && ((*iter)->mIsDead == false) && ((*iter)->isVisible) && (range >= distanceApart))
+		float edgeDistance = distanceApart - ((*iter)->getUnitSize() + (myPlayer->getUnitSize())) - castRadius;
+		if (distanceApart < closestDistance && ((*iter)->mIsDead == false) && ((*iter)->isVisible) && (range >= edgeDistance))
 		{
 			closestEnemy = (*iter);
 			closestDistance = distanceApart;

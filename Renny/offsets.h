@@ -1,5 +1,77 @@
 // Generated using ReClass 2016
 
+#define fnLogger 0x178CF0
+#define fnLogUIEvents 0x17CE90
+#define fnCastSpell 0x55B130
+#define fnGetHealthbarPos 0x1C0950
+#define fnEventHandler 0x250A30
+#define fnMainLoop 0x75E890
+#define fnDrawTurretRange 0x206F20
+#define fnLevelUpSpell 0x55D3C0
+#define fnSetSkin 0x20A0F0
+#define fnGetSpellData 0x550170
+#define fnPrintChat 0x58D290
+#define fnOpenChat 0x58C7E0
+#define fnDisplayChat 0x578AE0
+#define fnSendChat 0x6583C0
+#define fnSetChatScale 0x589D40
+#define fnIssueOrder 0x5C8880
+#define fnOnProcessSpell 0x550F70
+#define fnOnProcessSpellW 0x55C3F0
+#define fnSetPath 0x2186A0
+#define fnCreatePath 0x4F06F0
+#define fnIsWallOfGrass 0x5024D0
+#define fnIsWall 0x501670
+#define fnDispatchEvent 0x2BBFB0
+#define fnLoadTexture 0x7F8430
+#define fnOnProcessPacket 0x362080
+#define fnInitEvent 0x23E450
+#define fnOnLoadHero 0x36E4C0
+#define fnOnLoadChampion 0x1BCA50
+#define fnOnTeleport 0x1E7F60
+#define fnOnDisconnect 0x5EE6B0
+#define fnOnAfk 0x5EEA00
+#define fnSmartPing 0x67EEB0
+#define fnGameUpdate 0x31FA90
+#define fnClientMain 0x28FFB0
+#define fnPlaySound 0x279A90
+#define fnGetBasicAttack 0x1BFBE0
+#define fnGetAttackDelay 0x55F5D0
+#define fnGetAttackCastDelay 0x55F630
+#define fnUseObject 0x196F20
+#define fnCreateObject 0x2EE750
+#define fnIdentifyObject 0x21D220
+#define fnDeleteObject 0x2DEFF0
+#define fnAddRemoveBuff 0x549E00
+#define fnLevelUp 0x229940
+#define fnAssignNetworkID 0x2E9610
+#define fnUpdateBuff 0x52D640
+#define fnDoEmote 0x6423A0
+#define fnDoMasteryBadge 0x59D830
+#define fnOnSurrenderVote 0x65A640
+#define fnUpdateChargeableSpell 0x55CFB0
+#define fnApplySpellCD 0x555370
+#define fnStopCast 0x55C8A0
+#define fnGetBoundingRadius 0x1F46C0
+#define fnWorldToScreen 0x7FF4A0
+#define fnScreenToWorld 0x7FF580
+#define fnMapToWorld 0x62FD50
+#define fnWorld2Map 0x28DC80
+#define fnGetTacticalMap 0x1C74A0
+
+#define oLocalPlayer 0x2E4FF38
+#define oChatClientPtr 0x2E570C0
+#define oObjectManager 0x2E4AFE0
+#define oRenderer 0x2E743A0
+#define oZoomClass 0x2E47F40
+#define oUnderMouseObject 0x21F1A94
+#define oCursor 0x15A3B20
+#define oMissionInfo 0x2E79C04
+#define oVersion 0x2E556A0
+#define oNetClient 0x2E4FFC8
+#define oTexturePack 0x2E52388
+#define oGameTime 0x2E480C4
+
 struct Vector
 {
 	float x;
@@ -7,15 +79,13 @@ struct Vector
 	float z;
 };
 
-
-
 class object;
 class objectManager;
 class activeSpell;
 class spellCastDataBase;
 class spellData;
 class spellInst;
-class oCursor;
+class oMouse;
 class spellInfo;
 class AIManager;
 
@@ -298,7 +368,7 @@ public:
 	}
 }; //Size=0x0804
 
-class oCursor
+class oMouse
 {
 public:
 	unsigned char pad_0x0000[0x90]; //0x0000

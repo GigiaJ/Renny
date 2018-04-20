@@ -10,23 +10,23 @@ namespace Operations {
 	typedef char(__thiscall* tOnProcessSpellW)(DWORD* SpellBookPtr, DWORD* pSpellInfo);
 	typedef char(__cdecl* tIsWall)(Vector* position, unsigned __int16 unknown);
 
-	tCastSpell fnCastSpell;
-	tIssueOrder fnIssueOrder;
-	tGetAttackCastDelay fnGetAttackCastDelay;
-	tGetSpellData fnGetSpellData;
-	tOnProcessSpell fnOnProcessSpell;
-	tOnProcessSpellW fnOnProcessSpellW;
-	tIsWall fnIsWall;
+	tCastSpell mCastSpell;
+	tIssueOrder mIssueOrder;
+	tGetAttackCastDelay mGetAttackCastDelay;
+	tGetSpellData  mGetSpellData;
+	tOnProcessSpell  mOnProcessSpell;
+	tOnProcessSpellW  mOnProcessSpellW;
+	tIsWall  mIsWall;
 
 
 	void Init()
 	{
-		fnCastSpell = (tCastSpell)(base + 0x548D90);
-		fnIssueOrder = (tIssueOrder)(base + 0x1C9780);
-		fnGetAttackCastDelay = (tGetAttackCastDelay)(base + 0x54C980);
-		fnGetSpellData = (tGetSpellData)(base + 0x53E150);
-		fnOnProcessSpell = (tOnProcessSpell)(base + 0x53EC10);
-		fnIsWall = (tIsWall)(base + 0x4F0E90);
+		 mCastSpell = (tCastSpell)(base + fnCastSpell);
+		 mIssueOrder = (tIssueOrder)(base + fnIssueOrder);
+		 mGetAttackCastDelay = (tGetAttackCastDelay)(base + fnGetAttackCastDelay);
+		 mGetSpellData = (tGetSpellData)(base + fnGetSpellData);
+		 mOnProcessSpell = (tOnProcessSpell)(base + fnOnProcessSpell);
+		 mIsWall = (tIsWall)(base + fnIsWall);
 		//fnOnProcessSpellW = (tOnProcessSpellW)(base + 0x54D140);
 	}
 
@@ -94,7 +94,7 @@ namespace Operations {
 				}
 			}
 		}
-		fnCastSpell(SpellBook, SpellPtr, slot, &predictedLocation, pEmpty, 0);
+		 mCastSpell(SpellBook, SpellPtr, slot, &predictedLocation, pEmpty, 0);
 	}
 
 	void IssueAttackOrder(object* enemyChamp) {
@@ -111,16 +111,16 @@ namespace Operations {
 			targetPosition = enemyPos;
 		}
 
-		fnIssueOrder(myPlayer, orderType, &targetPosition, enemyChamp, 0, 0, 0);
+		 mIssueOrder(myPlayer, orderType, &targetPosition, enemyChamp, 0, 0, 0);
 	}
 
 	void IssueMoveOrder(Vector positionToMoveTo) {
 		int orderType = 2; //MoveType
 		object* myPlayer = (object*)lPlayer;
-		fnIssueOrder(myPlayer, orderType, &positionToMoveTo, nullptr, 0, 0, 0);
+		 mIssueOrder(myPlayer, orderType, &positionToMoveTo, nullptr, 0, 0, 0);
 	}
 
 	bool isWall(Vector position) {
-		return fnIsWall(&position, 1);
+		return  mIsWall(&position, 1);
 	}
 }

@@ -11,7 +11,7 @@
 extern DWORD base;
 extern objectManager* objMgr;
 extern DWORD lPlayer;
-extern DWORD oMouse;
+extern DWORD Mouse;
 extern spellCastDataBase* autoAttackData;
 extern spellCastDataBase* spellCastData;
 extern float vGameTime;

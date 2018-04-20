@@ -12,7 +12,9 @@ namespace Operations
 
 	void IssueAttackOrder(object* enemyChamp);
 
-	void IssueMoveOrder();
+	void IssueMoveOrder(Vector positionToMoveTo);
+
+	bool isWall(Vector position);
 
 }
 

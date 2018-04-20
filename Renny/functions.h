@@ -7,6 +7,8 @@ bool isNegative(float number);
 
 bool isZero(float number);
 
+int setEnemyTeam(object* myPlayer);
+
 float modifySign(float numberToCheck, float numberToModify);
 
 float calculateEnemyFuturePosition(float arg1, float arg2, float arg3, float arg4, float arg5, float arg6, float arg7);

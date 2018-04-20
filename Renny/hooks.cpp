@@ -3,8 +3,8 @@
 #include "hooks.h"
 
 
-int hookLength = 11;
-DWORD hookAddress = base + 0x1CF81B;
+int hookLength = 6;
+DWORD hookAddress = base + 0x1CF820;
 DWORD BackAddy1 = hookAddress + hookLength;
 int hookLength2 = 10;
 DWORD hookAddress2 = base + 0x1E3CCB;
@@ -80,22 +80,20 @@ void __declspec(naked) onSpellCast() {
 	__asm {
 		pushad
 	}
+
+	DWORD spellCastInfo;
+
+
+	__asm {
+		mov spellCastInfo, eax
+	}
+	applyActiveSpellCastInfo(spellCastInfo);
+
+
 	__asm {
 		popad
-		lea eax, dword ptr ss : [esp + 2Ch]
-		push eax
+		lea ecx, dword ptr ss : [ebp - 1268h]
 	}
-
-	DWORD* spellCastInfo;
-
-	__asm {
-		mov edx, ebx
-		mov ebx, esp
-		mov spellCastInfo, ebx
-		mov ebx, edx
-	}
-
-	applyActiveSpellCastInfo(*spellCastInfo);
 
 	__asm jmp BackAddy1
 }

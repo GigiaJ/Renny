@@ -8,6 +8,7 @@ namespace Operations {
 	typedef float(__cdecl *tGetAttackCastDelay)(object* unit, int attackID); //attackID can be found in the second called subroutine of castdelay that uses the attackID as a parameter currently 65
 	typedef signed int(__thiscall *tGetSpellData)(DWORD* unitSpellBook, int slot, int a3);
 	typedef char(__thiscall* tOnProcessSpellW)(DWORD* SpellBookPtr, DWORD* pSpellInfo);
+	typedef char(__cdecl* tIsWall)(Vector* position, unsigned __int16 unknown);
 
 	tCastSpell fnCastSpell;
 	tIssueOrder fnIssueOrder;
@@ -15,6 +16,8 @@ namespace Operations {
 	tGetSpellData fnGetSpellData;
 	tOnProcessSpell fnOnProcessSpell;
 	tOnProcessSpellW fnOnProcessSpellW;
+	tIsWall fnIsWall;
+
 
 	void Init()
 	{
@@ -23,6 +26,7 @@ namespace Operations {
 		fnGetAttackCastDelay = (tGetAttackCastDelay)(base + 0x54C980);
 		fnGetSpellData = (tGetSpellData)(base + 0x53E150);
 		fnOnProcessSpell = (tOnProcessSpell)(base + 0x53EC10);
+		fnIsWall = (tIsWall)(base + 0x4F0E90);
 		//fnOnProcessSpellW = (tOnProcessSpellW)(base + 0x54D140);
 	}
 
@@ -48,7 +52,7 @@ namespace Operations {
 		float myUnitSize = myPlayer->mEdgePos2.x - myPlayer->mEdgePos1.x;
 		float moveSpeed = enemyChamp->mMoveSpeed;
 
-		if (missileSpeed > 0) {
+		if (missileSpeed > 0.0f) {
 			if (enemyChamp->mAIManager->mIsMoving || enemyChamp->mAIManager->mIsDashing) {
 
 				Vector enemyPos = {};
@@ -110,13 +114,13 @@ namespace Operations {
 		fnIssueOrder(myPlayer, orderType, &targetPosition, enemyChamp, 0, 0, 0);
 	}
 
-	void IssueMoveOrder() {
-		int orderType = 2; //AttackType
+	void IssueMoveOrder(Vector positionToMoveTo) {
+		int orderType = 2; //MoveType
 		object* myPlayer = (object*)lPlayer;
-		Vector myPos = myPlayer->mUnitPos;
-		oCursor* myMouse = (oCursor*)oMouse;
-		Vector mousePos = myMouse->mMousePos;
+		fnIssueOrder(myPlayer, orderType, &positionToMoveTo, nullptr, 0, 0, 0);
+	}
 
-		fnIssueOrder(myPlayer, orderType, &mousePos, nullptr, 0, 0, 0);
+	bool isWall(Vector position) {
+		return fnIsWall(&position, 1);
 	}
 }

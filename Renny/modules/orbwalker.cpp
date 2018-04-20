@@ -32,7 +32,7 @@ void orbwalker(object* myPlayer) {
 		}
 	}
 	if (moveDelay <= vGameTime) {
-		oCursor* myMouse = (oCursor*)oMouse;
+		oMouse* myMouse = (oMouse*)Mouse;
 		Vector mousePos = myMouse->mMousePos;
 		Operations::IssueMoveOrder(mousePos);
 		moveDelay = resetDelay(0.200f);

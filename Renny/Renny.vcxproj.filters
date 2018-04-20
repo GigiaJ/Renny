@@ -36,16 +36,16 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="modules\orbwalker.cpp">
+    <ClCompile Include="modules\moduleFunctions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="modules\autododge.cpp">
+    <ClCompile Include="modules\orbwalker.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="modules\comboer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="modules\moduleFunctions.cpp">
+    <ClCompile Include="modules\autododge.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -60,14 +60,18 @@ Functions = [
 	
 	["SetChatScale","E8 C6 87 F6 FF ? ? ? ? ? ", 2], #Can be found with "SetChatScaleX"
 	
+	["IssueOrder", "E8 E0 FB BF FF ? ? ? ? ? ", 2],
 	
-	["IssueOrder", "E8 ? ? ? ? 5D 5B 5F B0 01 5E 83 C4 14 C2 1C 00 FF", 2],
+	["EventMoveMouseClick", "E8 ? ? ? ? 5D 5B 5F B0 01 5E 83 C4 14 C2 1C 00 FF", 2],
 	#\xE8\x00\x00\x00\x00\x5D\x5B\x5F\xB0\x01\x5E\x83\xC4\x14\xC2\x1C\x00\xFF x????xxxxxxxxxxxxx
 	
-	["OnProcessSpell", "83 EC 10 80 7C 24 ? ? 74 25", 1],
+	["OnProcessSpell", "83 EC 10 80 7C 24 ? ? 74 25", 1], #Called by OnProcessSpellW
 	
-	["OnProcessSpellW", "57 8B 7C 24 08 8B 17", 1],
+	["OnProcessSpellW", "57 8B 7C 24 08 8B 17", 1], #Called by OnSpellCast and OnAutoAttack
 	
+	["OnSpellCast", "81 EC 3C 04 00 00 ? ? ? ? ? ? ", 1],
+	
+	["OnAutoAttack", "51 55 8B E9 55 ", 1], 
 	
 	#NavStuff
 	["SetPath", "83 EC 10 56 8B 74 24 18 57 89 4C 24 14 ",1],

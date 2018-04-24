@@ -43,12 +43,12 @@ namespace Operations {
 		object* myPlayer = (object*)lPlayer;
 		Vector myPos = myPlayer->mUnitPos;
 		float ping = 0.024f * 2.0f;
-		SpellBook = (lPlayer + 0x1B90);
+		SpellBook = (lPlayer + pSpellBookPtr);
 		SpellPtr = *(DWORD*)myPlayer->mSpellInstArray[slot];
 		float missileSpeed = (myPlayer->mSpellInstArray[slot]->mSpellData->mSpellInfo->mMissileSpeed);
 		float missileWidth = (myPlayer->mSpellInstArray[slot]->mSpellData->mSpellInfo->mMissileWidth);
 		float castTime = (myPlayer->mSpellInstArray[slot]->mSpellData->mSpellInfo->mCastTime);
-		float castRadius = (myPlayer->mSpellInstArray[slot]->mSpellData->mSpellInfo->mCastRadius);
+		float castRadius = (myPlayer->mSpellInstArray[slot]->mSpellData->mSpellInfo->mCastRadius[myPlayer->mSpellInstArray[slot]->mCurrentRank + 1].value);
 		float myUnitSize = myPlayer->mEdgePos2.x - myPlayer->mEdgePos1.x;
 		float moveSpeed = enemyChamp->mMoveSpeed;
 

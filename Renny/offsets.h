@@ -1,5 +1,3 @@
-// Generated using ReClass 2016
-
 #define fnLogger 0x178CF0
 #define fnLogUIEvents 0x17CE90
 #define fnCastSpell 0x55B130
@@ -15,9 +13,12 @@
 #define fnDisplayChat 0x578AE0
 #define fnSendChat 0x6583C0
 #define fnSetChatScale 0x589D40
-#define fnIssueOrder 0x5C8880
+#define fnIssueOrder 0x1C8360
+#define fnEventMoveMouseClick 0x5C8880
 #define fnOnProcessSpell 0x550F70
 #define fnOnProcessSpellW 0x55C3F0
+#define fnOnSpellCast 0x1CE370
+#define fnOnAutoAttack 0x1E52A0
 #define fnSetPath 0x2186A0
 #define fnCreatePath 0x4F06F0
 #define fnIsWallOfGrass 0x5024D0
@@ -72,6 +73,10 @@
 #define oTexturePack 0x2E52388
 #define oGameTime 0x2E480C4
 
+
+#define pSpellBookPtr 0x1BD0
+// Generated using ReClass 2016
+
 struct Vector
 {
 	float x;
@@ -79,15 +84,25 @@ struct Vector
 	float z;
 };
 
+
+
+class ReClassFloat;
 class object;
 class objectManager;
 class activeSpell;
 class spellCastDataBase;
 class spellData;
-class spellInst;
 class oMouse;
 class spellInfo;
 class AIManager;
+class spellInst;
+
+class ReClassFloat
+{
+public:
+	float value; //0x0000 
+
+}; //Size=0x0004
 
 class object
 {
@@ -156,146 +171,155 @@ public:
 	float mChampSpecificHealth; //0x06E8 
 	unsigned char pad_0x06EC[0xC]; //0x06EC
 	int mStopShieldFade; //0x06F8 
-	unsigned char pad_0x06FC[0x764]; //0x06FC
-	float mPercentCooldownCapMod; //0x0E60 
-	unsigned char pad_0x0E64[0xC]; //0x0E64
-	float mPassiveCooldownEndTime; //0x0E70 
-	unsigned char pad_0x0E74[0xC]; //0x0E74
-	float mPassiveCooldownTotalTime; //0x0E80 
-	unsigned char pad_0x0E84[0x2C]; //0x0E84
-	float mFlatPhysicalDamageMod; //0x0EB0 
-	unsigned char pad_0x0EB4[0xC]; //0x0EB4
-	float mPercentPhysicalDamageMod; //0x0EC0 
-	unsigned char pad_0x0EC4[0xC]; //0x0EC4
-	float mFlatMagicDamageMod; //0x0ED0 
-	unsigned char pad_0x0ED4[0xC]; //0x0ED4
-	float mPercentMagicDamageMod; //0x0EE0 
-	unsigned char pad_0x0EE4[0xC]; //0x0EE4
-	float mFlatMagicReduction; //0x0EF0 
-	unsigned char pad_0x0EF4[0xC]; //0x0EF4
-	float mPercentMagicReduction; //0x0F00 
-	unsigned char pad_0x0F04[0xC]; //0x0F04
-	float mFlatCastRangeMod; //0x0F10 
-	unsigned char pad_0x0F14[0xC]; //0x0F14
-	float mAttackSpeedMod; //0x0F20 
-	unsigned char pad_0x0F24[0xC]; //0x0F24
-	float mBaseAttackDamage; //0x0F30 
-	unsigned char pad_0x0F34[0xC]; //0x0F34
-	float mBaseAttackDamageSansPercentScale; //0x0F40 
-	unsigned char pad_0x0F44[0xC]; //0x0F44
-	float mFlatBaseAttackDamageMod; //0x0F50 
-	unsigned char pad_0x0F54[0xC]; //0x0F54
-	float mPercentBaseAttackDamageMod; //0x0F60 
-	unsigned char pad_0x0F64[0xC]; //0x0F64
-	float mBaseAbilityDamage; //0x0F70 
-	unsigned char pad_0x0F74[0xC]; //0x0F74
-	float mScaleSkinCoef; //0x0F80 
-	unsigned char pad_0x0F84[0xC]; //0x0F84
-	float mDodge; //0x0F90 
-	unsigned char pad_0x0F94[0xC]; //0x0F94
-	float mCrit; //0x0FA0 
-	unsigned char pad_0x0FA4[0xC]; //0x0FA4
-	float mArmor; //0x0FB0 
-	unsigned char pad_0x0FB4[0xC]; //0x0FB4
-	float mBonusArmor; //0x0FC0 
-	unsigned char pad_0x0FC4[0xC]; //0x0FC4
-	float mSpellBlock; //0x0FD0 
-	unsigned char pad_0x0FD4[0xC]; //0x0FD4
-	float mBonusSpellBlock; //0x0FE0 
-	unsigned char pad_0x0FE4[0xC]; //0x0FE4
-	float mHPRegenRate; //0x0FF0 
-	unsigned char pad_0x0FF4[0xC]; //0x0FF4
-	float mBaseHPRegenRate; //0x1000 
-	unsigned char pad_0x1004[0xC]; //0x1004
-	float mMoveSpeed; //0x1010 
-	unsigned char pad_0x1014[0xC]; //0x1014
-	float mMoveSpeedBaseIncrease; //0x1020 
-	unsigned char pad_0x1024[0xC]; //0x1024
-	float mAttackRange; //0x1030 
-	unsigned char pad_0x1034[0xC]; //0x1034
-	float mFlatBubbleRadiusMod; //0x1040 
-	unsigned char pad_0x1044[0xC]; //0x1044
-	float mPercentBubbleRadiusMod; //0x1050 
-	unsigned char pad_0x1054[0xC]; //0x1054
-	float mFlatArmorPenetration; //0x1060 
-	unsigned char pad_0x1064[0xC]; //0x1064
-	float mPhysicalLethality; //0x1070 
-	unsigned char pad_0x1074[0xC]; //0x1074
-	float mPercentBonusArmorPenetration; //0x1080 
-	unsigned char pad_0x1084[0xC]; //0x1084
-	float mPercentArmorPenetration; //0x1090 
-	unsigned char pad_0x1094[0xC]; //0x1094
-	float mPercentCritBonusArmorPenetration; //0x10A0 
-	unsigned char pad_0x10A4[0xC]; //0x10A4
-	float mPercentCritTotalArmorPenetration; //0x10B0 
-	unsigned char pad_0x10B4[0xC]; //0x10B4
-	float mFlatMagicPenetration; //0x10C0 
-	unsigned char pad_0x10C4[0xC]; //0x10C4
-	float mMagicLethality; //0x10D0 
-	unsigned char pad_0x10D4[0xC]; //0x10D4
-	float mPercentMagicPenetration; //0x10E0 
-	unsigned char pad_0x10E4[0xC]; //0x10E4
-	float mPercentBonusMagicPenetration; //0x10F0 
-	unsigned char pad_0x10F4[0xC]; //0x10F4
-	float mPercentLifeStealMod; //0x1100 
-	unsigned char pad_0x1104[0xC]; //0x1104
-	float mPercentSpellVampMod; //0x1110 
-	unsigned char pad_0x1114[0x1C]; //0x1114
-	float mPercentCCReduction; //0x1130 
-	unsigned char pad_0x1134[0xC]; //0x1134
-	float mPercentEXPBonus; //0x1140 
-	unsigned char pad_0x1144[0xC]; //0x1144
-	float mPARRegenRate; //0x1150 
-	unsigned char pad_0x1154[0xC]; //0x1154
-	float mPrimaryARBaseRegenRateRep; //0x1160 
-	unsigned char pad_0x1164[0xC]; //0x1164
-	float mSecondaryARRegenRateRep; //0x1170 
-	unsigned char pad_0x1174[0xC]; //0x1174
-	float mSecondaryARBaseRegenRateRep; //0x1180 
-	unsigned char pad_0x1184[0xB8]; //0x1184
-	float mGold; //0x123C 
-	unsigned char pad_0x1240[0x8]; //0x1240
-	AIManager* mAIManager; //0x1248 
-	float mGoldTotal; //0x124C 
-	unsigned char pad_0x1250[0xC]; //0x1250
-	float mMinimumGold; //0x125C 
-	unsigned char pad_0x1260[0x158]; //0x1260
-	Vector mDirectionFaced; //0x13B8 
-	unsigned char pad_0x13C4[0xCFC]; //0x13C4
-	spellInst* mSpellInstArray[4]; //0x20C0 
-	unsigned char pad_0x40D0[0x15EC]; //0x40D0
-	int mEvolvePoints; //0x56BC 
-	unsigned char pad_0x56C0[0xC]; //0x56C0
-	int mEvolveFlag; //0x56CC 
-	unsigned char pad_0x56D0[0xC]; //0x56D0
-	float mExp; //0x56DC 
-	unsigned char pad_0x56E0[0xC]; //0x56E0
-	float mLevelRef; //0x56EC 
-	unsigned char pad_0x56F0[0xC]; //0x56F0
-	bool mSkillUpLevelDeltaReplicate; //0x56FC 
-	unsigned char pad_0x56FD[0x903]; //0x56FD
-	int mNumNeutralMinionsKilled; //0x6000 
-	unsigned char pad_0x6004[0x20]; //0x6004
-	int mInputLocks; //0x6024 
-	unsigned char pad_0x6028[0xC]; //0x6028
-	int mHealthBarCharacterIDForIcon; //0x6034 
-	unsigned char pad_0x6038[0x530]; //0x6038
-	float mPhysicalDamageTaken; //0x6568 
-	unsigned char pad_0x656C[0xC]; //0x656C
-	float mMagicDamageTaken; //0x6578 
-	unsigned char pad_0x657C[0xC]; //0x657C
-	float mTrueDamageTaken; //0x6588 
-	unsigned char pad_0x658C[0x374]; //0x658C
+	unsigned char pad_0x06FC[0x72C]; //0x06FC
+	float mNegativeCurrentCDR; //0x0E28 
+	unsigned char pad_0x0E2C[0xC]; //0x0E2C
+	float mNegativeMaxCDR; //0x0E38 
+	unsigned char pad_0x0E3C[0x1C]; //0x0E3C
+	float mPercentCooldownCapMod; //0x0E58 
+	unsigned char pad_0x0E5C[0xC]; //0x0E5C
+	float mPassiveCooldownEndTime; //0x0E68 
+	unsigned char pad_0x0E6C[0xC]; //0x0E6C
+	float mPassiveCooldownTotalTime; //0x0E78 
+	unsigned char pad_0x0E7C[0x2C]; //0x0E7C
+	float mFlatPhysicalDamageMod; //0x0EA8 
+	unsigned char pad_0x0EAC[0xC]; //0x0EAC
+	float mPercentPhysicalDamageMod; //0x0EB8 
+	unsigned char pad_0x0EBC[0xC]; //0x0EBC
+	float mFlatMagicDamageMod; //0x0EC8 
+	unsigned char pad_0x0ECC[0xC]; //0x0ECC
+	float mPercentMagicDamageMod; //0x0ED8 
+	unsigned char pad_0x0EDC[0xC]; //0x0EDC
+	float mFlatMagicReduction; //0x0EE8 
+	unsigned char pad_0x0EEC[0xC]; //0x0EEC
+	float mPercentMagicReduction; //0x0EF8 
+	unsigned char pad_0x0EFC[0xC]; //0x0EFC
+	float mFlatCastRangeMod; //0x0F08 
+	unsigned char pad_0x0F0C[0xC]; //0x0F0C
+	float mAttackSpeedMod; //0x0F18 
+	unsigned char pad_0x0F1C[0xC]; //0x0F1C
+	float mBaseAttackDamage; //0x0F28 
+	unsigned char pad_0x0F2C[0xC]; //0x0F2C
+	float mBaseAttackDamageSansPercentScale; //0x0F38 
+	unsigned char pad_0x0F3C[0xC]; //0x0F3C
+	float mFlatBaseAttackDamageMod; //0x0F48 
+	unsigned char pad_0x0F4C[0xC]; //0x0F4C
+	float mPercentBaseAttackDamageMod; //0x0F58 
+	unsigned char pad_0x0F5C[0xC]; //0x0F5C
+	float mBaseAbilityDamage; //0x0F68 
+	unsigned char pad_0x0F6C[0xC]; //0x0F6C
+	float mScaleSkinCoef; //0x0F78 
+	unsigned char pad_0x0F7C[0xC]; //0x0F7C
+	float mDodge; //0x0F88 
+	unsigned char pad_0x0F8C[0xC]; //0x0F8C
+	float mCrit; //0x0F98 
+	unsigned char pad_0x0F9C[0xC]; //0x0F9C
+	float mArmor; //0x0FA8 
+	unsigned char pad_0x0FAC[0xC]; //0x0FAC
+	float mBonusArmor; //0x0FB8 
+	unsigned char pad_0x0FBC[0xC]; //0x0FBC
+	float mSpellBlock; //0x0FC8 
+	unsigned char pad_0x0FCC[0xC]; //0x0FCC
+	float mBonusSpellBlock; //0x0FD8 
+	unsigned char pad_0x0FDC[0xC]; //0x0FDC
+	float mHPRegenRate; //0x0FE8 
+	unsigned char pad_0x0FEC[0xC]; //0x0FEC
+	float mBaseHPRegenRate; //0x0FF8 
+	unsigned char pad_0x0FFC[0xC]; //0x0FFC
+	float mMoveSpeed; //0x1008 
+	unsigned char pad_0x100C[0xC]; //0x100C
+	float mMoveSpeedBaseIncrease; //0x1018 
+	unsigned char pad_0x101C[0xC]; //0x101C
+	float mAttackRange; //0x1028 
+	unsigned char pad_0x102C[0xC]; //0x102C
+	float mFlatBubbleRadiusMod; //0x1038 
+	unsigned char pad_0x103C[0xC]; //0x103C
+	float mPercentBubbleRadiusMod; //0x1048 
+	unsigned char pad_0x104C[0xC]; //0x104C
+	float mFlatArmorPenetration; //0x1058 
+	unsigned char pad_0x105C[0xC]; //0x105C
+	float mPhysicalLethality; //0x1068 
+	unsigned char pad_0x106C[0xC]; //0x106C
+	float mPercentBonusArmorPenetration; //0x1078 
+	unsigned char pad_0x107C[0xC]; //0x107C
+	float mPercentArmorPenetration; //0x1088 
+	unsigned char pad_0x108C[0xC]; //0x108C
+	float mPercentCritBonusArmorPenetration; //0x1098 
+	unsigned char pad_0x109C[0xC]; //0x109C
+	float mPercentCritTotalArmorPenetration; //0x10A8 
+	unsigned char pad_0x10AC[0xC]; //0x10AC
+	float mFlatMagicPenetration; //0x10B8 
+	unsigned char pad_0x10BC[0xC]; //0x10BC
+	float mMagicLethality; //0x10C8 
+	unsigned char pad_0x10CC[0xC]; //0x10CC
+	float mPercentMagicPenetration; //0x10D8 
+	unsigned char pad_0x10DC[0xC]; //0x10DC
+	float mPercentBonusMagicPenetration; //0x10E8 
+	unsigned char pad_0x10EC[0xC]; //0x10EC
+	float mPercentLifeStealMod; //0x10F8 
+	unsigned char pad_0x10FC[0xC]; //0x10FC
+	float mPercentSpellVampMod; //0x1108 
+	unsigned char pad_0x110C[0x1C]; //0x110C
+	float mPercentCCReduction; //0x1128 
+	unsigned char pad_0x112C[0xC]; //0x112C
+	float mPercentEXPBonus; //0x1138 
+	unsigned char pad_0x113C[0xC]; //0x113C
+	float mPARRegenRate; //0x1148 
+	unsigned char pad_0x114C[0xC]; //0x114C
+	float mPrimaryARBaseRegenRateRep; //0x1158 
+	unsigned char pad_0x115C[0xC]; //0x115C
+	float mSecondaryARRegenRateRep; //0x1168 
+	unsigned char pad_0x116C[0xC]; //0x116C
+	float mSecondaryARBaseRegenRateRep; //0x1178 
+	unsigned char pad_0x117C[0xC4]; //0x117C
+	AIManager* mAIManager; //0x1240 
+	float mGold; //0x1244 
+	unsigned char pad_0x1248[0xC]; //0x1248
+	float mGoldTotal; //0x1254 
+	unsigned char pad_0x1258[0xC]; //0x1258
+	float mMinimumGold; //0x1264 
+	unsigned char pad_0x1268[0x168]; //0x1268
+	Vector mDirectionFaced; //0x13D0 
+	unsigned char pad_0x13DC[0x814]; //0x13DC
+	activeSpell* mActiveSpell; //0x1BF0 
+	unsigned char pad_0x1BF4[0x50C]; //0x1BF4
+	spellInst* mSpellInstArray[4]; //0x2100 
+	spellInst* mPartOfSpellInst1; //0x2104 
+	spellInst* mPartOfSpellInst2; //0x2108 
+	spellInst* mPartOfSpellInst4; //0x210C 
+	unsigned char pad_0x2110[0x14D4]; //0x2110
+	int mEvolvePoints; //0x35E4 
+	unsigned char pad_0x35E8[0xC]; //0x35E8
+	int mEvolveFlag; //0x35F4 
+	unsigned char pad_0x35F8[0xC]; //0x35F8
+	float mExp; //0x3604 
+	unsigned char pad_0x3608[0xC]; //0x3608
+	float mLevelRef; //0x3614 
+	unsigned char pad_0x3618[0xC]; //0x3618
+	bool mSkillUpLevelDeltaReplicate; //0x3624 
+	unsigned char pad_0x3625[0x903]; //0x3625
+	int mNumNeutralMinionsKilled; //0x3F28 
+	unsigned char pad_0x3F2C[0x20]; //0x3F2C
+	int mInputLocks; //0x3F4C 
+	unsigned char pad_0x3F50[0xC]; //0x3F50
+	int mHealthBarCharacterIDForIcon; //0x3F5C 
+	unsigned char pad_0x3F60[0x530]; //0x3F60
+	float mPhysicalDamageTaken; //0x4490 
+	unsigned char pad_0x4494[0xC]; //0x4494
+	float mMagicDamageTaken; //0x44A0 
+	unsigned char pad_0x44A4[0xC]; //0x44A4
+	float mTrueDamageTaken; //0x44B0 
+	unsigned char pad_0x44B4[0x3B4]; //0x44B4
 
 	float getUnitSize() {
 		return (this->mEdgePos2.x - this->mEdgePos1.x);
 	}
-}; //Size=0x6900
+}; //Size=0x4868
 
 class objectManager
 {
 public:
-	object** mObjectManagerArray; //0x0000 
+	object * *mObjectManagerArray; //0x0000 
 	int mArrayMaxSize; //0x0004 
 	int mArrayCurrentUsedIndex; //0x0008 
 	int mArrayHighestIndex; //0x000C 
@@ -314,14 +338,15 @@ class spellCastDataBase
 {
 public:
 	spellData * mSpellData; //0x0000 
-	unsigned char pad_0x0004[0x4]; //0x0004
-	int mSpellLevel; //0x0008 
-	unsigned char pad_0x000C[0x14]; //0x000C
-	short casterIndex; //0x0020 
+	unsigned char pad_0x0004[0x14]; //0x0004
+	int mSpellRank; //0x0018 
+	unsigned char pad_0x001C[0x4]; //0x001C
+	short mCasterIndex; //0x0020 
 	unsigned char pad_0x0022[0x16]; //0x0022
 	Vector mStartPosition; //0x0038 
 	Vector mTargetPosition; //0x0044 
-	unsigned char pad_0x0050[0x18]; //0x0050
+	unsigned char pad_0x0050[0xC]; //0x0050
+	Vector mDirectionFacedAtCast; //0x005C 
 	bool mHasTarget; //0x0068 
 	unsigned char pad_0x0069[0x3]; //0x0069
 	short mTargetIndex; //0x006C 
@@ -340,6 +365,9 @@ public:
 	float mManaCost; //0x03DC 
 	unsigned char pad_0x03E0[0x460]; //0x03E0
 
+	int getSpellRank() {
+		return this->mSpellRank + 1;
+	}
 }; //Size=0x0840
 
 class spellData
@@ -350,23 +378,6 @@ public:
 	unsigned char pad_0x0038[0x3CC]; //0x0038
 
 }; //Size=0x0404
-
-class spellInst
-{
-public:
-	unsigned char pad_0x0000[0x1C]; //0x0000
-	float mCurrentRank; //0x001C 
-	unsigned char pad_0x0020[0x48]; //0x0020
-	float mCurrentCDR; //0x0068 
-	unsigned char pad_0x006C[0xB0]; //0x006C
-	spellData* mSpellData; //0x011C 
-	unsigned char pad_0x0120[0x6E4]; //0x0120
-
-public:
-	static spellInst* getSpellInst(DWORD lPlayer, int slot) {
-		return (spellInst*)(lPlayer + (0x20C0 + (slot * 0x04)));
-	}
-}; //Size=0x0804
 
 class oMouse
 {
@@ -380,27 +391,22 @@ public:
 class spellInfo
 {
 public:
-	unsigned char pad_0x0000[0xD0]; //0x0000
-	float mSpellCostFirstLevel; //0x00D0 
-	float mSpellCostSecondLevel; //0x00D4 
-	float mSpellCostThirdLevel; //0x00D8 
-	float mSpellCostFourthLevel; //0x00DC 
-	float mSpellCostFifthLevel; //0x00E0 
-	unsigned char pad_0x00E4[0x164]; //0x00E4
-	float mCastTime; //0x0248 
-	unsigned char pad_0x024C[0x20]; //0x024C
-	float mCoolDownTime; //0x026C 
-	unsigned char pad_0x0270[0x138]; //0x0270
-	float mMaxRange; //0x03A8 
-	unsigned char pad_0x03AC[0x18]; //0x03AC
-	float mCastRadius; //0x03C4 
-	unsigned char pad_0x03C8[0xA4]; //0x03C8
-	float mMissileSpeed; //0x046C 
-	unsigned char pad_0x0470[0x74]; //0x0470
-	float mMissileWidth; //0x04E4 
-	unsigned char pad_0x04E8[0x58]; //0x04E8
+	unsigned char pad_0x0000[0x1F4]; //0x0000
+	float mAnimationTime; //0x01F4 
+	float mCastTime; //0x01F8 
+	unsigned char pad_0x01FC[0x7C]; //0x01FC
+	ReClassFloat mCoolDownTime[7]; //0x0278 
+	unsigned char pad_0x0294[0x104]; //0x0294
+	ReClassFloat mMaxRangeForPlacement[7]; //0x0398 
+	ReClassFloat mMaxRange[7]; //0x03B4 
+	ReClassFloat mCastRadius[7]; //0x03D0 
+	unsigned char pad_0x03EC[0x8C]; //0x03EC
+	float mMissileSpeed; //0x0478 
+	unsigned char pad_0x047C[0x74]; //0x047C
+	float mMissileWidth; //0x04F0 
+	unsigned char pad_0x04F4[0x4]; //0x04F4
 
-}; //Size=0x0540
+}; //Size=0x04F8
 
 class AIManager
 {
@@ -411,13 +417,29 @@ public:
 	unsigned char pad_0x0199[0xB]; //0x0199
 	Vector mLastPosition; //0x01A4 
 	Vector mNextPosition; //0x01B0 
-	unsigned char pad_0x01BC[0x100]; //0x01BC
-	Vector mCurrentPosition; //0x02BC 
-	unsigned char pad_0x02C8[0x94]; //0x02C8
+	unsigned char pad_0x01BC[0x1A0]; //0x01BC
 	Vector mDashEndPosition; //0x035C 
 	unsigned char pad_0x0368[0x2C]; //0x0368
 	bool mIsDashing; //0x0394 
 	unsigned char pad_0x0395[0xEF]; //0x0395
 
 }; //Size=0x0484
+
+class spellInst
+{
+public:
+	unsigned char pad_0x0000[0x1C]; //0x0000
+	int mCurrentRank; //0x001C 
+	unsigned char pad_0x0020[0xFC]; //0x0020
+	spellData* mSpellData; //0x011C 
+	unsigned char pad_0x0120[0x42C]; //0x0120
+
+	float  getCoolDown(object* unit) {
+		return this->mSpellData->mSpellInfo->mCoolDownTime[this->mCurrentRank + 1].value - (this->mSpellData->mSpellInfo->mCoolDownTime[this->mCurrentRank + 1].value * (-unit->mNegativeCurrentCDR));
+	}
+
+	static spellInst* getSpellInst(DWORD unit, int slot) {
+		return (spellInst*)(unit + (0x20C0 + (slot * 0x04)));
+	}
+}; //Size=0x054C
 

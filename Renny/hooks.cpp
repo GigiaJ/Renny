@@ -4,10 +4,10 @@
 
 
 int hookLength = 6;
-DWORD hookAddress = base + 0x1CF820;
+DWORD hookAddress = base + fnOnSpellCast + 0x2B5;
 DWORD BackAddy1 = hookAddress + hookLength;
 int hookLength2 = 10;
-DWORD hookAddress2 = base + 0x1E3CCB;
+DWORD hookAddress2 = base + fnOnAutoAttack + 0x1B8;
 DWORD BackAddy2 = hookAddress2 + hookLength2;
 
 int hookLength3 = 9;
@@ -70,7 +70,7 @@ void __declspec(naked) onAutoAttack() {
 	applyActiveAutoCastInfo(autoAttackInfo);
 
 	__asm {
-		lea ecx, [ebx + 1B90h]
+		lea ecx, [ebp + pSpellBookPtr]
 	}
 
 	__asm jmp BackAddy2
@@ -92,37 +92,8 @@ void __declspec(naked) onSpellCast() {
 
 	__asm {
 		popad
-		lea ecx, dword ptr ss : [ebp - 1268h]
+		lea ecx, dword ptr ss : [ebx - 1268h]
 	}
 
 	__asm jmp BackAddy1
-}
-
-void __declspec(naked) onCast() {
-	__asm {
-		pushad
-	}
-
-	DWORD* spellCastInfo;
-
-	__asm {
-		mov edx, [esp + 1Ch]
-		mov spellCastInfo, edx
-
-	}
-
-	applyActiveSpellCastInfo(*spellCastInfo);
-
-	__asm {
-
-		popad
-
-		push edi
-		mov edi, dword ptr ss : [esp + 8h]
-		mov edx, dword ptr ds : [edi]
-		test edx, edx
-
-		jmp BackAddy3
-	}
-
 }

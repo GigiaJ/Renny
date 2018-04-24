@@ -37,4 +37,5 @@ void orbwalker(object* myPlayer) {
 		Operations::IssueMoveOrder(mousePos);
 		moveDelay = resetDelay(0.200f);
 	}
+	autoAttackData = NULL;
 }

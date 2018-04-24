@@ -18,12 +18,62 @@ Rename = -1
 
 # Offsets // Patterns // xref's (Type:: 1 => Pattern, 2 => Call Pattern, 3 => Reference)
 Functions = [
-[
+
 
 ]
 
 Offsets = [
-
+		[
+			"fnIssueOrder0",
+			"E8 18 F9 BF FF ? ? ? ? ? ",
+			1,
+			0
+		],		[
+			"fnIssueOrder1",
+			"E8 CE FB FF FF ? ? ? ? ? 5F ",
+			1,
+			0
+		],		[
+			"fnIssueOrder2",
+			"E8 95 F6 BF FF ? ? ? ? ? ",
+			1,
+			0
+		],		[
+			"fnIssueOrder3",
+			"E8 B3 E4 BF FF ? ? ? ? ? ",
+			1,
+			0
+		],		[
+			"fnIssueOrder4",
+			"E8 36 FC FF FF ? ? ? ? ? 5F ",
+			1,
+			0
+		],		[
+			"fnIssueOrder5",
+			"E8 7F FE FF FF ? ? ? ? ? 8B 84 24 C8 00 00 00 ? ? ? ? ? ? ? ",
+			1,
+			0
+		],		[
+			"fnIssueOrder6",
+			"E8 E0 FB BF FF ? ? ? ? ? ",
+			1,
+			0
+		],		[
+			"fnIssueOrder7",
+			"E8 DF EA BF FF ? ? ? ? ? ",
+			1,
+			0
+		],		[
+			"fnIssueOrder8",
+			"E8 3D FD BF FF ? ? ? ? ? ",
+			1,
+			0
+		],		[
+			"fnIssueOrder9",
+			"E8 04 FC FF FF ? ? ? ? ? 5F ",
+			1,
+			0
+		]
 ]
 
 # Finder Functions

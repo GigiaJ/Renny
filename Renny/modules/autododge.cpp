@@ -74,36 +74,49 @@ Vector findClosestPoint(Slope slope, Vector castPosition, Vector targetPosition,
 }
 
 Vector sideStepPosition(Slope slope, Vector positionToSideStepFrom, object* myPlayer) {
+	Vector positionToSideStepTo = positionToSideStepFrom;
 	float perpendicularSlope = -(pow(slope.gradient, -1));
 	float distanceToMoveBy = myPlayer->getUnitSize() + (spellCastData->mSpellData->mSpellInfo->mMissileWidth * 2);
 	int counter = 0;
 	while (counter < distanceToMoveBy) {
 		if (slope.denominator != 0.0f) {
-			positionToSideStepFrom.x = positionToSideStepFrom.x + 1;
+			positionToSideStepTo.x = positionToSideStepTo.x + 1;
 		}
 		if (slope.numerator != 0.0f) {
-			positionToSideStepFrom.z = positionToSideStepFrom.z + perpendicularSlope;
+			positionToSideStepTo.z = positionToSideStepTo.z + perpendicularSlope;
 		}
 		counter++;
 	}
 
-	//if (isWall(Vector) { pos.z - perpSlope pos.x - 1
+	if (Operations::isWall(positionToSideStepTo)) {
+		positionToSideStepTo = positionToSideStepFrom;
+		counter = 0;
+		while (counter < distanceToMoveBy) {
+			if (slope.denominator != 0.0f) {
+				positionToSideStepTo.x = positionToSideStepTo.x + 1;
+			}
+			if (slope.numerator != 0.0f) {
+				positionToSideStepTo.z = positionToSideStepTo.z + perpendicularSlope;
+			}
+			counter++;
+		}
 
+	}
 	return positionToSideStepFrom;
 }
 
 void autododge(object* myPlayer) {
 	if (spellCastData != NULL) {
 		int enemyTeam = setEnemyTeam(myPlayer);
-		float distanceApart = absVectorDistance(myPlayer->mUnitPos, objMgr->mObjectManagerArray[spellCastData->casterIndex]->mUnitPos);
-		if (enemyTeam == objMgr->mObjectManagerArray[spellCastData->casterIndex]->mTeam) {
+		float distanceApart = absVectorDistance(myPlayer->mUnitPos, objMgr->mObjectManagerArray[spellCastData->mCasterIndex]->mUnitPos);
+		if (enemyTeam == objMgr->mObjectManagerArray[spellCastData->mCasterIndex]->mTeam) {
 			if (spellCastData->mSpellData->mSpellInfo->mMissileSpeed > 0.0f) {
 				Vector castTargetPosition = spellCastData->mTargetPosition;
-				Vector castStartPosition = objMgr->mObjectManagerArray[spellCastData->casterIndex]->mUnitPos;
-				if (spellCastData->mSpellData->mSpellInfo->mMaxRange > distanceApart) {
+				Vector castStartPosition = objMgr->mObjectManagerArray[spellCastData->mCasterIndex]->mUnitPos;
+				if (spellCastData->mSpellData->mSpellInfo->mMaxRange[spellCastData->getSpellRank()].value > distanceApart) {
 					Slope projectileSlope = {};
-					projectileSlope.numerator = (castTargetPosition.z - objMgr->mObjectManagerArray[spellCastData->casterIndex]->mUnitPos.z);
-					projectileSlope.denominator = (castTargetPosition.x - objMgr->mObjectManagerArray[spellCastData->casterIndex]->mUnitPos.x);
+					projectileSlope.numerator = (castTargetPosition.z - objMgr->mObjectManagerArray[spellCastData->mCasterIndex]->mUnitPos.z);
+					projectileSlope.denominator = (castTargetPosition.x - objMgr->mObjectManagerArray[spellCastData->mCasterIndex]->mUnitPos.x);
 					projectileSlope.gradient = projectileSlope.numerator / projectileSlope.denominator;
 
 					Vector closestPoint = findClosestPoint(projectileSlope, castStartPosition, castTargetPosition, myPlayer->mUnitPos);

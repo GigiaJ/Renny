@@ -439,7 +439,7 @@ public:
 	}
 
 	static spellInst* getSpellInst(DWORD unit, int slot) {
-		return (spellInst*)(unit + (0x20C0 + (slot * 0x04)));
+		return (spellInst*)(unit + (0x2100 + (slot * 0x04)));
 	}
 }; //Size=0x054C
 

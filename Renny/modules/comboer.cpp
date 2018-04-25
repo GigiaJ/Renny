@@ -18,7 +18,7 @@ void autoComboer(object* myPlayer) {
 
 			if (firstSpell != -1 && firstSpellAwaitingReset == true) {
 				Operations::CastSpell(champToCombo, firstSpell);
-				secondSpellDelay = resetDelay(spellCastData->mWindUpTime);
+				secondSpellDelay = resetDelay(myPlayer->mSpellInstArray[firstSpell]->mSpellData->mSpellInfo->mCastTime);
 				firstSpellAwaitingReset = false;
 				if (secondSpell == -1) {
 					firstSpellAwaitingReset = true;
@@ -28,7 +28,7 @@ void autoComboer(object* myPlayer) {
 
 			if (secondSpell != -1 && secondSpellDelay <= vGameTime && secondSpellAwaitingReset == true) {
 				Operations::CastSpell(champToCombo, secondSpell);
-				thirdSpellDelay = resetDelay(spellCastData->mWindUpTime);
+				thirdSpellDelay = resetDelay(myPlayer->mSpellInstArray[secondSpell]->mSpellData->mSpellInfo->mCastTime);
 				secondSpellAwaitingReset = false;
 				if (thirdSpell == -1) {
 					firstSpellAwaitingReset = true;

@@ -17,7 +17,7 @@ float signOfPointDifference(float firstPoint, float secondPoint) {
 
 Vector findClosestPoint(Slope slope, Vector castPosition, Vector targetPosition, Vector targetObjPos) {
 	
-	int xDifference = static_cast<int>(abs(castPosition.x) + abs(targetPosition.x));
+	int xDifference = static_cast<int>(abs(castPosition.x - targetPosition.x));
 	int xPos = static_cast<int>(castPosition.x);
 	float zPos = castPosition.z;
 	int targetXPos = static_cast<int>(targetPosition.x);
@@ -36,15 +36,16 @@ Vector findClosestPoint(Slope slope, Vector castPosition, Vector targetPosition,
 			closestDistance = distance;
 			closestPoint = positionToTest;
 		}
-		if (slope.denominator != 0) {
+		if (slope.denominator != 0.0f) {
 			xPos++;
 		}
-		if (slope.numerator != 0) {
+		if (slope.numerator != 0.0f) {
 			zPos = zPos + slope.gradient;
 		}
 		counter++;
 	}
 	counter = 0;
+
 	if (xPos != targetXPos) {
 		xPos = static_cast<int>(castPosition.x);
 		zPos = castPosition.z;
@@ -74,13 +75,21 @@ Vector findClosestPoint(Slope slope, Vector castPosition, Vector targetPosition,
 }
 
 Vector sideStepPosition(Slope slope, Vector positionToSideStepFrom, object* myPlayer) {
-	Vector positionToSideStepTo = positionToSideStepFrom;
+	Vector positionToSideStepTo = {};
+	positionToSideStepTo.x = positionToSideStepFrom.x;
+	positionToSideStepTo.y = positionToSideStepFrom.y;
+	positionToSideStepTo.z = positionToSideStepFrom.z;
 	float perpendicularSlope = -(pow(slope.gradient, -1));
 	float distanceToMoveBy = myPlayer->getUnitSize() + (spellCastData->mSpellData->mSpellInfo->mMissileWidth * 2);
 	int counter = 0;
 	while (counter < distanceToMoveBy) {
 		if (slope.denominator != 0.0f) {
-			positionToSideStepTo.x = positionToSideStepTo.x + 1;
+			if (isNegative(perpendicularSlope)) {
+				positionToSideStepTo.x = positionToSideStepTo.x - 1;
+			}
+			else {
+				positionToSideStepTo.x = positionToSideStepTo.x + 1;
+			}
 		}
 		if (slope.numerator != 0.0f) {
 			positionToSideStepTo.z = positionToSideStepTo.z + perpendicularSlope;
@@ -88,21 +97,29 @@ Vector sideStepPosition(Slope slope, Vector positionToSideStepFrom, object* myPl
 		counter++;
 	}
 
+	
 	if (Operations::isWall(positionToSideStepTo)) {
-		positionToSideStepTo = positionToSideStepFrom;
+		positionToSideStepTo.x = positionToSideStepFrom.x;
+		positionToSideStepTo.y = positionToSideStepFrom.y;
+		positionToSideStepTo.z = positionToSideStepFrom.z;
 		counter = 0;
 		while (counter < distanceToMoveBy) {
 			if (slope.denominator != 0.0f) {
-				positionToSideStepTo.x = positionToSideStepTo.x + 1;
+				if (isNegative(perpendicularSlope)) {
+					positionToSideStepTo.x = positionToSideStepTo.x + 1;
+				}
+				else {
+					positionToSideStepTo.x = positionToSideStepTo.x - 1;
+				}
 			}
 			if (slope.numerator != 0.0f) {
-				positionToSideStepTo.z = positionToSideStepTo.z + perpendicularSlope;
+				positionToSideStepTo.z = positionToSideStepTo.z - perpendicularSlope;
 			}
 			counter++;
 		}
-
 	}
-	return positionToSideStepFrom;
+	
+	return positionToSideStepTo;
 }
 
 void autododge(object* myPlayer) {
@@ -127,9 +144,7 @@ void autododge(object* myPlayer) {
 					float distanceFromProjectile = absVectorDistance(closestPoint, myPlayer->mUnitPos);
 					float distanceFromProjectileEdge = distanceFromProjectile + (spellCastData->mSpellData->mSpellInfo->mMissileWidth / 2);
 					if (distanceFromProjectileEdge <= myPlayer->getUnitSize()) {
-
 						Vector positionToMoveTo = sideStepPosition(projectileSlope, closestPoint, myPlayer);
-						positionToMoveTo.y = closestPoint.y;
 						Operations::IssueMoveOrder(positionToMoveTo);
 					}
 
@@ -152,7 +167,7 @@ void autododge(object* myPlayer) {
 				}
 			}
 		}
-		spellCastData = NULL;
 	}
+	spellCastData = NULL;
 }
 

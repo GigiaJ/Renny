@@ -63,6 +63,8 @@ void applyActiveSpellCastInfo(DWORD address) {
 	spellCastData = (spellCastDataBase*)(address);
 }
 
+void applyCastInfo(DWORD address) {
+}
 
 void getListOfEnemyChamps(object* myPlayer)
 {

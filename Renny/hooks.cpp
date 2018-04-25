@@ -6,12 +6,13 @@
 int hookLength = 6;
 DWORD hookAddress = base + fnOnSpellCast + 0x2B5;
 DWORD BackAddy1 = hookAddress + hookLength;
+
 int hookLength2 = 10;
 DWORD hookAddress2 = base + fnOnAutoAttack + 0x1B8;
 DWORD BackAddy2 = hookAddress2 + hookLength2;
 
-int hookLength3 = 9;
-DWORD hookAddress3 = base + 0x549910;
+int hookLength3 = 6;
+DWORD hookAddress3 = base + 0x55C3F1;
 DWORD BackAddy3 = hookAddress3 + hookLength3;
 
 bool Hook(void * toHook, void * ourFunct, int len) {
@@ -39,11 +40,11 @@ void applyHooks() {
 	if (doOnce) {
 		doOnce = false;
 
-	Hook((void*)hookAddress, onSpellCast, hookLength);
+		//Hook((void*)hookAddress, onSpellCast, hookLength);
 
-	Hook((void*)hookAddress2, onAutoAttack, hookLength2);
+		Hook((void*)hookAddress2, onAutoAttack, hookLength2);
 
-	// Hook((void*)hookAddress3, onCast, hookLength3);
+		//Hook((void*)hookAddress3, onCast, hookLength3);
 	}
 }
 
@@ -56,6 +57,7 @@ void __declspec(naked) onAutoAttack() {
 	__asm {
 		popad
 		push dword ptr ss : [esp + 0Ch]
+		pushad
 	}
 
 	DWORD autoAttackInfo;
@@ -70,6 +72,7 @@ void __declspec(naked) onAutoAttack() {
 	applyActiveAutoCastInfo(autoAttackInfo);
 
 	__asm {
+		popad
 		lea ecx, [ebp + pSpellBookPtr]
 	}
 
@@ -87,8 +90,10 @@ void __declspec(naked) onSpellCast() {
 	__asm {
 		mov spellCastInfo, eax
 	}
-	applyActiveSpellCastInfo(spellCastInfo);
 
+	if (spellCastInfo != 0x3) {
+		applyActiveSpellCastInfo(spellCastInfo);
+	}
 
 	__asm {
 		popad

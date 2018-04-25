@@ -21,6 +21,8 @@ void applyActiveAutoCastInfo(DWORD arg1);
 
 void applyActiveSpellCastInfo(DWORD arg1);
 
+void applyCastInfo(DWORD arg1);
+
 void getListOfEnemyChamps(object* myPlayer);
 
 object* getClosestEnemy(object* myPlayer, float range, float castRadius);

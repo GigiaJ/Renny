@@ -7,15 +7,25 @@
 	float x;
 	float y;
 	float z;
-};
-
-"/>
+	
+	inline bool operator!=(Vector a) {
+		if (x != a.x) {
+			return true;
+		}
+		if (y != a.y) {
+			return true;
+		}
+		if (z != a.z) {
+			return true;
+		}
+	}
+};"/>
     <Footer Text=""/>
     <Notes Text=""/>
     <Class Name="ReClassFloat" Type="28" Comment="" Offset="9306112" strOffset="8e0000" Code="">
         <Node Name="value" Type="13" Size="4" bHidden="false" Comment=""/>
     </Class>
-    <Class Name="object" Type="28" Comment="" Offset="949420536" strOffset="&quot;League of Legends.exe&quot; + *2E4FF38" Code="	float getUnitSize() {
+    <Class Name="object" Type="28" Comment="" Offset="1161195592" strOffset="45367048" Code="	float getUnitSize() {
 		return (this-&gt;mEdgePos2.x - this-&gt;mEdgePos1.x);
 	}">
         <Node Name="N00000E1B" Type="4" Size="4" bHidden="false" Comment=""/>
@@ -45,10 +55,10 @@
         <Node Name="N00000E33" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N00000E34" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N00000E35" Type="4" Size="4" bHidden="false" Comment=""/>
-        <Node Name="N00000E36" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="mNetworkId" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N00000E37" Type="4" Size="4" bHidden="false" Comment=""/>
-        <Node Name="mNetworkId" Type="15" Size="4" bHidden="false" Comment=""/>
-        <Node Name="N00000E39" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="mNetworkId" Type="10" Size="4" bHidden="false" Comment=""/>
+        <Node Name="mNetworkId" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N00000E3A" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="mEdgePos1" Type="23" Size="12" bHidden="false" Comment=""/>
         <Node Name="mEdgePos2" Type="23" Size="12" bHidden="false" Comment=""/>
@@ -4665,8 +4675,7 @@
         <Node Name="N00001CFF" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N00001D00" Type="4" Size="4" bHidden="false" Comment=""/>
     </Class>
-
-	<Class Name="objectManager" Type="28" Comment="" Offset="48434848" strOffset="&quot;League of Legends.exe&quot; + 2E30EA0 " Code="">
+    <Class Name="objectManager" Type="28" Comment="" Offset="48434848" strOffset="&quot;League of Legends.exe&quot; + 2E30EA0 " Code="">
         <Node Name="*mObjectManagerArray" Type="8" Size="4" bHidden="false" Comment="" Pointer="object"/>
         <Node Name="mArrayMaxSize" Type="10" Size="4" bHidden="false" Comment=""/>
         <Node Name="mArrayCurrentUsedIndex" Type="10" Size="4" bHidden="false" Comment=""/>
@@ -7194,5 +7203,4 @@ static spellInst* getSpellInst(DWORD unit, int slot) {
         <Node Name="N00005772" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N00005773" Type="4" Size="4" bHidden="false" Comment=""/>
     </Class>
-    
 </ReClass>

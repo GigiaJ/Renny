@@ -3,7 +3,7 @@
 #include "hooks.h"
 
 
-int hookLength = 6;
+int hookLength = 7;
 DWORD hookAddress = base + fnOnSpellCast + 0x2B5;
 DWORD BackAddy1 = hookAddress + hookLength;
 
@@ -11,9 +11,15 @@ int hookLength2 = 10;
 DWORD hookAddress2 = base + fnOnAutoAttack + 0x1B8;
 DWORD BackAddy2 = hookAddress2 + hookLength2;
 
-int hookLength3 = 6;
-DWORD hookAddress3 = base + 0x55C3F1;
+int hookLength3 = 9;
+DWORD hookAddress3 = base + 0x55C428;
 DWORD BackAddy3 = hookAddress3 + hookLength3;
+
+
+int hookLength4 = 5;
+DWORD hookAddress4 = base + 0x4F0996;
+DWORD BackAddy4 = hookAddress4 + hookLength4;
+DWORD callAddy4 = base + 0x50DB60;
 
 bool Hook(void * toHook, void * ourFunct, int len) {
 	if (len < 5) {
@@ -42,10 +48,39 @@ void applyHooks() {
 
 		//Hook((void*)hookAddress, onSpellCast, hookLength);
 
-		Hook((void*)hookAddress2, onAutoAttack, hookLength2);
+		//Hook((void*)hookAddress2, onAutoAttack, hookLength2);
 
-		//Hook((void*)hookAddress3, onCast, hookLength3);
+		Hook((void*)hookAddress3, onCast, hookLength3);
+
+		Hook((void*)hookAddress4, onWallClick, hookLength4);
 	}
+}
+
+void __declspec(naked) onCast() {
+
+	//DWORD castInfo;
+
+	__asm {
+		mov spellCastData, edi
+	}
+
+	//__asm {
+	//	pushad
+	//}
+
+	//applyCastInfo(castInfo);
+
+	__asm {
+	//	popad
+		mov     esi, eax
+		add     esp, 18h
+		mov     ecx, esi
+		mov     edx, [esi]
+	}
+
+	__asm jmp BackAddy3
+
+
 }
 
 void __declspec(naked) onAutoAttack() {
@@ -97,8 +132,18 @@ void __declspec(naked) onSpellCast() {
 
 	__asm {
 		popad
+		push eax
 		lea ecx, dword ptr ss : [ebx - 1268h]
 	}
 
 	__asm jmp BackAddy1
+}
+
+void _declspec(naked) onWallClick() {
+	
+	_asm call callAddy4
+
+	_asm mov isWall, eax
+
+	_asm jmp BackAddy4
 }

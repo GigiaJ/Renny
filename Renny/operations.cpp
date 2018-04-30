@@ -2,7 +2,7 @@
 #include "operations.h"
 
 namespace Operations {
-	typedef int*(__thiscall *tCastSpell)(DWORD SpellBookPtr, spellInst* SpellDataPtr, int SlotNumber, Vector* startPosition, Vector* EndPosition, int networkId);
+	typedef void(__thiscall *tCastSpell)(void* SpellBookPtr, spellInst* SpellDataPtr, signed int SlotNumber, Vector* StartPosition, Vector* EndPosition, int NetworkId);
 	typedef int*(__thiscall *tIssueOrder)(object* myPlayer, int orderType, Vector* targetPosition, object* targetObject, bool isAttackMove, bool isMinion, int networkID);
 	typedef int(__cdecl  *tOnProcessSpell)(void* SpellBookPtr, signed int SlotNumber, int negativeOne, void* SpellDataPtr, char isAutoAttack, char isMinion);
 	typedef float(__cdecl *tGetAttackCastDelay)(object* unit, int attackID); //attackID can be found in the second called subroutine of castdelay that uses the attackID as a parameter currently 65
@@ -94,7 +94,7 @@ namespace Operations {
 				}
 			}
 		}
-		 mCastSpell(SpellBook, SpellPtr, slot, &predictedLocation, pEmpty, 0);
+		 mCastSpell((void*)SpellBook, SpellPtr, slot, &predictedLocation, pEmpty, 0);
 	}
 
 	void IssueAttackOrder(object* enemyChamp) {
@@ -121,6 +121,6 @@ namespace Operations {
 	}
 
 	bool isWall(Vector position) {
-		return  mIsWall(&position, 0x400);
+		return  mIsWall(&position, 0);
 	}
 }

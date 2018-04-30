@@ -82,6 +82,18 @@ struct Vector
 	float x;
 	float y;
 	float z;
+	
+	inline bool operator!=(Vector a) {
+		if (x != a.x) {
+			return true;
+		}
+		if (y != a.y) {
+			return true;
+		}
+		if (z != a.z) {
+			return true;
+		}
+	}
 };
 
 
@@ -113,7 +125,7 @@ public:
 	unsigned char pad_0x001C[0x18]; //0x001C
 	int mGeneralType; //0x0034 
 	unsigned char pad_0x0038[0x3C]; //0x0038
-	DWORD mNetworkId; //0x0074 
+	int mNetworkId; //0x0074 
 	unsigned char pad_0x0078[0x8]; //0x0078
 	Vector mEdgePos1; //0x0080 
 	Vector mEdgePos2; //0x008C 
@@ -439,7 +451,7 @@ public:
 	}
 
 	static spellInst* getSpellInst(DWORD unit, int slot) {
-		return (spellInst*)(unit + (0x2100 + (slot * 0x04)));
+		return (spellInst*)(unit + (0x20C0 + (slot * 0x04)));
 	}
 }; //Size=0x054C
 

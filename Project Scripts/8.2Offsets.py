@@ -77,8 +77,7 @@ Functions = [
     	["SetPath", "f3 0f 10 01 f3 0f 5c ?? 0f 54 c1 0f 2f d0", 1],#ALE-C92B9700
     	["CreatePath", "ALE-30FDAB23", 3],
     	["IsWallOfGrass", "Infinite loop detected", 3],
-    	["IsWall", "E8 ? ? ? ? 8A 4C 24 26", 2],
-    	
+    	    	
     	["DoEmote", "A1 1C DD 5F 01 83 EC 0C 8B 48 08 E8 20 1F 0A 00 84 C0 74 08 32 C0 83 C4 0C C2 04 00 8B 0D E0 F6", 1],#"dance";"joke";"laugh";"taunt";"toggle";
     	["DoMasteryBadge", "81 EC ? ? ? ? A1 ? ? ? ? 33 C4 89 84 24 ? ? ? ? 53 8B 9C 24 ? ? ? ? 55 8B E9 8B 8C 24 ? ? ? ? ", 1],# use "ALE-A6219283"
      
@@ -93,6 +92,7 @@ Functions = [
     	["OnProcessSpellW", "57 8B 7C 24 08 8B 17", 1],
 		["IssueOrder","ALE-E1D3ADB6",3],
     	["StopCast", "83 EC 10 56 8B 74 24 24", 1],
+		["IsSkillShotConeOrSingleTarget", "E8 ? ? ? ? 8A 4C 24 26", 2],
      
 ]
 

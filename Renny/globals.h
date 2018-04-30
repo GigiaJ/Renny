@@ -17,7 +17,7 @@ extern spellCastDataBase* spellCastData;
 extern float vGameTime;
 
 extern std::vector<object*> listOfEnemyChamps;
-extern volatile int loopCounter;
+extern volatile DWORD isWall;
 
 extern int firstSpell;
 extern int secondSpell;

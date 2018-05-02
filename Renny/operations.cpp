@@ -33,12 +33,12 @@ namespace Operations {
 	void CastSpell(object* enemyChamp, int slot) {
 		DWORD SpellBook;
 		spellInst* SpellPtr;
-		Vector Empty;
+		Vector Empty = EMPTYVECTOR;
 
 		Vector predictedLocation = enemyChamp->mUnitPos;
-		Empty.x = 0;
-		Empty.y = 0;
-		Empty.z = 0;
+		//Empty.x = 0;
+		//Empty.y = 0;
+		//Empty.z = 0;
 		Vector* pEmpty = &Empty;
 		object* myPlayer = (object*)lPlayer;
 		Vector myPos = myPlayer->mUnitPos;

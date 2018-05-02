@@ -26,10 +26,10 @@ int setEnemyTeam(object* myPlayer) {
 
 float modifySign(float numberToCheck, float numberToModify) {
 	if (isNegative(numberToCheck)) {
-		return (numberToModify * -1.0f);
+		return (abs(numberToModify) * -1.0f);
 	}
 	if (isPositive(numberToCheck)) {
-		return numberToModify;
+		return abs(numberToModify);
 	}
 	if (isZero(numberToCheck)) {
 		return 0;
@@ -80,14 +80,7 @@ void getListOfEnemyChamps(object* myPlayer)
 				if (TemporaryObject->mIsTargetable)
 				{
 					if (TemporaryObject->mUnitType == 5121)
-					{
-						myfile << "Address: " << TemporaryObject;
-						myfile << "Address: " << &TemporaryObject;
-						myfile << "Address: " << *(DWORD*)TemporaryObject;
-						myfile << "Address: " << (DWORD*)TemporaryObject;
-						myfile << "Address: " << (DWORD)TemporaryObject;
-						myfile << "\n";
-						
+					{				
 						listOfEnemyChamps.push_back(TemporaryObject);
 					}
 				}

@@ -4,7 +4,14 @@
 struct Slope {
 	float numerator;
 	float denominator;
-	float gradient = numerator / denominator;
+	
+	inline float getGradient() {
+		return (numerator / denominator);
+	}
+
+	inline float getReciprocalGradient() {
+		return (denominator / numerator);
+	}
 };
 
 void autododge(object* myPlayer);

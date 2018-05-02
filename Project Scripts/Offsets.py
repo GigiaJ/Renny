@@ -60,27 +60,33 @@ Functions = [
 	
 	["SetChatScale","E8 C6 87 F6 FF ? ? ? ? ? ", 2], #Can be found with "SetChatScaleX"
 	
+	["IssueOrder", "E8 E0 FB BF FF ? ? ? ? ? ", 2],
 	
-	["IssueOrder", "E8 ? ? ? ? 5D 5B 5F B0 01 5E 83 C4 14 C2 1C 00 FF", 2],
+	["EventMoveMouseClick", "E8 ? ? ? ? 5D 5B 5F B0 01 5E 83 C4 14 C2 1C 00 FF", 2],
 	#\xE8\x00\x00\x00\x00\x5D\x5B\x5F\xB0\x01\x5E\x83\xC4\x14\xC2\x1C\x00\xFF x????xxxxxxxxxxxxx
 	
-	["OnProcessSpell", "83 EC 10 80 7C 24 ? ? 74 25", 1],
+	["CheckIfInitialClickIsAvaliable", "83 EC 2C F3 0F 10 44 24 48 ? ? ? ? ? ? ", 1], #Can be found in CreatePath, returns a bool and returns a true on clicking a wall
+		
+	["OnProcessSpell", "83 EC 10 80 7C 24 ? ? 74 25", 1], #Called by OnProcessSpellW
 	
-	["OnProcessSpellW", "57 8B 7C 24 08 8B 17", 1],
+	["OnProcessSpellW", "57 8B 7C 24 08 8B 17", 1], #Called by OnSpellCast and OnAutoAttack
 	
+	["OnSpellCast", "81 EC 3C 04 00 00 ? ? ? ? ? ? ", 1],
+	
+	["OnAutoAttack", "51 55 8B E9 55 ", 1], 
+	
+	["IsSkillShotConeOrSingleTarget", "E8 99 EE F9 FF ? ? ? ? ? ", 2],
 	
 	#NavStuff
 	["SetPath", "83 EC 10 56 8B 74 24 18 57 89 4C 24 14 ",1],
 	
 	["CreatePath", "ALE-30FDAB23", 3],
 	
+	["OnUpdatePath", "E8 AA 69 00 00 ? ? ? ? ? ", 2],
+	
 	["IsWallOfGrass", "F3 0F 10 5C 24 10 83 EC 18 F3 0F 10 6C 24 20 F3 0F 10 74 24 1C 0F 2E DB 53 8B D9 56 57 F3 0F 5C 6B 1C F3 0F 5C 73 14 9F F3 0F 11 6C 24 2C", 1],
 	#Non generated sig
-	
-	["IsWall", "E8 99 EE F9 FF ? ? ? ? ? ", 2],
-	
-	
-	
+		
 	
 	["DispatchEvent", "83 EC 20 53 55 56 57 8B D9 8D 44 24 34 50 8D 44 24 14 ", 1], #Can be found within a caller just before the loc with ; void (__cdecl *) using "ALE-C234C67E"
 	

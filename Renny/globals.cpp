@@ -11,7 +11,7 @@ float vGameTime = *(reinterpret_cast<float*> (base + oGameTime));
 
 std::vector<object*> listOfEnemyChamps = {};
 
-volatile int loopCounter = 0;
+volatile DWORD isWall = 0x00000000;
 
 int firstSpell = 0;
 int secondSpell = 1;

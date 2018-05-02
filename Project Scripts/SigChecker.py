@@ -18,12 +18,66 @@ Rename = -1
 
 # Offsets // Patterns // xref's (Type:: 1 => Pattern, 2 => Call Pattern, 3 => Reference)
 Functions = [
-[
 
 ]
 
 Offsets = [
-
+				[
+			"onUpdatePath0",
+			"E8 E0 62 00 00 ? ? ? ? ? ",
+			1,
+			0
+		],		[
+			"onUpdatePath1",
+			"E8 0D F2 FE FF ? ? ? ? ? ",
+			1,
+			0
+		],		[
+			"onUpdatePath2",
+			"E8 AA 69 00 00 ? ? ? ? ? ",
+			1,
+			0
+		],		[
+			"onUpdatePath3",
+			"E8 5A C7 FF FF ? ? ? ? ? F3 0F 10 54 24 2C ? ? ? ? ? ? ",
+			1,
+			0
+		],		[
+			"onUpdatePath4",
+			"E8 6A 9A FF FF ? ? ? ? ? 8A 84 24 AB 00 00 00 ? ? ? ? ? ? ? ",
+			1,
+			0
+		],		[
+			"onUpdatePath5",
+			"E8 24 FF FF FF ? ? ? ? ? 8B 44 24 04 ",
+			1,
+			0
+		],		[
+			"onUpdatePath6",
+			"E8 FD 67 00 00 ? ? ? ? ? F3 0F 7E 44 24 30 ? ? ? ? ? ? ",
+			1,
+			0
+		],		[
+			"onUpdatePath7",
+			"E8 46 63 00 00 ? ? ? ? ? 0F BF 04 B5 18 0B 56 01 ? ? ? ? ? ? ? ? ",
+			1,
+			0
+		],		[
+			"onUpdatePath8",
+			"E8 24 23 00 00 ? ? ? ? ? F3 0F 10 47 0C ? ? ? ? ? ",
+			1,
+			0
+		],		[
+			"onUpdatePath9",
+			"E8 C0 8A FE FF ? ? ? ? ? ",
+			1,
+			0
+		],		[
+			"onUpdatePath10",
+			"E8 C1 64 00 00 ? ? ? ? ? 8B D6 ",
+			1,
+			0
+		]
 ]
 
 # Finder Functions

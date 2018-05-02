@@ -2,6 +2,8 @@
 
 #include "offsets.h"
 #include <vector>
+#define _USE_MATH_DEFINES
+#include <math.h>
 #include <iostream>
 #include <fstream>
 #include <chrono>
@@ -17,7 +19,7 @@ extern spellCastDataBase* spellCastData;
 extern float vGameTime;
 
 extern std::vector<object*> listOfEnemyChamps;
-extern volatile int loopCounter;
+extern volatile DWORD isWall;
 
 extern int firstSpell;
 extern int secondSpell;

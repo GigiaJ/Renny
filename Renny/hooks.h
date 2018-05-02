@@ -8,4 +8,6 @@ void onSpellCast();
 
 void onCast();
 
+void onWallClick();
+
 void applyHooks();

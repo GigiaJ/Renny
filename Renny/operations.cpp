@@ -2,13 +2,13 @@
 #include "operations.h"
 
 namespace Operations {
-	typedef int*(__thiscall *tCastSpell)(DWORD SpellBookPtr, DWORD SpellDataPtr, int SlotNumber, Vector* startPosition, Vector* EndPosition, int networkId);
+	typedef void(__thiscall *tCastSpell)(void* SpellBookPtr, spellInst* SpellDataPtr, signed int SlotNumber, Vector* StartPosition, Vector* EndPosition, int NetworkId);
 	typedef int*(__thiscall *tIssueOrder)(object* myPlayer, int orderType, Vector* targetPosition, object* targetObject, bool isAttackMove, bool isMinion, int networkID);
 	typedef int(__cdecl  *tOnProcessSpell)(void* SpellBookPtr, signed int SlotNumber, int negativeOne, void* SpellDataPtr, char isAutoAttack, char isMinion);
 	typedef float(__cdecl *tGetAttackCastDelay)(object* unit, int attackID); //attackID can be found in the second called subroutine of castdelay that uses the attackID as a parameter currently 65
 	typedef signed int(__thiscall *tGetSpellData)(DWORD* unitSpellBook, int slot, int a3);
 	typedef char(__thiscall* tOnProcessSpellW)(DWORD* SpellBookPtr, DWORD* pSpellInfo);
-	typedef char(__cdecl* tIsWall)(Vector* position, unsigned __int16 unknown);
+	typedef bool(__cdecl* tIsWall)(Vector* position, unsigned __int16 unknown);
 
 	tCastSpell mCastSpell;
 	tIssueOrder mIssueOrder;
@@ -32,23 +32,23 @@ namespace Operations {
 
 	void CastSpell(object* enemyChamp, int slot) {
 		DWORD SpellBook;
-		DWORD SpellPtr;
-		Vector Empty;
+		spellInst* SpellPtr;
+		Vector Empty = EMPTYVECTOR;
 
 		Vector predictedLocation = enemyChamp->mUnitPos;
-		Empty.x = 0;
-		Empty.y = 0;
-		Empty.z = 0;
+		//Empty.x = 0;
+		//Empty.y = 0;
+		//Empty.z = 0;
 		Vector* pEmpty = &Empty;
 		object* myPlayer = (object*)lPlayer;
 		Vector myPos = myPlayer->mUnitPos;
 		float ping = 0.024f * 2.0f;
-		SpellBook = (lPlayer + 0x1B90);
-		SpellPtr = *(DWORD*)myPlayer->mSpellInstArray[slot];
+		SpellBook = (lPlayer + pSpellBookPtr);
+		SpellPtr = myPlayer->mSpellInstArray[slot];
 		float missileSpeed = (myPlayer->mSpellInstArray[slot]->mSpellData->mSpellInfo->mMissileSpeed);
 		float missileWidth = (myPlayer->mSpellInstArray[slot]->mSpellData->mSpellInfo->mMissileWidth);
 		float castTime = (myPlayer->mSpellInstArray[slot]->mSpellData->mSpellInfo->mCastTime);
-		float castRadius = (myPlayer->mSpellInstArray[slot]->mSpellData->mSpellInfo->mCastRadius);
+		float castRadius = (myPlayer->mSpellInstArray[slot]->mSpellData->mSpellInfo->mCastRadius[myPlayer->mSpellInstArray[slot]->mCurrentRank + 1].value);
 		float myUnitSize = myPlayer->mEdgePos2.x - myPlayer->mEdgePos1.x;
 		float moveSpeed = enemyChamp->mMoveSpeed;
 
@@ -94,7 +94,7 @@ namespace Operations {
 				}
 			}
 		}
-		 mCastSpell(SpellBook, SpellPtr, slot, &predictedLocation, pEmpty, 0);
+		 mCastSpell((void*)SpellBook, SpellPtr, slot, &predictedLocation, pEmpty, 0);
 	}
 
 	void IssueAttackOrder(object* enemyChamp) {
@@ -121,6 +121,6 @@ namespace Operations {
 	}
 
 	bool isWall(Vector position) {
-		return  mIsWall(&position, 1);
+		return  mIsWall(&position, 0);
 	}
 }

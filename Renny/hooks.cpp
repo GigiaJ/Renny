@@ -3,16 +3,23 @@
 #include "hooks.h"
 
 
-int hookLength = 6;
-DWORD hookAddress = base + 0x1CF820;
+int hookLength = 7;
+DWORD hookAddress = base + fnOnSpellCast + 0x2B5;
 DWORD BackAddy1 = hookAddress + hookLength;
+
 int hookLength2 = 10;
-DWORD hookAddress2 = base + 0x1E3CCB;
+DWORD hookAddress2 = base + fnOnAutoAttack + 0x1B8;
 DWORD BackAddy2 = hookAddress2 + hookLength2;
 
 int hookLength3 = 9;
-DWORD hookAddress3 = base + 0x549910;
+DWORD hookAddress3 = base + 0x55C428;
 DWORD BackAddy3 = hookAddress3 + hookLength3;
+
+
+int hookLength4 = 5;
+DWORD hookAddress4 = base + 0x4F0996;
+DWORD BackAddy4 = hookAddress4 + hookLength4;
+DWORD callAddy4 = base + 0x50DB60;
 
 bool Hook(void * toHook, void * ourFunct, int len) {
 	if (len < 5) {
@@ -39,12 +46,41 @@ void applyHooks() {
 	if (doOnce) {
 		doOnce = false;
 
-	Hook((void*)hookAddress, onSpellCast, hookLength);
+		//Hook((void*)hookAddress, onSpellCast, hookLength);
 
-	Hook((void*)hookAddress2, onAutoAttack, hookLength2);
+		//Hook((void*)hookAddress2, onAutoAttack, hookLength2);
 
-	// Hook((void*)hookAddress3, onCast, hookLength3);
+		Hook((void*)hookAddress3, onCast, hookLength3);
+
+		Hook((void*)hookAddress4, onWallClick, hookLength4);
 	}
+}
+
+void __declspec(naked) onCast() {
+
+	//DWORD castInfo;
+
+	__asm {
+		mov spellCastData, edi
+	}
+
+	//__asm {
+	//	pushad
+	//}
+
+	//applyCastInfo(castInfo);
+
+	__asm {
+	//	popad
+		mov     esi, eax
+		add     esp, 18h
+		mov     ecx, esi
+		mov     edx, [esi]
+	}
+
+	__asm jmp BackAddy3
+
+
 }
 
 void __declspec(naked) onAutoAttack() {
@@ -56,6 +92,7 @@ void __declspec(naked) onAutoAttack() {
 	__asm {
 		popad
 		push dword ptr ss : [esp + 0Ch]
+		pushad
 	}
 
 	DWORD autoAttackInfo;
@@ -70,7 +107,8 @@ void __declspec(naked) onAutoAttack() {
 	applyActiveAutoCastInfo(autoAttackInfo);
 
 	__asm {
-		lea ecx, [ebx + 1B90h]
+		popad
+		lea ecx, [ebp + pSpellBookPtr]
 	}
 
 	__asm jmp BackAddy2
@@ -87,42 +125,25 @@ void __declspec(naked) onSpellCast() {
 	__asm {
 		mov spellCastInfo, eax
 	}
-	applyActiveSpellCastInfo(spellCastInfo);
 
+	if (spellCastInfo != 0x3) {
+		applyActiveSpellCastInfo(spellCastInfo);
+	}
 
 	__asm {
 		popad
-		lea ecx, dword ptr ss : [ebp - 1268h]
+		push eax
+		lea ecx, dword ptr ss : [ebx - 1268h]
 	}
 
 	__asm jmp BackAddy1
 }
 
-void __declspec(naked) onCast() {
-	__asm {
-		pushad
-	}
+void _declspec(naked) onWallClick() {
+	
+	_asm call callAddy4
 
-	DWORD* spellCastInfo;
+	_asm mov isWall, eax
 
-	__asm {
-		mov edx, [esp + 1Ch]
-		mov spellCastInfo, edx
-
-	}
-
-	applyActiveSpellCastInfo(*spellCastInfo);
-
-	__asm {
-
-		popad
-
-		push edi
-		mov edi, dword ptr ss : [esp + 8h]
-		mov edx, dword ptr ds : [edi]
-		test edx, edx
-
-		jmp BackAddy3
-	}
-
+	_asm jmp BackAddy4
 }

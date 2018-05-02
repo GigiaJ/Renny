@@ -26,10 +26,10 @@ int setEnemyTeam(object* myPlayer) {
 
 float modifySign(float numberToCheck, float numberToModify) {
 	if (isNegative(numberToCheck)) {
-		return (numberToModify * -1.0f);
+		return (abs(numberToModify) * -1.0f);
 	}
 	if (isPositive(numberToCheck)) {
-		return numberToModify;
+		return abs(numberToModify);
 	}
 	if (isZero(numberToCheck)) {
 		return 0;
@@ -52,20 +52,25 @@ float absVectorDistance(Vector firstVector, Vector secondVector) {
 float absObjectDistanceApart(object* unitOne, object*unitTwo) {
 	float unitSizesAdded = (unitOne->getUnitSize() / 2) + (unitTwo->getUnitSize() / 2);
 	float absoluteCentersApart = absVectorDistance(unitOne->mUnitPos, unitTwo->mUnitPos);
-	return (absoluteCentersApart + unitSizesAdded);
+	return (absoluteCentersApart - unitSizesAdded);
 }
 
 void applyActiveAutoCastInfo(DWORD address) {
-		autoAttackData = (spellCastDataBase*)(address);
+	autoAttackData = (spellCastDataBase*)(address);
 }
 
 void applyActiveSpellCastInfo(DWORD address) {
 	spellCastData = (spellCastDataBase*)(address);
 }
 
+void applyCastInfo(DWORD address) {
+	spellCastData = reinterpret_cast<spellCastDataBase*>(address);
+}
 
 void getListOfEnemyChamps(object* myPlayer)
 {
+	std::ofstream myfile;
+	myfile.open("C:\\Users\\gigia\\Desktop\\Script Development\\output.txt");
 	int enemyTeam = setEnemyTeam(myPlayer);
 	for (int i = 0; i < objMgr->mArrayHighestIndex; i++) {
 		if (objMgr->mObjectManagerArray[i] != NULL) {
@@ -75,13 +80,14 @@ void getListOfEnemyChamps(object* myPlayer)
 				if (TemporaryObject->mIsTargetable)
 				{
 					if (TemporaryObject->mUnitType == 5121)
-					{
+					{				
 						listOfEnemyChamps.push_back(TemporaryObject);
 					}
 				}
 			}
 		}
 	}
+	myfile.close();
 }
 
 object* getClosestEnemy(object* myPlayer, float range, float castRadius) {

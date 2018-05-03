@@ -18,66 +18,12 @@ Rename = -1
 
 # Offsets // Patterns // xref's (Type:: 1 => Pattern, 2 => Call Pattern, 3 => Reference)
 Functions = [
-
+		["OnLoadHero", "81 EC 84 00 00 00 A1 C0 53 56 01 33 C4 89 84 24 80 00 00 00 57 8B", 1],
 ]
 
 Offsets = [
-				[
-			"onUpdatePath0",
-			"E8 E0 62 00 00 ? ? ? ? ? ",
-			1,
-			0
-		],		[
-			"onUpdatePath1",
-			"E8 0D F2 FE FF ? ? ? ? ? ",
-			1,
-			0
-		],		[
-			"onUpdatePath2",
-			"E8 AA 69 00 00 ? ? ? ? ? ",
-			1,
-			0
-		],		[
-			"onUpdatePath3",
-			"E8 5A C7 FF FF ? ? ? ? ? F3 0F 10 54 24 2C ? ? ? ? ? ? ",
-			1,
-			0
-		],		[
-			"onUpdatePath4",
-			"E8 6A 9A FF FF ? ? ? ? ? 8A 84 24 AB 00 00 00 ? ? ? ? ? ? ? ",
-			1,
-			0
-		],		[
-			"onUpdatePath5",
-			"E8 24 FF FF FF ? ? ? ? ? 8B 44 24 04 ",
-			1,
-			0
-		],		[
-			"onUpdatePath6",
-			"E8 FD 67 00 00 ? ? ? ? ? F3 0F 7E 44 24 30 ? ? ? ? ? ? ",
-			1,
-			0
-		],		[
-			"onUpdatePath7",
-			"E8 46 63 00 00 ? ? ? ? ? 0F BF 04 B5 18 0B 56 01 ? ? ? ? ? ? ? ? ",
-			1,
-			0
-		],		[
-			"onUpdatePath8",
-			"E8 24 23 00 00 ? ? ? ? ? F3 0F 10 47 0C ? ? ? ? ? ",
-			1,
-			0
-		],		[
-			"onUpdatePath9",
-			"E8 C0 8A FE FF ? ? ? ? ? ",
-			1,
-			0
-		],		[
-			"onUpdatePath10",
-			"E8 C1 64 00 00 ? ? ? ? ? 8B D6 ",
-			1,
-			0
-		]
+	
+
 ]
 
 # Finder Functions
@@ -124,13 +70,13 @@ def FindOffsetPattern(Pattern, Operand): # Find Offset by Pattern
 def DecToHex(Addr):
 	return "0x%0.2X" % Addr
 	
-def PrintWrapper(Alias, Addr, Type): # Type: 1 => Function, 2 => Offset
+def PrintWrapper(Alias, Addr, Type, i): # Type: 1 => Function, 2 => Offset
 	if Addr == BADADDR or Addr == 0 or Addr == 0x00:
 		print(Alias + " -> Error")
 		return
 		
-	if Type == 1: print("#define " + functionPrefix + Alias + " " + DecToHex(Addr))
-	if Type == 2: print("#define " + offsetPrefix + Alias + " " + DecToHex(Addr))
+	if Type == 1: print("#define " + functionPrefix + Alias + " " + DecToHex(Addr) + "\t #" + "{}".format(i))
+	if Type == 2: print("#define " + offsetPrefix + Alias + " " + DecToHex(Addr) + "\t #" + "{}".format(i))
 	
 	if Rename == 1:
 		if Type == 1: MakeName(Addr, str(functionPrefix + Alias))
@@ -140,28 +86,21 @@ def PrintWrapper(Alias, Addr, Type): # Type: 1 => Function, 2 => Offset
 	
 # Main
 def Initialize():
-	global Rename
-	Rename = idc.AskYN(0, "Automaticly Update Names? (sub_549570 => PrintChat)")
-	if Rename == -1:
-		print("Exiting...")
-		return
-		
-	print("")
-	print("++ Uhrwerk: Offsets (%s)" % datetime.datetime.now())
-	print("Why do they keep breaking...")
-	print("")
-	
 	print("++ Functions")
+	i = 1
 	for Alias, Reference, Type in Functions:
-		if Type == 1: PrintWrapper(Alias, FindFuncPattern(Reference), 1)
-		if Type == 2: PrintWrapper(Alias, FindFuncCall(Reference), 1)
-		if Type == 3: PrintWrapper(Alias, FindFuncFirstReference(Reference), 1)
+		if Type == 1: PrintWrapper(Alias, FindFuncPattern(Reference), 1, i)
+		if Type == 2: PrintWrapper(Alias, FindFuncCall(Reference), 1, i)
+		if Type == 3: PrintWrapper(Alias, FindFuncFirstReference(Reference), 1, i)
+		i = i + 1
 	print("")
 	
 	print("++ Offsets")
+	i = 1
 	for Alias, Reference, Type, Operand in Offsets:
-		if Type == 1: PrintWrapper(Alias, FindOffsetPattern(Reference, Operand), 2)
-		if Type == 2: PrintWrapper(Alias, FindOffsetPattern(Reference, Operand), 2)
+		if Type == 1: PrintWrapper(Alias, FindOffsetPattern(Reference, Operand), 2, i)
+		if Type == 2: PrintWrapper(Alias, FindOffsetPattern(Reference, Operand), 2, i)
+		i = i + 1
 	print("")
 	
 Initialize()

@@ -22,7 +22,7 @@ Functions = [
 	["LogUIEvents", "53 55 56 8B F1 57 8B 7C 24 18", 1], # evtPlayerAttackMoveClick
 	#\x53\x55\x56\x8B\xF1\x57\x8B\x7C\x24\x18 xxxxxxxxxx
 	
-	["CastSpell", "83 EC 34 53 55 8B 6C 24 40", 1], # ALE-229C053F / ERROR: Client Tried to cast a spell from an invalid slot: %d
+	["CastSpell", "E8 C3 50 F3 FF 5E 85 DB 74 1C 8B CF E8 87 64 F0 FF 84 C0 74 11 8B 0D 20 4C 57 01 FF 73 08 8B ", 2], # ALE-229C053F / ERROR: Client Tried to cast a spell from an invalid slot: %d
 	#\x83\xEC\x34\x53\x55\x8B\x6C\x24\x40 xxxxxxxxx
 	
 	["GetHealthbarPos", "8B 81 ? ? ? ? 85 C0 74 12", 1],	#Can be found with "ExpirationPriorityThreshold"
@@ -51,16 +51,16 @@ Functions = [
 	["PrintChat", "E8 ? ? ? ? C6 44 24 ? ? 85 DB 74 76 8D 44 24 14", 2], 
 	#\xE8\x00\x00\x00\x00\xC6\x44\x24\x00\x00\x85\xDB\x74\x76\x8D\x44\x24\x14 x????xxx??xxxxxxxx
 	
-	["OpenChat", "E8 23 B3 F4 FF ? ? ? ? ? ", 2], # Can be found with "game_console_chatcommand_allchat_1"
+	["OpenChat", "83 EC 30 A1 C0 53 56 01 33 C4 89 44 24 2C 53 57", 1], # Can be found with "game_console_chatcommand_allchat_1"
 	
-	["DisplayChat", "E8 19 6B F3 FF ? ? ? ? ? ", 2], #Can be found with "MaxChatBufferSize"
+	["DisplayChat", "81 EC 3C 01 00 00 A1 C0 53 56 01 33 C4 89 84 24 38 01 00 00 55", 1], #Can be found with "MaxChatBufferSize"
 	
 	["SendChat", "56 6A FF FF 74", 1],
 	#\x56\x6A\xFF\xFF\x74 xxxxx
 	
-	["SetChatScale","E8 C6 87 F6 FF ? ? ? ? ? ", 2], #Can be found with "SetChatScaleX"
+	["SetChatScale", "83 EC 24 A1 C0 53 56 01 33 C4 89 44 24 20 F3 0F", 1], #Can be found with "SetChatScaleX"
 	
-	["IssueOrder", "E8 E0 FB BF FF ? ? ? ? ? ", 2],
+	["IssueOrder", "E8 68 47 C1 FF ? ? ? ? ? ", 2], #Can be found in EventMoveMouseClick, the caller of the caller of CreatePath
 	
 	["EventMoveMouseClick", "E8 ? ? ? ? 5D 5B 5F B0 01 5E 83 C4 14 C2 1C 00 FF", 2],
 	#\xE8\x00\x00\x00\x00\x5D\x5B\x5F\xB0\x01\x5E\x83\xC4\x14\xC2\x1C\x00\xFF x????xxxxxxxxxxxxx
@@ -71,11 +71,9 @@ Functions = [
 	
 	["OnProcessSpellW", "57 8B 7C 24 08 8B 17", 1], #Called by OnSpellCast and OnAutoAttack
 	
-	["OnSpellCast", "81 EC 3C 04 00 00 ? ? ? ? ? ? ", 1],
+	["OnSpellCast", "81 EC FC 04 00 00 A1 C0 53 56 01 33 C4 89 84 24 F8 04 00 00 53 8B 9C 24 04 05 00 00 55 56 8B ", 1],
 	
-	["OnAutoAttack", "51 55 8B E9 55 ", 1], 
-	
-	["IsSkillShotConeOrSingleTarget", "E8 99 EE F9 FF ? ? ? ? ? ", 2],
+	["OnAutoAttack", "83 EC 08 53 8B D9 53 ", 1],
 	
 	#NavStuff
 	["SetPath", "83 EC 10 56 8B 74 24 18 57 89 4C 24 14 ",1],
@@ -94,12 +92,12 @@ Functions = [
 	
 	["OnProcessPacket",	"ALE-752C285F", 3], #Also calls pretty much everything and is the second longest function size wise so you can find it in the functions window
 	
-	["InitEvent",	"E8 98 90 FF FF ? ? ? ? ? ", 2], #Can be found with "CloseOnEndGameDelaySeconds" and following the second function after fnLogger
+	["InitEvent", "83 EC 4C A1 C0 53 56 01 33 C4 89 44 24 48 53 55", 1], #Can be found with "CloseOnEndGameDelaySeconds" and following the jump if not zero  first call and then the second function within that call is InitEvent
 	
-	["OnLoadHero", "E8 49 BE 00 00 ? ? ? ? ? ", 2], #Can be found with "Creating Hero %s...\n"
+	["OnLoadHero", "81 EC 84 00 00 00 A1 C0 53 56 01 33 C4 89 84 24 80 00 00 00 57 8B", 1], #Can be found with {:5s}| {#channel!} Spawn Champion Request {ChampionName} [{#Summo
 	
 	["OnLoadChampion", "83 EC 08 E8 38 27 64 00 ? ? ? ? ? ", 1], #Found within OnLoadHero
-	
+	["OnLoadChampion", "83 EC 08 E8 98 1E 63 00 ? ? ? ? ? ", 1],
 	["OnTeleport", "53 55 56 57 8B 7C 24 14 8B E9 8B D7 ", 1], #Can be found a little ways above "ALE-752C285F" in ProcessPacket with two references to objectManager between right after the ;void * and ; size_t
 	
 	["OnDisconnect", "E8 2F CB 28 00 ? ? ? ? ? ", 2], #Can be found with "game_messagebox_caption_disconnect"
@@ -108,7 +106,7 @@ Functions = [
 	
 	["SmartPing", "83 EC 18 53 56 57 8D 4C 24 0C ", 1],
 	
-	["GameUpdate", "E8 7E DF FF FF ? ? ? ? ? ", 2], #Can be found with "Waiting for all players to connect\n"
+	["GameUpdate", "81 EC 4C 01 00 00 A1 C0 53 56 01 33 C4 89 84 24 48 01 00 00 55 56 8B F1", 1], #Can be found with "Waiting for all players to connect\n"
 	
 	["ClientMain", "E8 E3 78 FF FF ? ? ? ? ? ", 2], #Can be found with "Invalid AttackDelayCastOffsetPercent! Character: %s, attack index"
 	
@@ -171,14 +169,14 @@ Functions = [
 ]
 
 Offsets = [
-	["LocalPlayer","39 3D 38 FF E4 02 ? ? ? ? ? ? ", 1, 0], #All the other ones start with 8B or A1, no sigs from prev version are the same, but the one starting with 3 will make a valid sig
+	["LocalPlayer","39 3D 38 FF E4 02 ? ? ? ? ? ? ", 1, 0],
 
 	["ChatClientPtr", "A1 ? ? ? ? 85 C0 74 32", 1, 1],
 	#\xA1\x00\x00\x00\x00\x85\xC0\x74\x32 x????xxxx
 	["ObjectManager", "A1 ?? ?? ?? ?? 8B 0C 88 85 C9 74 0E 39 71 08 75 09 6A 01", 1, 1], # ALE-DFB7B379 (below mov eax, ObjectManager)
 	
-	["Renderer", "A1 A0 43 E7 02 ? ? ? ? ? 8B 80 E0 95 0C 00 ? ? ? ? ? ? ", 1, 1], # SkinnedMesh_SOLID_COLOR_PS (above mox ecx, Renderer) / %1_WEIGHT%2 (below call sub .. mov ecx, Renderer)
-		
+	["Renderer", "8B 0D BC 2D E4 02 ? ? ? ? ? ? 6A 00 6A 02 ", 1, 1], # SkinnedMesh_SOLID_COLOR_PS (above mox ecx, Renderer) / %1_WEIGHT%2 (below call sub .. mov ecx, Renderer)["oRenderer", "83 3D BC 2D E4 02 00 ? ? ? ? ? ? ? 56 ", 2],	 #SUCCESS	0x2E42DBC
+	
 	["ZoomClass", "A3 ? ? ? ? 8D 4C 24 20", 1, 0], # Globals/CameraConfig_CLASSIC (above cmp ZoomBase, 0)
 	
 	["UnderMouseObject", "C7 05 ? ? ? ? ? ? ? ? E8 ? ? ? ? 83 C4 04 FF B4", 1, 0],
@@ -188,6 +186,8 @@ Offsets = [
 	#\xA1\x00\x00\x00\x00\x8B\x40\x14\x85 x????xxxx
 	
 	["MissionInfo", "8B 35 04 9C E7 02 ? ? ? ? ? ? ", 1,1], #Caller of a sub using it can be found with "EndSnapshotCapture" and the sub using it is the first call in that loc. Within that sub it's the first dword in the sub (move edi, dword_whatever)
+	
+	["GameState", "A3 FC 9A E1 02 ? ? ? ? ? ", 1, 1], #Can be found in GameUpdate above the loc with "Game Ended.  Closing after delay..." and 3 renderer references
 	
 	["Version", "B8 A0 56 E5 02 ? ? ? ? ? ", 1, 1], #Function referencing it can be found with "Build Version: %s ChangeList: %u\n", it is the function in the loc with "Build Version: %s ChangeList: %u\n" that has eax pushed on as an arg
 	

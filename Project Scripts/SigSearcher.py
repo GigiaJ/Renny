@@ -18,7 +18,8 @@ Rename = -1
 
 # Offsets // Patterns // xref's (Type:: 1 => Pattern, 2 => Call Pattern, 3 => Reference)
 Functions = [
-		["OnLoadHero", "81 EC 84 00 00 00 A1 C0 53 56 01 33 C4 89 84 24 80 00 00 00 57 8B", 1],
+
+
 ]
 
 Offsets = [
@@ -72,7 +73,7 @@ def DecToHex(Addr):
 	
 def PrintWrapper(Alias, Addr, Type, i): # Type: 1 => Function, 2 => Offset
 	if Addr == BADADDR or Addr == 0 or Addr == 0x00:
-		print(Alias + " -> Error")
+		print("fn" + Alias + " -> Error")
 		return
 		
 	if Type == 1: print("#define " + functionPrefix + Alias + " " + DecToHex(Addr) + "\t #" + "{}".format(i))

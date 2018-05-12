@@ -8,7 +8,6 @@ namespace Operations {
 	typedef float(__cdecl *tGetAttackCastDelay)(object* unit, int attackID); //attackID can be found in the second called subroutine of castdelay that uses the attackID as a parameter currently 65
 	typedef signed int(__thiscall *tGetSpellData)(DWORD* unitSpellBook, int slot, int a3);
 	typedef char(__thiscall* tOnProcessSpellW)(DWORD* SpellBookPtr, DWORD* pSpellInfo);
-	typedef bool(__cdecl* tIsWall)(Vector* position, unsigned __int16 unknown);
 
 	tCastSpell mCastSpell;
 	tIssueOrder mIssueOrder;
@@ -16,7 +15,6 @@ namespace Operations {
 	tGetSpellData  mGetSpellData;
 	tOnProcessSpell  mOnProcessSpell;
 	tOnProcessSpellW  mOnProcessSpellW;
-	tIsWall  mIsWall;
 
 
 	void Init()
@@ -26,7 +24,6 @@ namespace Operations {
 		 mGetAttackCastDelay = (tGetAttackCastDelay)(base + fnGetAttackCastDelay);
 		 mGetSpellData = (tGetSpellData)(base + fnGetSpellData);
 		 mOnProcessSpell = (tOnProcessSpell)(base + fnOnProcessSpell);
-		 mIsWall = (tIsWall)(base + fnIsWall);
 		//fnOnProcessSpellW = (tOnProcessSpellW)(base + 0x54D140);
 	}
 
@@ -118,9 +115,5 @@ namespace Operations {
 		int orderType = 2; //MoveType
 		object* myPlayer = (object*)lPlayer;
 		 mIssueOrder(myPlayer, orderType, &positionToMoveTo, nullptr, 0, 0, 0);
-	}
-
-	bool isWall(Vector position) {
-		return  mIsWall(&position, 0);
 	}
 }

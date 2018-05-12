@@ -7,6 +7,8 @@ import datetime
  
 UA_MAXOP = 11
 MAX_XREFS = 5
+FILE_LOCATION = "C:\\Users\\gigia\\source\\repos\Renny\\Project Scripts\\"
+
 
 def replaceBetween(s, newstring, index1, index2, nofail=False):
 	# raise an error if index is outside of the string
@@ -110,6 +112,159 @@ def FindOffsetPattern(Pattern, Operand): # Find Offset by Pattern
 def DecToHex(addr):
 	return "0x%0.2X" % addr
 
+def PrintWrapper(Alias, Addr, Type, i): # Type: 1 => Function, 2 => Offset
+	if Addr == BADADDR or Addr == 0 or Addr == 0x00:
+		print("fn" + Alias + " -> Error")
+		return
+	
+	if Type == 0: print("#define " + Alias + " " + DecToHex(Addr) + "\t #" + "{}".format(i))
+	if Type == 1: print("#define " + functionPrefix + Alias + " " + DecToHex(Addr) + "\t #" + "{}".format(i))
+	if Type == 2: print("#define " + offsetPrefix + Alias + " " + DecToHex(Addr) + "\t #" + "{}".format(i))
+		
+	return	
+	
+def SignatureSearch():
+	class Function:	
+
+		def __init__(self):
+			self.Alias = ""
+			self.Reference = ""
+			self.Type = 0
+			self.HasPrefix = False
+			self.Position = 0
+		
+		def setAlias(self, Alias):
+			self.Alias = Alias
+		def setReference(self, Reference):
+			self.Reference = Reference
+		def setType(self, Type):
+			self.Type = Type
+		def setHasPrefix(self, HasPrefix):
+			self.HasPrefix = HasPrefix
+		def setPosition(self, Position):
+			self.Position = Position
+				
+	class Offset:	
+		def __init__(self):
+			self.Alias = ""
+			self.Reference = ""
+			self.Type = 0
+			self.Operand = 0
+			self.HasPrefix = False
+			self.Position = 0
+		
+		def setAlias(self, Alias):
+			self.Alias = Alias
+		def setReference(self, Reference):
+			self.Reference = Reference
+		def setType(self, Type):
+			self.Type = Type
+		def setOperand(self, Operand):
+			self.Operand = Operand
+		def setHasPrefix(self, HasPrefix):
+			self.HasPrefix = HasPrefix
+		def setPosition(self, Position):
+			self.Position = Position
+
+	Functions = []
+	Offsets = []
+	input = open(FILE_LOCATION + "Signatures.txt", "r")
+	lines = input.readlines()
+	position = 1
+	for x in lines:
+		if x.find("\", 1, True]") != -1 or x.find("\", 2, True]") != -1 or x.find("\", 1, False]") != -1 or x.find("\", 2, False]") != -1:
+			x = x.replace("\"", "")
+			index = x.find("[\"") + 2
+			object = Function()
+			count = 0
+			while count != x.count(","):
+				index = index + 2
+				temp = x[index:]
+				newIndex = temp.find(",")
+				tempIndex = index + newIndex
+				
+				if count == 0:
+					object.setPosition(position)
+					object.setAlias(x[index:tempIndex])
+					
+				if count == 1:
+					object.setReference(x[index:tempIndex])
+					
+				if count == 2:
+					object.setType(x[index:tempIndex])
+					
+				if count == 3:
+					hasPrefix = x[index:tempIndex - 1]
+					if hasPrefix == "False":
+						object.setHasPrefix(False)
+					if hasPrefix == "True":
+						object.setHasPrefix(True)
+				
+				
+				index = tempIndex
+				count = count + 1	
+
+			Functions.append(object)
+			position = position + 1
+		if x.find(", 1, 0, True]") != -1 or x.find(", 1, 1, True]") != -1 or x.find(", 1, 0, False]") != -1 or x.find(", 1, 1, False]") != -1:
+			x = x.replace("\"", "")
+			index = x.find("[\"") + 2
+			object = Offset()
+			count = 0
+			while count != x.count(","):
+				index = index + 2
+				temp = x[index:]
+				newIndex = temp.find(",")
+				tempIndex = index + newIndex
+				
+				if count == 0:
+					object.setPosition(position)
+					object.setAlias(x[index:tempIndex])
+					
+				if count == 1:
+					object.setReference(x[index:tempIndex])
+					
+				if count == 2:
+					object.setType(x[index:tempIndex])
+				
+				if count == 3:
+					object.setOperand(x[index:tempIndex])
+					
+				if count == 4:
+					hasPrefix = x[index:tempIndex - 1]
+					if hasPrefix == "False":
+						object.setHasPrefix(False)
+					if hasPrefix == "True":
+						object.setHasPrefix(True)
+						
+				index = tempIndex
+				count = count + 1	
+
+			Offsets.append(object)
+			position = position + 1
+			
+	input.close()
+	print("++ Functions")
+	for x in Functions:
+		if x.HasPrefix == True:
+			if int(x.Type) == 1: PrintWrapper(x.Alias, FindFuncPattern(x.Reference), 1, x.Position)
+			if int(x.Type) == 2: PrintWrapper(x.Alias, FindFuncCall(x.Reference), 1, x.Position)
+			if int(x.Type) == 3: PrintWrapper(x.Alias, FindFuncFirstReference(x.Reference), 1, x.Position)
+		else:
+			if int(x.Type) == 1: PrintWrapper(x.Alias, FindFuncPattern(x.Reference), 0, x.Position)
+			if int(x.Type) == 2: PrintWrapper(x.Alias, FindFuncCall(x.Reference), 0, x.Position)
+			if int(x.Type) == 3: PrintWrapper(x.Alias, FindFuncFirstReference(x.Reference), 0, x.Position)
+	print("")
+	
+	print("++ Offsets")
+	for x in Offsets:
+		if x.HasPrefix == True:
+			if int(x.Type) == 1: PrintWrapper(x.Alias, FindOffsetPattern(x.Reference, int(x.Operand)), 2, x.Position)
+			#if x.Type == "2": PrintWrapper(x.Alias, FindOffsetPattern(x.Reference, x.Operand), 2, i)
+		else:
+			if int(x.Type) == 1: PrintWrapper(x.Alias, FindOffsetPattern(x.Reference, int(x.Operand)), 0, x.Position)
+			#if x.Type == "2": PrintWrapper(x.Alias, FindOffsetPattern(x.Reference, x.Operand), 0, i)
+	print("")
 
 def add_to_clipboard(text):
 	r = Tk()
@@ -227,7 +382,11 @@ def ApplyCorrections(curSig):
 		curSig = CorrectDefinedOffsets(curSig, "0F B6", -1, 4)
 		if (curSig.find("XX") != -1):
 			curSig = curSig.replace("XX", "??")	
-	
+	#########################################################	
+	if curSig.find("6A") != -1:
+		curSig = CorrectDefinedOffsets(curSig, "6A", -1, 2)
+		if (curSig.find("XX") != -1):
+			curSig = curSig.replace("XX", "??")	
 	#########################################################	
 	curSig = CorrectBytes(curSig, "68", 5, True)
 	if curSig.find("68") != -1:
@@ -240,12 +399,16 @@ def ApplyCorrections(curSig):
 			curSig = curSig.replace("XX", "??")	
 			# cmp     [esp+0Ch+var_1], 0
 	#########################################################
-	if curSig.find("81 EC") != -1:
-		curSig = CorrectDefinedOffsets(curSig, "81 EC", 3, 4)
+	if curSig.find("81 C1") != -1:
+		curSig = CorrectDefinedOffsets(curSig, "81 C4", 3, 4)
 		if curSig.find("XX") != -1:
 			curSig = curSig.replace("XX", "??")	
 	if curSig.find("81 C4") != -1:
 		curSig = CorrectDefinedOffsets(curSig, "81 C4", 3, 4)
+		if curSig.find("XX") != -1:
+			curSig = curSig.replace("XX", "??")	
+	if curSig.find("81 EC") != -1:
+		curSig = CorrectDefinedOffsets(curSig, "81 EC", 3, 4)
 		if curSig.find("XX") != -1:
 			curSig = curSig.replace("XX", "??")	
 	curSig = CorrectBytes(curSig, "81", 10, True)
@@ -253,6 +416,10 @@ def ApplyCorrections(curSig):
 		if (curSig.find("XX") != -1):
 			curSig = curSig.replace("XX", "??")	
 	#########################################################
+	if curSig.find("83 78") != -1:
+		curSig = CorrectDefinedOffsets(curSig, "83 78", 3, 4)
+		if curSig.find("XX") != -1:
+			curSig = curSig.replace("XX", "??")	
 	if curSig.find("83 7C") != -1:
 		curSig = CorrectDefinedOffsets(curSig, "83 7C", 4, 5)
 		if curSig.find("XX") != -1:
@@ -273,6 +440,10 @@ def ApplyCorrections(curSig):
 		curSig = CorrectDefinedOffsets(curSig, "83 EC", -1, 3)
 		if curSig.find("XX") != -1:
 			curSig = curSig.replace("XX", "??")
+	curSig = CorrectBytes(curSig, "83", 7, True)
+	if curSig.find("83") != -1:
+		if (curSig.find("XX") != -1):
+			curSig = curSig.replace("XX", "??")	
 	#########################################################	
 	if curSig.find("89 44") != -1:
 		curSig = CorrectDefinedOffsets(curSig, "89 44", -1, 4)
@@ -326,6 +497,10 @@ def ApplyCorrections(curSig):
 			curSig = curSig.replace("XX", "??")
 	if curSig.find("8B 4B") != -1:
 		curSig = CorrectDefinedOffsets(curSig, "8B 4B", -1, 3)
+		if curSig.find("XX") != -1:
+			curSig = curSig.replace("XX", "??")
+	if curSig.find("8B 4C") != -1:
+		curSig = CorrectDefinedOffsets(curSig, "8B 4C", -1, 4)
 		if curSig.find("XX") != -1:
 			curSig = curSig.replace("XX", "??")
 	if curSig.find("8B 4F") != -1:
@@ -393,6 +568,11 @@ def ApplyCorrections(curSig):
 		curSig = CorrectDefinedOffsets(curSig, "8D 04", -1, 3)
 		if curSig.find("XX") != -1:
 			curSig = curSig.replace("XX", "??")	
+	if curSig.find("8D 14") != -1:
+		curSig = CorrectDefinedOffsets(curSig, "8D 14", -1, 3)
+		if curSig.find("XX") != -1:
+			curSig = curSig.replace("XX", "??")	
+			#lea     edx, [esp+18h+var_18]
 	if curSig.find("8D 44") != -1:
 		curSig = CorrectDefinedOffsets(curSig, "8D 44", -1, 4)
 		if curSig.find("XX") != -1:
@@ -433,13 +613,27 @@ def ApplyCorrections(curSig):
 		if (curSig.find("XX") != -1):
 			curSig = curSig.replace("XX", "??")	
 	#########################################################
+	if curSig.find("B9") != -1:
+		curSig = CorrectDefinedOffsets(curSig, "B9", 2, 3)
+		curSig = CorrectDefinedOffsets(curSig, "B9", 4, 5)
+		if curSig.find("XX") != -1:
+			curSig = curSig.replace("XX", "??")	
+	#########################################################	
 	if curSig.find("C6 46") != -1:
 		curSig = CorrectDefinedOffsets(curSig, "C6 46", 3, 4)
+		if curSig.find("XX") != -1:
+			curSig = curSig.replace("XX", "??")	
+	if curSig.find("C6 46") != -1:
+		curSig = CorrectDefinedOffsets(curSig, "C6 46", 4, 5)
 		if curSig.find("XX") != -1:
 			curSig = curSig.replace("XX", "??")			
 	#########################################################
 	if curSig.find("C7 04 24") != -1:
 		curSig = CorrectBytes(curSig, "C7", 7, False)
+		if (curSig.find("XX") != -1):
+			curSig = curSig.replace("XX", "??")	
+	if curSig.find("C7 46") != -1:
+		curSig = CorrectBytes(curSig, "C7", 7, True)
 		if (curSig.find("XX") != -1):
 			curSig = curSig.replace("XX", "??")	
 	curSig = CorrectBytes(curSig, "C7", 8, True)
@@ -493,6 +687,10 @@ def ApplyCorrections(curSig):
 		curSig = CorrectBytes(curSig, "F3", 5, False)
 		if (curSig.find("XX") != -1):
 			curSig = curSig.replace("XX", "??")
+	if curSig.find("F3 0F 11 4C") != -1:
+		curSig = CorrectBytes(curSig, "F3", 6, False)
+		if (curSig.find("XX") != -1):
+			curSig = curSig.replace("XX", "??")
 	if curSig.find("F3 0F 11 4E") != -1:
 		curSig = CorrectBytes(curSig, "F3", 5, False)
 		if (curSig.find("XX") != -1):
@@ -506,9 +704,21 @@ def ApplyCorrections(curSig):
 		if (curSig.find("XX") != -1):
 			curSig = curSig.replace("XX", "??")
 	
-	#########################################################						
+	#########################################################	
+	if curSig.find("FF 50") != -1:
+		curSig = CorrectDefinedOffsets(curSig, "FF 50", -1, 3)
+		if curSig.find("XX") != -1:
+			curSig = curSig.replace("XX", "??")		
+	if curSig.find("FF B4") != -1:
+		curSig = CorrectDefinedOffsets(curSig, "FF B4", -1, 4)
+		if curSig.find("XX") != -1:
+			curSig = curSig.replace("XX", "??")			
 	if curSig.find("FF 74") != -1:
 		curSig = CorrectDefinedOffsets(curSig, "FF 74", -1, 4)
+		if curSig.find("XX") != -1:
+			curSig = curSig.replace("XX", "??")	
+	if curSig.find("FF 90") != -1:
+		curSig = CorrectDefinedOffsets(curSig, "FF 90", 3, 4)
 		if curSig.find("XX") != -1:
 			curSig = curSig.replace("XX", "??")	
 	#########################################################
@@ -603,14 +813,21 @@ def CreatePattern():
 		patternType = 2
 	
 	Addr = []
-		
+	OffsetPattern = []
+	HasPrefix = []
+	hasPrefix = "False"
+	
 	if patternType == 1:
-		if name.find("fn") != -1:
-			name = name.replace("fn", "")
-		if name.find("o" + name.replace("o", "", 1)) != -1:
+		if name.find("fn") == 0:
+			name = name.replace("fn", "", 1)
+			hasPrefix = "True"
+		if name.find("o") == 0:
 			name = name.replace("o", "", 1)	
+			hasPrefix = "True"
+		HasPrefix.append(hasPrefix)
 		currentpattern = create_pattern(ea)	
 		Addr.append(FindFuncPattern(currentpattern))
+		OffsetPattern.append(currentpattern)
 		foundPattern.append(["\"" + name + "\"", "\"{}\"".format(currentpattern), patternType])
 	xrefs = list(XrefsTo(ea, 0))
 	xrefs = list(filter(lambda xref: SegName(xref.frm) != ".rdata", xrefs))
@@ -624,12 +841,16 @@ def CreatePattern():
 		while opndValue != -1 and opndValue != ea:
 			i += 1
 			opndValue = GetOperandValue(xref.frm, i)
-		if name.find("fn") != -1:
-			name = name.replace("fn", "")
-		if name.find("o" + name.replace("o", "", 1)) != -1:
+		if name.find("fn") == 0:
+			name = name.replace("fn", "", 1)
+			hasPrefix = "True"
+		if name.find("o") == 0:
 			name = name.replace("o", "", 1)	
+			hasPrefix = "True"
+		HasPrefix.append(hasPrefix)
 		currentpattern = create_pattern(xref.frm)
 		Addr.append(FindFuncCall(currentpattern))
+		OffsetPattern.append(currentpattern)
 		foundPattern.append(["\"{}\"".format(name), "\"{}\"".format(currentpattern), 2])
 		x = x + 1
 	formattedPattern = ""
@@ -638,16 +859,37 @@ def CreatePattern():
 	for i, pattern in enumerate(foundPattern):
 		formattedPattern += "\t\t["
 		for j, v in enumerate(pattern)  :
-			formattedPattern += "{}".format(v)
+			if Addr[z] == 0x01 and len("{}".format(v)) == 1:
+				formattedPattern += "1, 1"
+			else:
+				formattedPattern += "{}".format(v)
 			if j != len(pattern) - 1:
 				formattedPattern += ", "
+		formattedPattern += ", " + HasPrefix[i]
 		formattedPattern += "],"
-		if Addr[z] == BADADDR or Addr[z] == 0 or Addr[z] == 0x00:
-			formattedPattern += "\t #FAIL\t" + DecToHex(Addr[z])
+		
+		if Addr[z] == 0x01:
+			Addr[z] = FindFuncPattern(OffsetPattern[z])
+			if Addr[z] == BADADDR or Addr[z] == 0 or Addr[z] == 0x00:
+				formattedPattern += "\t #FAIL\t" + DecToHex(Addr[z])
+			else:
+				formattedPattern += "\t #SUCCESS\t" + DecToHex(Addr[z])
+			Addr[z] = FindOffsetPattern(OffsetPattern[z], 1)
+			formattedPattern += "\t" +  DecToHex(Addr[z])
 		else:
-			formattedPattern += "\t #SUCCESS\t" + DecToHex(Addr[z])
+			if Addr[z] == BADADDR or Addr[z] == 0 or Addr[z] == 0x00:
+				Addr[z] = FindFuncPattern(OffsetPattern[z])
+				formattedPattern += "\t #FAIL\t" + DecToHex(Addr[z])
+			else:
+				formattedPattern += "\t #SUCCESS\t" + DecToHex(Addr[z])
+		
 		formattedPattern += "\n"
 		z = z + 1
+		
+	output = open(FILE_LOCATION + "Signatures.txt", "w+")
+	output.write(formattedPattern)
+	output.close()
+	
 	value = "# {}".format(name)
 	value += "\nPATTERN_DESCRIPTIONS.append({})".format("[\n\t\"{}\",\n\t{},\n\t[\n{}\n\t]\n]".format(name, patternType, formattedPattern))
 
@@ -680,5 +922,20 @@ except:
 		del hotkey_ctx
 	else:
 		print("CreateSignature hotkey registered to Ctrl+Shift+Alt+S!")
+		
+try:
+	hotkey_scs
+	if idaapi.del_hotkey(hotkey_scs):
+		print("SearchSignature hotkey unregistered!")
+		del hotkey_scs
+	else:
+		print("Failed to delete SearchSignature hotkey!")
+except:
+	hotkey_scs = idaapi.add_hotkey("Ctrl+Shift+Alt+D", SignatureSearch)
+	if hotkey_scs is None:
+		print("Failed to register SearchSignature hotkey!")
+		del hotkey_scs
+	else:
+		print("SearchSignature hotkey registered to Ctrl+Shift+Alt+D!")
 
 

@@ -25,7 +25,7 @@
     <Class Name="ReClassFloat" Type="28" Comment="" Offset="9306112" strOffset="8e0000" Code="">
         <Node Name="value" Type="13" Size="4" bHidden="false" Comment=""/>
     </Class>
-    <Class Name="object" Type="28" Comment="" Offset="1161195592" strOffset="45367048" Code="	float getUnitSize() {
+    <Class Name="object" Type="28" Comment="" Offset="1093167192" strOffset="&quot;League of Legends.exe&quot; + *2E1EAC4" Code="	float getUnitSize() {
 		return (this-&gt;mEdgePos2.x - this-&gt;mEdgePos1.x);
 	}">
         <Node Name="N00000E1B" Type="4" Size="4" bHidden="false" Comment=""/>
@@ -49,8 +49,6 @@
         <Node Name="N00000E2D" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N00000E2E" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N00000E2F" Type="4" Size="4" bHidden="false" Comment=""/>
-        <Node Name="N00000E30" Type="4" Size="4" bHidden="false" Comment=""/>
-        <Node Name="N00000E31" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N00000E32" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N00000E33" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N00000E34" Type="4" Size="4" bHidden="false" Comment=""/>
@@ -4675,7 +4673,7 @@
         <Node Name="N00001CFF" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N00001D00" Type="4" Size="4" bHidden="false" Comment=""/>
     </Class>
-    <Class Name="objectManager" Type="28" Comment="" Offset="48434848" strOffset="&quot;League of Legends.exe&quot; + 2E30EA0 " Code="">
+    <Class Name="objectManager" Type="28" Comment="" Offset="51757704" strOffset="&quot;League of Legends.exe&quot; + 2E1C288" Code="">
         <Node Name="*mObjectManagerArray" Type="8" Size="4" bHidden="false" Comment="" Pointer="object"/>
         <Node Name="mArrayMaxSize" Type="10" Size="4" bHidden="false" Comment=""/>
         <Node Name="mArrayCurrentUsedIndex" Type="10" Size="4" bHidden="false" Comment=""/>

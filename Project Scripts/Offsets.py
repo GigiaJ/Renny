@@ -21,7 +21,7 @@ Functions = [
 	
 	["LogUIEvents", "53 55 56 8B F1 57 8B ?? 24 ?? ?? 6E ?? 3B FD ", 1, True], # evtPlayerAttackMoveClick
 	
-	["CastSpell", "83 EC ?? 53 55 56 8B 74 24 ?? 8B E9 57 83 BE ?? ?? 00 00 00 ", 1, True], # ALE-229C053F / ERROR: Client Tried to cast a spell from an invalid slot: %d
+	["CastSpell", "E8 ?? ?? ?? ?? 5E 85 DB 74 1C ", 2, True], # ALE-229C053F / ERROR: Client Tried to cast a spell from an invalid slot: %d
 	
 	["GetHealthbarPos", "8B ?? ?? ?? ?? ?? 85 C0 74 12 FF 74 24 ?? ", 1, True],	#Can be found with "ExpirationPriorityThreshold"	
 	
@@ -60,7 +60,7 @@ Functions = [
 	
 	["OnSpellCast", "81 EC ?? ?? 00 00 A1 ?? ?? ?? ?? 33 C4 89 84 24 ?? ?? 00 00 53 8B ?? ?? ?? ?? ?? 00 55 56 8B E9 89 5C 24 ?? 57 8D 4C 24 30 ", 1, True],
 	
-	["OnAutoAttack", "E8 ?? ?? ?? ?? 8D 4C 24 ?? 8A D8 E8 ?? ?? ?? ?? 8A C3 E9 D4 02 00 00 ", 2, True],
+	["OnAutoAttack", "8D 44 24 ?? 50 FF 74 24 ?? FF 74 24 ?? E8 ?? ?? ?? ?? 5F ", 1, True],
 	
 	#NavStuff
 	["SetPath", "83 EC ?? 56 8B 74 24 ?? 57 89 4C 24 ?? 8B 46 ?? ", 1, True],
@@ -75,7 +75,7 @@ Functions = [
 	
 	["LoadTexture", "83 EC ?? A1 ?? ?? ?? ?? 33 C4 89 44 24 ?? 8B 44 24 ?? 53 55 56 57 8B 7C 24 ?? 8B E9 ", 1, True], #Can be found with "TEXTURE: Failed to find texture"
 	
-	["OnProcessPacket", "81 EC ?? ?? 00 00 A1 ?? ?? ?? ?? 33 C4 89 84 24 ?? ?? 00 00 53 55 8B AC 24 ?? ?? 00 00 56 57 8B F1 89 6C 24 ?? ", 1, True], #Can be found with "ALE-752C285F" Also calls pretty much everything and is the second longest function size wise so you can find it in the functions window 
+	["OnProcessPacket", "8D ?? ?? ?? ?? ?? 00 56 50 E8 ?? ?? ?? ?? 83 C4 ?? B9 ?? ?? ?? ?? ", 1, True], #Can be found with "ALE-752C285F" Also calls pretty much everything and is the second longest function size wise so you can find it in the functions window 
 	
 	["InitEvent", "83 EC ?? A1 ?? ?? ?? ?? 33 C4 89 44 24 ?? 53 55 56 57 8B ?? ?? ?? ?? ?? 00 00 00 8D 4F 34 ", 1, True], #Can be found with "CloseOnEndGameDelaySeconds" and following the jump if not zero  first call and then the second function within that call is InitEvent
 	
@@ -126,9 +126,7 @@ Functions = [
 	
 	["OnSurrenderVote", "8B 81 ?? ?? 00 00 8A 54 24 0C 53 ", 1, True], #Can be found by using the second call of PrintChat in OnProcessPacket and scrolling up until you are three locs below a local player reference
 	
-	["UpdateChargeableSpell", "83 EC 28 53 55 8B 6C 24 34 56 ", 1, True], #Can be found by looking in GameUpdate and checking the next decent sized loc above "Game Ended.  Closing after delay is satisfied." (about 4 locs up) and stepping into the call right after the cursor is being moved onto ecx
-	# and in the second to last loc stepping into the second call in the loc then it is the call near the end that has a lead ecx to the spellbook ptr (also has a LocalPlayer being moved onto the ESI)
-	#Can also be found by using MassSigCheck (my own script) and finding the one that calls it which also calls GetSpellState and it is the call near the end that has a lead ecx to the spellbook ptr
+	["UpdateChargeableSpell", "E8 ?? ?? ?? ?? 8B 43 24 8B 40 ?? ", 2, False], 
 	
 	["ApplySpellCD", "FF 74 24 ?? 8B ?? ?? ?? ?? ?? E8 ?? ?? ?? ?? 8B C8 85 C9 ", 1, True], #Can be found with "ALE-6213D87E" "ALE-42E20CB6"
 	

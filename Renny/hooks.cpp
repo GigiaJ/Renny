@@ -4,22 +4,22 @@
 
 
 int hookLength = 7;
-DWORD hookAddress = base + fnOnSpellCast + 0x2B5;
+DWORD hookAddress = base + fnOnSpellCast + 0x27C;
 DWORD BackAddy1 = hookAddress + hookLength;
 
 int hookLength2 = 10;
-DWORD hookAddress2 = base + fnOnAutoAttack + 0x1B8;
+DWORD hookAddress2 = base + fnOnAutoAttack + 0x286;
 DWORD BackAddy2 = hookAddress2 + hookLength2;
 
 int hookLength3 = 9;
-DWORD hookAddress3 = base + 0x55C428;
+DWORD hookAddress3 = base + fnOnProcessSpellW + 0x33;
 DWORD BackAddy3 = hookAddress3 + hookLength3;
 
 
 int hookLength4 = 5;
-DWORD hookAddress4 = base + 0x4F0996;
+DWORD hookAddress4 = base + fnCreatePath + 0x2A6;
 DWORD BackAddy4 = hookAddress4 + hookLength4;
-DWORD callAddy4 = base + 0x50DB60;
+DWORD callAddy4 = base + fnCheckIfInitialClickIsAvaliable;
 
 bool Hook(void * toHook, void * ourFunct, int len) {
 	if (len < 5) {
@@ -108,7 +108,7 @@ void __declspec(naked) onAutoAttack() {
 
 	__asm {
 		popad
-		lea ecx, [ebp + pSpellBookPtr]
+		lea ecx, [ebx + pSpellBookPtr]
 	}
 
 	__asm jmp BackAddy2

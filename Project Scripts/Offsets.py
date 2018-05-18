@@ -17,185 +17,171 @@ Rename = -1
 
 # Offsets // Patterns // xref's (Type:: 1 => Pattern, 2 => Call Pattern, 3 => Reference)
 Functions = [
-	["Logger", "8D 44 24 14 50 FF 74 24 14 FF", 1], # Writes Debug Messages (Also printed when you attach VS Debugger)
+	["Logger", "8D ?? 24 ?? 50 FF ?? 24 ?? FF ?? 24 ?? FF ?? 24 ?? FF ?? 24 ?? E8 ?? ?? ?? ?? ?? C4 ?? C3 ", 1, True], # Writes Debug Messages (Also printed when you attach VS Debugger)
 	
-	["LogUIEvents", "53 55 56 8B F1 57 8B 7C 24 18", 1], # evtPlayerAttackMoveClick
-	#\x53\x55\x56\x8B\xF1\x57\x8B\x7C\x24\x18 xxxxxxxxxx
+	["LogUIEvents", "53 55 56 8B F1 57 8B ?? 24 ?? ?? 6E ?? 3B FD ", 1, True], # evtPlayerAttackMoveClick
 	
-	["CastSpell", "83 EC 34 53 55 8B 6C 24 40", 1], # ALE-229C053F / ERROR: Client Tried to cast a spell from an invalid slot: %d
-	#\x83\xEC\x34\x53\x55\x8B\x6C\x24\x40 xxxxxxxxx
+	["CastSpell", "E8 ?? ?? ?? ?? 5E 85 DB 74 1C ", 2, True], # ALE-229C053F / ERROR: Client Tried to cast a spell from an invalid slot: %d
 	
-	["GetHealthbarPos", "8B 81 ? ? ? ? 85 C0 74 12", 1],	#Can be found with "ExpirationPriorityThreshold"
-	#\x8B\x81\x00\x00\x00\x00\x85\xC0\x74\x12 xx????xxxx
+	["GetHealthbarPos", "8B ?? ?? ?? ?? ?? 85 C0 74 12 FF 74 24 ?? ", 1, True],	#Can be found with "ExpirationPriorityThreshold"	
 	
+	["EventHandler", "83 EC ?? A1 ?? ?? ?? ?? 33 C4 89 44 24 ?? 53 8B D9 56 8B 74 24 ?? ", 1, True],
 	
-	
-	["EventHandler", "83 EC 38 A1 ? ? ? ? 33 C4 89 44 24 34 53 8B D9 56 8B 74 24 48", 1],
-	
-	["MainLoop", "83 EC 08 53 8B D9 89 5C 24 04 8B 4B", 1], # Not directly the main loop, but you can hook into here (func called by the main loop)
-	#\x83\xEC\x08\x53\x8B\xD9\x89\x5C\x24\x04\x8B\x4B xxxxxxxxxxxx
+	["MainLoop", "E8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 85 C0 74 07 8B 10 8B C8 FF 52 10 ", 2, True],
 
-	["DrawTurretRange", "E8 ? ? ? ? 84 C0 75 1B 83", 2],
-	#\xE8\x00\x00\x00\x00\x84\xC0\x75\x1B\x83 x????xxxxx
+	["DrawTurretRange", "E8 ?? ?? ?? ?? 84 C0 75 1B 83 BE ?? ?? 00 00 00 ", 2, True],
 	
-	["LevelUpSpell", "83 EC 0C 53 8B 5C 24 14 56 8B F1 85 DB", 1], #ALE-89BAB541
-	#\xE8\x00\x00\x00\x00\xA1\x00\x00\x00\x00\x85\xC0\x74\x0F\x8B x????x????xxxxx
+	["LevelUpSpell", "83 EC ?? 53 8B 5C 24 ?? 56 8B F1 85 DB 78 05 ", 1, True],	 #ALE-89BAB541
 	
-	["SetSkin", "E8 ? ? ? ? 8B 0E 8B F8 8B 87", 2],
-	#\xE8\x00\x00\x00\x00\x8B\x0E\x8B\xF8\x8B\x87 x????xxxxxx
+	["SetSkin", "E8 ?? ?? ?? ?? 83 C4 ?? 89 44 24 ?? 8B C8 8B 10 ", 2, True],	
 	
-	["GetSpellData", "E8 ? ? ? ? 66 85 C0 74 06", 2], # aka. GetSpellState
-	#\xE8\x00\x00\x00\x00\x66\x85\xC0\x74\x06 x????xxxxx
+	["GetSpellData", "8B 44 24 ?? 83 EC ?? 53 8B ?? ?? ?? ?? ?? 00 ", 1, True], # aka. GetSpellState
 	
 #Chat	
-	["PrintChat", "E8 ? ? ? ? C6 44 24 ? ? 85 DB 74 76 8D 44 24 14", 2], 
-	#\xE8\x00\x00\x00\x00\xC6\x44\x24\x00\x00\x85\xDB\x74\x76\x8D\x44\x24\x14 x????xxx??xxxxxxxx
+	["PrintChat", "E8 ?? ?? ?? ?? 8B ?? ?? ?? ?? ?? 6A 01 E8 ?? ?? ?? ?? B0 01 ", 2, True],	
 	
-	["OpenChat", "E8 23 B3 F4 FF ? ? ? ? ? ", 2], # Can be found with "game_console_chatcommand_allchat_1"
+	["OpenChat", "83 EC ?? A1 ?? ?? ?? ?? 33 C4 89 44 24 ?? 53 57 8B F9 33 DB 89 5C 24 ?? ", 1, True], # Can be found with "game_console_chatcommand_allchat_1"
 	
-	["DisplayChat", "E8 19 6B F3 FF ? ? ? ? ? ", 2], #Can be found with "MaxChatBufferSize"
+	["DisplayChat", "E8 ?? ?? ?? ?? 8B ?? ?? ?? ?? ?? 85 C9 0F ?? ?? ?? ?? ?? C2 08 00 ", 2, True], #Can be found with "MaxChatBufferSize"
 	
-	["SendChat", "56 6A FF FF 74", 1],
-	#\x56\x6A\xFF\xFF\x74 xxxxx
+	["SendChat", "56 6A FF FF 74 24 ?? 8B F1 ", 1, True],
 	
-	["SetChatScale","E8 C6 87 F6 FF ? ? ? ? ? ", 2], #Can be found with "SetChatScaleX"
+	["SetChatScale", "83 EC ?? A1 ?? ?? ?? ?? 33 C4 89 44 24 ?? F3 ?? ?? ?? ?? ?? 8D 04 24 56 ", 1, True], #Can be found with "SetChatScaleX"
 	
-	["IssueOrder", "E8 E0 FB BF FF ? ? ? ? ? ", 2],
+	["IssueOrder", "81 EC ?? ?? 00 00 53 8B D9 C7 ?? ?? ?? ?? ?? ?? ?? 8B 83 ?? ?? 00 00 ", 1, True], #Can be found in EventMoveMouseClick, the caller of the caller of CreatePath
 	
-	["EventMoveMouseClick", "E8 ? ? ? ? 5D 5B 5F B0 01 5E 83 C4 14 C2 1C 00 FF", 2],
-	#\xE8\x00\x00\x00\x00\x5D\x5B\x5F\xB0\x01\x5E\x83\xC4\x14\xC2\x1C\x00\xFF x????xxxxxxxxxxxxx
+	["OnMoveMouseClick", "E8 ?? ?? ?? ?? 5D 5B 5F B0 01 5E 83 C4 ?? C2 1C 00 FF 74 24 ?? ", 2, True],
 	
-	["CheckIfInitialClickIsAvaliable", "83 EC 2C F3 0F 10 44 24 48 ? ? ? ? ? ? ", 1], #Can be found in CreatePath, returns a bool and returns a true on clicking a wall
+	["CheckIfInitialClickIsAvaliable", "83 EC ?? F3 ?? ?? ?? ?? ?? 8B C1 53 ", 1, True], #Can be found in CreatePath, returns a bool and returns a true on clicking a wall
 		
-	["OnProcessSpell", "83 EC 10 80 7C 24 ? ? 74 25", 1], #Called by OnProcessSpellW
+	["OnProcessSpell", "E8 ?? ?? ?? ?? 8B F0 83 C4 ?? 8B CE 8B 16 57 ", 2, True], #Called by OnProcessSpellW
 	
-	["OnProcessSpellW", "57 8B 7C 24 08 8B 17", 1], #Called by OnSpellCast and OnAutoAttack
+	["OnProcessSpellW", "57 8B 7C 24 ?? 8B 17 85 D2 ", 1, True], #Called by OnSpellCast and OnAutoAttack
 	
-	["OnSpellCast", "81 EC 3C 04 00 00 ? ? ? ? ? ? ", 1],
+	["OnSpellCast", "81 EC ?? ?? 00 00 A1 ?? ?? ?? ?? 33 C4 89 84 24 ?? ?? 00 00 53 8B ?? ?? ?? ?? ?? 00 55 56 8B E9 89 5C 24 ?? 57 8D 4C 24 30 ", 1, True],
 	
-	["OnAutoAttack", "51 55 8B E9 55 ", 1], 
-	
-	["IsSkillShotConeOrSingleTarget", "E8 99 EE F9 FF ? ? ? ? ? ", 2],
+	["OnAutoAttack", "8D 44 24 ?? 50 FF 74 24 ?? FF 74 24 ?? E8 ?? ?? ?? ?? 5F ", 1, True],
 	
 	#NavStuff
-	["SetPath", "83 EC 10 56 8B 74 24 18 57 89 4C 24 14 ",1],
+	["SetPath", "83 EC ?? 56 8B 74 24 ?? 57 89 4C 24 ?? 8B 46 ?? ", 1, True],
 	
-	["CreatePath", "ALE-30FDAB23", 3],
+	["CreatePath", "F3 0F 7E 00 8B 40 ?? 89 44 24 ?? 8B 45 10 ", 1, True], #Can be found with "ALE-30FDAB23"
 	
-	["OnUpdatePath", "E8 AA 69 00 00 ? ? ? ? ? ", 2],
+	["OnUpdatePath", "55 8B EC 51 53 56 57 8B 7D 08 33 DB ", 1, True],
 	
-	["IsWallOfGrass", "F3 0F 10 5C 24 10 83 EC 18 F3 0F 10 6C 24 20 F3 0F 10 74 24 1C 0F 2E DB 53 8B D9 56 57 F3 0F 5C 6B 1C F3 0F 5C 73 14 9F F3 0F 11 6C 24 2C", 1],
-	#Non generated sig
-		
+	["IsWallOfGrass", "F3 ?? ?? ?? ?? ?? 83 EC ?? F3 ?? ?? ?? ?? ?? F3 ?? ?? ?? ?? ?? 0F 2E ?? ", 1, True],
 	
-	["DispatchEvent", "83 EC 20 53 55 56 57 8B D9 8D 44 24 34 50 8D 44 24 14 ", 1], #Can be found within a caller just before the loc with ; void (__cdecl *) using "ALE-C234C67E"
+	["DispatchEvent", "83 EC ?? 53 55 56 57 8B D9 8D 44 24 ?? 50 8D 44 24 14 ", 1, True], #Can be found within a caller just before the loc with ; void (__cdecl *) using "ALE-C234C67E"
 	
-	["LoadTexture", "TEXTURE: Failed to find texture", 3],
+	["LoadTexture", "83 EC ?? A1 ?? ?? ?? ?? 33 C4 89 44 24 ?? 8B 44 24 ?? 53 55 56 57 8B 7C 24 ?? 8B E9 ", 1, True], #Can be found with "TEXTURE: Failed to find texture"
 	
-	["OnProcessPacket",	"ALE-752C285F", 3], #Also calls pretty much everything and is the second longest function size wise so you can find it in the functions window
+	["OnProcessPacket", "8D ?? ?? ?? ?? ?? 00 56 50 E8 ?? ?? ?? ?? 83 C4 ?? B9 ?? ?? ?? ?? ", 1, True], #Can be found with "ALE-752C285F" Also calls pretty much everything and is the second longest function size wise so you can find it in the functions window 
 	
-	["InitEvent",	"E8 98 90 FF FF ? ? ? ? ? ", 2], #Can be found with "CloseOnEndGameDelaySeconds" and following the second function after fnLogger
+	["InitEvent", "83 EC ?? A1 ?? ?? ?? ?? 33 C4 89 44 24 ?? 53 55 56 57 8B ?? ?? ?? ?? ?? 00 00 00 8D 4F 34 ", 1, True], #Can be found with "CloseOnEndGameDelaySeconds" and following the jump if not zero  first call and then the second function within that call is InitEvent
 	
-	["OnLoadHero", "E8 49 BE 00 00 ? ? ? ? ? ", 2], #Can be found with "Creating Hero %s...\n"
+	["OnLoadHero", "FF 74 24 ?? 0F 43 44 24 ?? FF 74 24 ?? ", 1, True], #Can be found with {:5s}| {#channel!} Spawn Champion Request {ChampionName} [{#Summo
 	
-	["OnLoadChampion", "83 EC 08 E8 38 27 64 00 ? ? ? ? ? ", 1], #Found within OnLoadHero
+	["OnLoadChampion", "83 EC ?? E8 ?? ?? ?? ?? 68 ?? ?? ?? ?? ", 1, True], #Found within OnLoadHero
 	
-	["OnTeleport", "53 55 56 57 8B 7C 24 14 8B E9 8B D7 ", 1], #Can be found a little ways above "ALE-752C285F" in ProcessPacket with two references to objectManager between right after the ;void * and ; size_t
+	["OnTeleport", "53 55 56 57 8B 7C 24 ?? 8B E9 8B D7 ", 1, True], #Can be found a little ways above "ALE-752C285F" in ProcessPacket with two references to objectManager between right after the ;void * and ; size_t
 	
-	["OnDisconnect", "E8 2F CB 28 00 ? ? ? ? ? ", 2], #Can be found with "game_messagebox_caption_disconnect"
+	["OnDisconnect", "83 EC ?? A1 ?? ?? ?? ?? 33 C4 89 44 24 ?? 56 8B F1 C7 ?? ?? ?? ?? ?? ?? ?? 8D 44 24 ?? 89 74 24 ?? 50 C7 ?? ?? ?? ?? ?? ?? ?? 8D ?? ?? ?? ?? ?? 89 44 24 ?? E8 ?? ?? ?? ?? 8B 4C 24 28 85 C9 74 12 8B 11 8D 44 24 ?? 3B C8 0F 95 C0 0F B6 C0 50 FF 52 10 6A 22 ", 1, True], #Can be found with "game_messagebox_caption_disconnect"
+
+	["OnAfk", "83 EC ?? A1 ?? ?? ?? ?? 33 C4 89 44 24 ?? 56 8B F1 C7 ?? ?? ?? ?? ?? ?? ?? 8D 44 24 ?? 89 74 24 ?? 50 C7 ?? ?? ?? ?? ?? ?? ?? 8D ?? ?? ?? ?? ?? 89 44 24 ?? E8 ?? ?? ?? ?? 8B 4C 24 28 85 C9 74 12 8B 11 8D 44 24 ?? 3B C8 0F 95 C0 0F B6 C0 50 FF 52 10 6A 26 ", 1, True], #Can be found with "game_messagebox_text_afkwarningcaption"
 	
-	["OnAfk", "E8 27 57 28 00 ? ? ? ? ? ", 2], #Can be found with "game_messagebox_text_afkwarningcaption"
+	["SmartPing", "E8 ?? ?? ?? ?? 5E 5B 5F C2 10 00 84 DB ", 2, True],
 	
-	["SmartPing", "83 EC 18 53 56 57 8D 4C 24 0C ", 1],
+	["GameUpdate", "E8 ?? ?? ?? ?? A1 ?? ?? ?? ?? 85 C0 74 14 ", 2, True], #Can be found with "Waiting for all players to connect\n"
 	
-	["GameUpdate", "E8 7E DF FF FF ? ? ? ? ? ", 2], #Can be found with "Waiting for all players to connect\n"
+	["ClientMain", "E8 ?? ?? ?? ?? 83 C6 28 43 ", 2, True], #Can be found with "Invalid AttackDelayCastOffsetPercent! Character: %s, attack index"
 	
-	["ClientMain", "E8 E3 78 FF FF ? ? ? ? ? ", 2], #Can be found with "Invalid AttackDelayCastOffsetPercent! Character: %s, attack index"
+	["PlaySound", "55 56 8B 74 24 ?? 8B E9 83 7E 10 00 75 11 ", 1, True], #Can be found with "AudioManager::PlaySoundEvent: Failed to play sound event %s."
 	
-	["PlaySound", "55 56 8B 74 24 18 8B E9 83 7E 10 00 ", 1], #Can be found with "AudioManager::PlaySoundEvent: Failed to play sound event %s."
+	["GetBasicAttack", "E8 ?? ?? ?? ?? 8B E8 ?? ?? ?? ?? 02 FF 75 6C ", 2, True], #Caller's caller can be found with "ALE-C3418C4F" then the second call after that spot is the caller then in it, it is the call before GetAttackCastDelay
 	
-	["GetBasicAttack", "57 8B F9 B8 3D CB 88 3E ? ? ? ? ? ", 1], #Caller's caller can be found with "ALE-C3418C4F" then the second call after that spot is the caller
+	["GetAttackDelay", "83 EC ?? F3 ?? ?? ?? ?? ?? C7 ?? ?? ?? ?? ?? ?? 57 ", 1, True], #Can be found directly above GetAttackCastDelay
 	
-	["GetAttackDelay", "E8 10 98 36 00 ? ? ? ? ? ", 2], #Can be found directly above GetAttackCastDelay
+	["GetAttackCastDelay", "83 EC ?? 53 8B 5C 24 ?? 8B CB 56 ", 1, True],  #Caller's caller can be found with "ALE-C3418C4F" then the second call after that spot is the caller
+	#####
+	["UseObject", "83 EC ?? A1 ?? ?? ?? ?? 33 C4 89 44 24 ?? 53 55 8B 6C 24 ?? 8B D9 56 57 89 6C 24 ?? E8 ?? ?? ?? ?? ", 1, True], #Is caller of "8B 44 24 04 56 8B F1 89 46 48 ", 1 (only has 3 callers and one is issueorder, one is unknonwn, and one is useobject
 	
-	["GetAttackCastDelay", "83 EC 0C 53 8B 5C 24 14 8B CB ", 1],  #Caller's caller can be found with "ALE-C3418C4F" then the second call after that spot is the caller
+	["CreateObject", "53 56 8B ?? ?? ?? ?? ?? 57 85 F6 75 27 ", 1, True], #Can be found with "GetClassID: class %d isn't present"  "WARNING: Object %s can't be loaded!\n"
 	
-	["UseObject", "E9 05 A9 F7 FF ? ? ? ? ? ", 2], #Is caller of "Load Package - %s:%u" and is at an offset of +134 inside the subroutine of UseObject
+	["IdentifyObject", "E8 ?? ?? ?? ?? 85 C0 74 15 8D ?? ?? ?? ?? ?? 8B 01 ", 2, True], #Can be found by going to OnTeleport's call and checking the second call within the loc above OnTeleport's loc
 	
-	["CreateObject", "53 55 56 8B 35 1C AF E4 02 ? ? ? ? ? ? ", 1], #Can be found with "GetClassID: class %d isn't present"  "WARNING: Object %s can't be loaded!\n"
+	["DeleteObject", "83 EC ?? 53 55 8B 6C 24 ?? 56 57 8B ?? ?? ?? ?? ?? 00 00 84 C0 ", 1, True], #Can be found by checking in OnLoadHero and looking at the last call in the loc above "game_bot_"'s loc
 	
-	["IdentifyObject", "8B 51 1C 53 8B 5C 24 08 ", 1], #Can be found by going to OnTeleport's call and checking the second call within the loc above OnTeleport's loc
+	["AddRemoveBuff", "56 6A 00 6A 00 6A 00 6A 00 6A 04 68 ?? ?? ?? ?? 6A 00 68 ?? ?? ?? ?? 68 ?? ?? ?? ?? 68 ?? ?? ?? ?? 68 ?? ?? ?? ?? 68 4C 8A 60 BE ", 1, True], #Can be found with "PersistsThroughDeath" "NonDispellable" "OnPreDamagePriority" and several others
 	
-	["DeleteObject", "83 EC 08 53 8B 5C 24 10 55 56 57 8A 83 98 00 00 00 ? ? ? ? ? ? ", 1], #Can be found by checking in OnLoadHero and looking at the last call in the loc above "game_bot_"'s loc
+	["LevelUp", "F3 ?? ?? ?? ?? ?? 0F 57 C9 0F 2F C1 56 57 ", 1, True], #Can be found with "ALE-EC0BF512" "ALE-BD06C313" "ALE-06905997" "ALE-F65F3A49"
 	
-	["AddRemoveBuff", "E8 76 45 41 00 ? ? ? ? ? ", 2], #Can be found with "PersistsThroughDeath" "NonDispellable" "OnPreDamagePriority" and several others
+	["AssignNetworkID", "74 2D 89 44 24 ?? ", 1, True],	 #SUCCESS	0x2E24D0 #Can be found with "GameObject Network ID is being reset for %s"
 	
-	["LevelUp", "E8 64 AD 05 00 ? ? ? ? ? ", 2], #Can be found with "ALE-EC0BF512" "ALE-BD06C313" "ALE-06905997" "ALE-F65F3A49"
+	["UpdateBuff", "83 EC ?? 53 55 8B 6C 24 ?? 56 8B F1 89 74 24 ?? 57 85 ED ", 1, True], #Caller can be found with "ALE-DEFF93BD" "ALE-CFFAE012", the call is in the loc after "ALE-DEFF93BD" third call from the bottom
 	
-	["AssignNetworkID", "83 EC 08 56 8B F1 8B 46 74 C6 46 10 00 ", 1], #Can be found with "GameObject Network ID is being reset for %s"
-	
-	["UpdateBuff", "83 EC 14 53 55 56 8B 74 24 2C ", 1], #Caller can be found with "ALE-DEFF93BD" "ALE-CFFAE012", the call is in the loc after "ALE-DEFF93BD" third call from the bottom
-	
-	["DoEmote", "E8 30 CB 11 00 ? ? ? ? ? ", 1], #Can be found by using IDA search feature and searching "evtEmoteDance" cancelling the search and then searching next text twice, after stepping into the sub being pushed after the push 0 the sub being jumped to is DoEmote
+	["DoEmote", "A1 ?? ?? ?? ?? 83 EC ?? 8B 48 08 E8 ?? ?? ?? ?? 84 C0 74 08 32 C0 83 C4 ?? C2 04 00 8B ?? ?? ?? ?? ?? ", 1, True], #Can be found by using IDA search feature and searching "evtEmoteDance" cancelling the search and then searching next text twice, after stepping into the sub being pushed after the push 0 the sub being jumped to is DoEmote
 	#Is a call within DoEmote but setting it as a pattern makes it bring up the DoEmote address
 	
-	["DoMasteryBadge", "E8 B7 45 F5 FF ? ? ? ? ? ", 2], #Can be found with "ALE-A6219283"
+	["DoMasteryBadge", "81 EC ?? ?? 00 00 A1 ?? ?? ?? ?? 33 C4 89 84 24 ?? ?? 00 00 53 8B 9C 24 ?? ?? 00 00 55 8B E9 8B 8C 24 ?? ?? 00 00 ", 1, True], #Can be found with "ALE-A6219283"
 	
-	["OnSurrenderVote", "E8 4B 0C 2F 00 ? ? ? ? ? ", 2], #Can be found by using the second call of PrintChat in OnProcessPacket and scrolling up until you are three locs below a local player reference
+	["OnSurrenderVote", "8B 81 ?? ?? 00 00 8A 54 24 0C 53 ", 1, True], #Can be found by using the second call of PrintChat in OnProcessPacket and scrolling up until you are three locs below a local player reference
 	
-	["UpdateChargeableSpell", "83 EC 28 53 55 8B 6C 24 34 56 ", 1], #Can be found by looking in GameUpdate and checking the next decent sized loc above "Game Ended.  Closing after delay is satisfied." (about 4 locs up) and stepping into the call right after the cursor is being moved onto ecx
-	# and in the second to last loc stepping into the second call in the loc then it is the call near the end that has a lead ecx to the spellbook ptr (also has a LocalPlayer being moved onto the ESI)
-	#Can also be found by using MassSigCheck (my own script) and finding the one that calls it which also calls GetSpellState and it is the call near the end that has a lead ecx to the spellbook ptr
+	["UpdateChargeableSpell", "E8 ?? ?? ?? ?? 8B 43 24 8B 40 ?? ", 2, False], 
 	
-	["ApplySpellCD", "E8 23 A5 FF FF ? ? ? ? ? ", 2], #Can be found with "ALE-6213D87E" "ALE-42E20CB6"
+	["ApplySpellCD", "FF 74 24 ?? 8B ?? ?? ?? ?? ?? E8 ?? ?? ?? ?? 8B C8 85 C9 ", 1, True], #Can be found with "ALE-6213D87E" "ALE-42E20CB6"
 	
-	["StopCast", "83 EC 10 56 8B 74 24 24 ", 1],
+	["StopCast", "83 EC ?? 56 8B 74 24 ?? 8D 44 24 ?? 57 50 8D 54 24 14 ", 1, True],
 	
-	["GetBoundingRadius", "51 56 8B F1 83 BE 30 24 00 00 00 ? ? ? ? ? ? ? ", 1], #Can be found by tracing UseObject caller, the first call above where useobject is called 
+	["GetBoundingRadius", "D9 54 24 ?? F3 ?? ?? ?? ?? ?? 0F ?? ?? ?? ?? ?? ?? ", 1, True], #Can be found by tracing UseObject caller, the first call above where useobject is called ## Calls this func ["sub", "E8 ?? ?? ?? ?? D9 54 24 04 F3 0F 10 44 24 04 ", 2, True]
 	#Then in there the loc that moves the localplayer onto a register you can hit the second call from the bottom 
 	#After there is a loc with only two operations a mov and a call, the call is a subroutine that has two callers, the caller that you didn't use to get to this point is GetBoundingRadius
 	
-	["WorldToScreen", "E8 79 11 26 00 ? ? ? ? ? ", 2], #A caller of one of the callers can be found with "MaxPingParticleTime". In the loc with a dword being moved onto a register the call with eax being pushed on is the caller of this method
+	["WorldToScreen", "83 EC ?? A1 ?? ?? ?? ?? 33 C4 89 44 24 ?? A1 ?? ?? ?? ?? 8D 54 24 08 ", 1, True], #A caller of one of the callers can be found with "MaxPingParticleTime". In the loc with a dword being moved onto a register the call with eax being pushed on is the caller of this method
 	#in the loc where Renderer is reference you can find as the first call where eax is pushed
 	
-	["ScreenToWorld", "E8 5F AB 1E 00 ? ? ? ? ? ", 2], #A caller of one of the callers can be found with "MaxPingParticleTime". In the loc with a dword being moved onto a register the call with eax being pushed on is the caller of this method
+	["ScreenToWorld", "81 EC ?? ?? 00 00 A1 ?? ?? ?? ?? F3 0F ?? ?? ?? ?? ?? ?? ", 1, True], #A caller of one of the callers can be found with "MaxPingParticleTime". In the loc with a dword being moved onto a register the call with eax being pushed on is the caller of this method
 	#This one is the first call in the loc that has Renderer referenced
 	
-	["MapToWorld", "83 EC 08 8B 44 24 0C F3 0F 10 15 84 26 F8 00 ? ? ? ? ? ? ? ? ", 1], #Caller can be found with "CapturePointUnderAttack" and then the call to it is in the second loc third caller. It is also preceded by push eax and a mov ecx, edi
+	["MapToWorld", "E8 ?? ?? ?? ?? 8B 75 0C 8D 44 24 ?? ", 2, True], #Caller can be found with "CapturePointUnderAttack" and then the call to it is in the second loc third caller. It is also preceded by push eax and a mov ecx, edi
 	
-	["World2Map", "8B 44 24 04 53 8B D9 56 57 8B 3B ", 1], #Can be found in LoadHero five locs down from the loc that calls OnLoadChampion it is the last call in this loc
+	["World2Map", "8B 44 24 ?? 53 8B D9 56 57 8B 3B ", 1, True], #Can be found in LoadHero five locs down from the loc that calls OnLoadChampion it is the last call in this loc
 	
-	["GetTacticalMap", "E8 91 5F 39 00 ? ? ? ? ? ", 1], #Caller can be found with "Distance_To_Audio_Linked_Ally" and it is in the third loc from the bottom and is the second to last call in the loc
+	["GetTacticalMap", "E8 ?? ?? ?? ?? 8B C8 E8 ?? ?? ?? ?? 8B 4C 24 18 85 C9 74 1A ", 2, True], #Caller can be found with "Distance_To_Audio_Linked_Ally" and it is in the third loc from the bottom and is the second to last call in the loc
 	#Is a call within GetTacticalMap but setting as a pattern so it brings up GetTacticalMap's address
+	
+	
+	
+	
+	["j_CReplInfo32__AddVar", "6A ?? FF 74 24 ?? FF 74 24 ?? FF 74 24 ?? E8 ?? ?? ?? ?? C2 0C 00 ", 1, False],
 	
 ]
 
 Offsets = [
-	["LocalPlayer","39 3D 38 FF E4 02 ? ? ? ? ? ? ", 1, 0], #All the other ones start with 8B or A1, no sigs from prev version are the same, but the one starting with 3 will make a valid sig
+	["LocalPlayer", "8B ?? ?? ?? ?? ?? 8B ?? ?? ?? ?? ?? 00 00 89 44 24 ?? 8D 44 24 ?? ", 1, 1, True],
 
-	["ChatClientPtr", "A1 ? ? ? ? 85 C0 74 32", 1, 1],
-	#\xA1\x00\x00\x00\x00\x85\xC0\x74\x32 x????xxxx
-	["ObjectManager", "A1 ?? ?? ?? ?? 8B 0C 88 85 C9 74 0E 39 71 08 75 09 6A 01", 1, 1], # ALE-DFB7B379 (below mov eax, ObjectManager)
+	["ChatClientPtr", "B9 ?? ?? ?? ?? E8 ?? ?? ?? ?? A1 ?? ?? ?? ?? 89 44 24 ?? ", 1, 1, True],
 	
-	["Renderer", "A1 A0 43 E7 02 ? ? ? ? ? 8B 80 E0 95 0C 00 ? ? ? ? ? ? ", 1, 1], # SkinnedMesh_SOLID_COLOR_PS (above mox ecx, Renderer) / %1_WEIGHT%2 (below call sub .. mov ecx, Renderer)
-		
-	["ZoomClass", "A3 ? ? ? ? 8D 4C 24 20", 1, 0], # Globals/CameraConfig_CLASSIC (above cmp ZoomBase, 0)
+	["ObjectManager", "B9 ?? ?? ?? ?? E8 ?? ?? ?? ?? 8B F0 85 F6 74 36 ", 1, 1, True], # ALE-DFB7B379 (below mov eax, ObjectManager)
 	
-	["UnderMouseObject", "C7 05 ? ? ? ? ? ? ? ? E8 ? ? ? ? 83 C4 04 FF B4", 1, 0],
-	#\xC7\x05\x00\x00\x00\x00\x00\x00\x00\x00\xE8\x00\x00\x00\x00\x83\xC4\x04\xFF\xB4 xx????????x????xxxxx
+	["Renderer", "8B ?? ?? ?? ?? ?? 6A ?? 68 ?? ?? ?? ?? 68 ?? ?? ?? ?? E8 ?? ?? ?? ?? 8B ?? ?? ?? ?? ?? 6A ?? 56 ", 1, 1, True],	  # SkinnedMesh_SOLID_COLOR_PS (above mox ecx, Renderer) / %1_WEIGHT%2 (below call sub .. mov ecx, Renderer)["oRenderer", "83 3D BC 2D E4 02 00 ? ? ? ? ? ? ? 56 ", 2],	 #SUCCESS	0x2E42DBC
 	
-	["Cursor", "A1 ? ? ? ? 8B 40 14 85", 1, 1], # evtCameraSnap .. Leads to Mouse Position (8.4: ] + 0x14] + 0x10 = Vec3 of Mouse Position)
-	#\xA1\x00\x00\x00\x00\x8B\x40\x14\x85 x????xxxx
+	["ZoomClass", "A3 ?? ?? ?? ?? 8D 4C 24 ?? E8 ?? ?? ?? ?? A1 ?? ?? ?? ?? 5E 8B 4C 24 ?? 89 47 40 ", 1, 0, True], # Globals/CameraConfig_CLASSIC (above cmp ZoomBase, 0)
 	
-	["MissionInfo", "8B 35 04 9C E7 02 ? ? ? ? ? ? ", 1,1], #Caller of a sub using it can be found with "EndSnapshotCapture" and the sub using it is the first call in that loc. Within that sub it's the first dword in the sub (move edi, dword_whatever)
+	["UnderMouseObject", "C7 ?? ?? ?? ?? ?? ?? ?? 00 00 E8 ?? ?? ?? ?? 83 C4 ?? FF B4 24 ?? 00 00 00 ", 1, 0, True],
 	
-	["Version", "B8 A0 56 E5 02 ? ? ? ? ? ", 1, 1], #Function referencing it can be found with "Build Version: %s ChangeList: %u\n", it is the function in the loc with "Build Version: %s ChangeList: %u\n" that has eax pushed on as an arg
+	["Cursor", "8B ?? ?? ?? ?? ?? 8B 49 34 E8 ?? ?? ?? ?? 85 C0 ", 1, 1, True], # evtCameraSnap .. Leads to Mouse Position (8.4: ] + 0x14] + 0x10 = Vec3 of Mouse Position)
 	
-	["NetClient", "89 1D C8 FF E4 02 ? ? ? ? ? ? ", 1, 0], #Can be found with "Build Version: %s ChangeList: %u\n" it is the dword in the loc directly above the loc in which "Build Version: %s ChangeList: %u\n" is used
+	["MissionInfo", "C7 ?? ?? ?? ?? ?? ?? ?? 00 00 5B 74 0E ", 1, 0, True], #Caller of a sub using it can be found with "EndSnapshotCapture" and the sub using it is the first call in that loc. Within that sub it's the first dword in the sub (move edi, dword_whatever)
 	
-	["TexturePack", "83 3D 88 23 E5 02 00 ? ? ? ? ? ? ? ",1,0], #Can be found with "%.4f    %.4f    %.4f\n" and is the dword used in this sub
+	["GameState", "8B ?? ?? ?? ?? ?? 8D 04 ?? 6A 03 50 6A 04 E8 ?? ?? ?? ?? 8D 0C 24 E8 ?? ?? ?? ?? 8B 8C 24 ?? ?? 00 00 33 CC ", 1, 1, True], #Can be found in GameUpdate above the loc with "Game Ended.  Closing after delay..." and 3 renderer references
 	
-	["GameTime", "F3 0F 5C 0D C4 80 E4 02 ? ? ? ? ? ? ? ? ", 1,	1], #Should be found via the caller of the subroutine that uses this. 
+	["Version", "68 ?? ?? ?? ?? E8 ?? ?? ?? ?? 83 C4 ?? 8D 4C 24 ?? E8 ?? ?? ?? ?? 5E ", 1, 0, True],	 #Function referencing it can be found with "Build Version: %s ChangeList: %u\n", it is the function in the loc with "Build Version: %s ChangeList: %u\n" that has eax pushed on as an arg
+	
+	["NetClient", "8B ?? ?? ?? ?? ?? E8 ?? ?? ?? ?? E8 ?? ?? ?? ?? E8 ?? ?? ?? ?? 85 C0 ", 1, 1, True], #Can be found with "Build Version: %s ChangeList: %u\n" it is the dword in the loc directly above the loc in which "Build Version: %s ChangeList: %u\n" is used
+	
+	["TexturePack", "C7 ?? ?? ?? ?? ?? ?? ?? 00 00 8D 04 ?? C7 ?? ?? ?? ?? ?? ?? 50 ", 1, 0, True], #Can be found with "%.4f    %.4f    %.4f\n" and is the dword used in this sub
+	
+	["GameTime", "F3 0F ?? ?? ?? ?? ?? ?? 8B 48 08 E8 ?? ?? ?? ?? 51 ", 1, 0, True], #Should be found via the caller of the subroutine that uses this. 
 	#Caller of the using sub can be searched with "GAMESTATE_GAMELOOP UpdateVis\n" and it is at the top of the loc prior to this phrase
 	
 	
@@ -249,7 +235,8 @@ def PrintWrapper(Alias, Addr, Type): # Type: 1 => Function, 2 => Offset
 	if Addr == BADADDR or Addr == 0 or Addr == 0x00:
 		print(Alias + " -> Error")
 		return
-		
+	
+	if Type == 0: print("#define " + Alias + " " + DecToHex(Addr))
 	if Type == 1: print("#define " + functionPrefix + Alias + " " + DecToHex(Addr))
 	if Type == 2: print("#define " + offsetPrefix + Alias + " " + DecToHex(Addr))
 	
@@ -273,16 +260,25 @@ def Initialize():
 	print("")
 	
 	print("++ Functions")
-	for Alias, Reference, Type in Functions:
-		if Type == 1: PrintWrapper(Alias, FindFuncPattern(Reference), 1)
-		if Type == 2: PrintWrapper(Alias, FindFuncCall(Reference), 1)
-		if Type == 3: PrintWrapper(Alias, FindFuncFirstReference(Reference), 1)
+	for Alias, Reference, Type, HasPrefix in Functions:
+		if HasPrefix == True:
+			if Type == 1: PrintWrapper(Alias, FindFuncPattern(Reference), 1)
+			if Type == 2: PrintWrapper(Alias, FindFuncCall(Reference), 1)
+			if Type == 3: PrintWrapper(Alias, FindFuncFirstReference(Reference), 1)
+		else: 
+			if Type == 1: PrintWrapper(Alias, FindFuncPattern(Reference), 0)
+			if Type == 2: PrintWrapper(Alias, FindFuncCall(Reference), 0)
+			if Type == 3: PrintWrapper(Alias, FindFuncFirstReference(Reference), 0)
 	print("")
 	
 	print("++ Offsets")
-	for Alias, Reference, Type, Operand in Offsets:
-		if Type == 1: PrintWrapper(Alias, FindOffsetPattern(Reference, Operand), 2)
-		if Type == 2: PrintWrapper(Alias, FindOffsetPattern(Reference, Operand), 2)
+	for Alias, Reference, Type, Operand, HasPrefix in Offsets:
+		if HasPrefix == True:
+			if Type == 1: PrintWrapper(Alias, FindOffsetPattern(Reference, Operand), 2)
+			if Type == 2: PrintWrapper(Alias, FindOffsetPattern(Reference, Operand), 2)
+		else:
+			if Type == 1: PrintWrapper(Alias, FindOffsetPattern(Reference, Operand), 0)
+			if Type == 2: PrintWrapper(Alias, FindOffsetPattern(Reference, Operand), 0)
 	print("")
 	
 Initialize()

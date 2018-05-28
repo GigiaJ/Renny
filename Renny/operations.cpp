@@ -50,16 +50,16 @@ namespace Operations {
 		float moveSpeed = enemyChamp->mMoveSpeed;
 
 		if (missileSpeed > 0.0f) {
-			if (enemyChamp->mAIManager->mIsMoving || enemyChamp->mAIManager->mIsDashing) {
+			if (enemyChamp->mCharData->AIHeroClient->mIsMoving || enemyChamp->mCharData->AIHeroClient->mIsDashing) {
 
 				Vector enemyPos = {};
 
-				if (enemyChamp->mAIManager->mIsMoving) {
+				if (enemyChamp->mCharData->AIHeroClient->mIsMoving) {
 					enemyPos = enemyChamp->mUnitPos;
 				}
 
-				if (enemyChamp->mAIManager->mIsDashing) {
-					enemyPos = enemyChamp->mAIManager->mDashEndPosition;
+				if (enemyChamp->mCharData->AIHeroClient->mIsDashing) {
+					enemyPos = enemyChamp->mCharData->AIHeroClient->mDashEndPosition;
 				}
 
 				float enemyHitBoxSize = enemyChamp->getUnitSize();

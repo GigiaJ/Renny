@@ -8,11 +8,11 @@ DWORD hookAddress = base + fnOnSpellCast + 0x27C;
 DWORD BackAddy1 = hookAddress + hookLength;
 
 int hookLength2 = 10;
-DWORD hookAddress2 = base + fnOnAutoAttack + 0x286;
+DWORD hookAddress2 = base + fnOnAutoAttack + 0x258;
 DWORD BackAddy2 = hookAddress2 + hookLength2;
 
 int hookLength3 = 9;
-DWORD hookAddress3 = base + fnOnProcessSpellW + 0x33;
+DWORD hookAddress3 = base + fnOnProcessSpellW + 0x38;
 DWORD BackAddy3 = hookAddress3 + hookLength3;
 
 

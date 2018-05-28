@@ -12,16 +12,13 @@ bool isZero(float number) {
 	return (number == 0);
 }
 
-int setEnemyTeam(object* myPlayer) {
-	int enemyTeam = 0;
-
+void setEnemyTeam(object* myPlayer) {
 	if (myPlayer->mTeam == 200) {
 		enemyTeam = 100;
 	}
 	else {
 		enemyTeam = 200;
 	}
-	return enemyTeam;
 }
 
 float modifySign(float numberToCheck, float numberToModify) {
@@ -44,8 +41,8 @@ float calculateEnemyFuturePosition(float distanceTravelledDuringCast, float sumS
 float absVectorDistance(Vector firstVector, Vector secondVector) {
 	float distanceFromEachotherX = secondVector.x - firstVector.x;
 	float distanceFromEachotherZ =  secondVector.z - firstVector.z;
-	float absoluteDistanceFromEachotherX = static_cast<float>(std::fabs(distanceFromEachotherX));
-	float absoluteDistanceFromEachotherZ = static_cast<float>(std::fabs(distanceFromEachotherZ));
+	float absoluteDistanceFromEachotherX = std::abs(distanceFromEachotherX);
+	float absoluteDistanceFromEachotherZ = std::abs(distanceFromEachotherZ);
 	return  absoluteDistanceFromEachotherX + absoluteDistanceFromEachotherZ;
 }
 
@@ -71,7 +68,6 @@ void getListOfEnemyChamps(object* myPlayer)
 {
 	std::ofstream myfile;
 	myfile.open("C:\\Users\\gigia\\Desktop\\Script Development\\output.txt");
-	int enemyTeam = setEnemyTeam(myPlayer);
 	for (int i = 0; i < objMgr->mArrayHighestIndex; i++) {
 		if (objMgr->mObjectManagerArray[i] != NULL) {
 			object* TemporaryObject = objMgr->mObjectManagerArray[i];

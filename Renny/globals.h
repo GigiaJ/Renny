@@ -17,6 +17,7 @@ extern DWORD Mouse;
 extern spellCastDataBase* autoAttackData;
 extern spellCastDataBase* spellCastData;
 extern float vGameTime;
+extern int enemyTeam;
 
 extern std::vector<object*> listOfEnemyChamps;
 extern volatile DWORD isWall;

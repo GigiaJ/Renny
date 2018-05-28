@@ -114,7 +114,7 @@ def DecToHex(addr):
 
 def PrintWrapper(Alias, Addr, Type, i): # Type: 1 => Function, 2 => Offset
 	if Addr == BADADDR or Addr == 0 or Addr == 0x00:
-		print("fn" + Alias + " -> Error")
+		print(Alias + " -> Error")
 		return
 	
 	if Type == 0: print("#define " + Alias + " " + DecToHex(Addr) + "\t #" + "{}".format(i))
@@ -168,7 +168,7 @@ def SignatureSearch():
 
 	Functions = []
 	Offsets = []
-	input = open(FILE_LOCATION + "Signatures.txt", "r")
+	input = open(FILE_LOCATION + "SigMakeCheckSigs.txt", "r")
 	lines = input.readlines()
 	position = 1
 	for x in lines:
@@ -473,7 +473,12 @@ def ApplyCorrections(curSig):
 		curSig = CorrectDefinedOffsets(curSig, "89 84", 4, 5)
 		if curSig.find("XX") != -1:
 			curSig = curSig.replace("XX", "??")
-	#########################################################				
+	#########################################################
+	if curSig.find("8A 43") != -1:
+		curSig = CorrectDefinedOffsets(curSig, "8A 43", -1, 3)
+		if curSig.find("XX") != -1:
+			curSig = curSig.replace("XX", "??")
+	#########################################################		
 	if curSig.find("8B 40") != -1:
 		curSig = CorrectDefinedOffsets(curSig, "8B 40", -1, 3)
 		if curSig.find("XX") != -1:
@@ -493,6 +498,10 @@ def ApplyCorrections(curSig):
 			#mov     eax, [ebp+40h]
 	if curSig.find("8B 46") != -1:
 		curSig = CorrectDefinedOffsets(curSig, "8B 46", -1, 3)
+		if curSig.find("XX") != -1:
+			curSig = curSig.replace("XX", "??")
+	if curSig.find("8B 48") != -1:
+		curSig = CorrectDefinedOffsets(curSig, "8B 48", -1, 3)
 		if curSig.find("XX") != -1:
 			curSig = curSig.replace("XX", "??")
 	if curSig.find("8B 4B") != -1:
@@ -886,7 +895,7 @@ def CreatePattern():
 		formattedPattern += "\n"
 		z = z + 1
 		
-	output = open(FILE_LOCATION + "Signatures.txt", "w+")
+	output = open(FILE_LOCATION + "SigMakeCheckSigs.txt", "w+")
 	output.write(formattedPattern)
 	output.close()
 	

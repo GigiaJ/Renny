@@ -7,7 +7,7 @@ bool isNegative(float number);
 
 bool isZero(float number);
 
-int setEnemyTeam(object* myPlayer);
+void setEnemyTeam(object* myPlayer);
 
 float modifySign(float numberToCheck, float numberToModify);
 

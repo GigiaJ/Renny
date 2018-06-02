@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ReClass>
     <!--ReClassEx-->
-    <TypeDef tdHex="unsigned char" tdInt64="__int64" tdInt32="int" tdInt16="short" tdInt8="bool" tdQWORD="DWORD64" tdDWORD="DWORD" tdWORD="WORD" tdBYTE="unsigned char" tdFloat="float" tdDouble="double" tdVec2="Vector2" tdVec3="Vector" tdQuat="Vector4" tdMatrix="matrix3x4_t" tdPChar="char*" tdPWChar="wchar_t*"/>
+    <TypeDef tdHex="unsigned char" tdInt64="__int64" tdInt32="int" tdInt16="short" tdInt8="bool" tdQWORD="DWORD64" tdDWORD="DWORD" tdWORD="WORD" tdBYTE="__int8" tdFloat="float" tdDouble="double" tdVec2="Vector2" tdVec3="Vector" tdQuat="Vector4" tdMatrix="matrix3x4_t" tdPChar="char*" tdPWChar="wchar_t*"/>
     <Header Text="struct Vector
 {
 	float x;
@@ -35,7 +35,7 @@
     <Class Name="ReClassFloat" Type="28" Comment="" Offset="9306112" strOffset="8e0000" Code="">
         <Node Name="value" Type="13" Size="4" bHidden="false" Comment=""/>
     </Class>
-    <Class Name="object" Type="28" Comment="" Offset="161" strOffset="&quot;League of Legends.exe&quot; + *2E2D650" Code="	float getUnitSize() {
+    <Class Name="object" Type="28" Comment="" Offset="1301860952" strOffset="&quot;League of Legends.exe&quot; + *0x2E2345C" Code="	float getUnitSize() {
 		return (this-&gt;mEdgePos2.x - this-&gt;mEdgePos1.x);
 	}">
         <Node Name="N00000E1B" Type="4" Size="4" bHidden="false" Comment=""/>
@@ -388,15 +388,15 @@
         <Node Name="N00000F74" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N00000F75" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N00000F76" Type="4" Size="4" bHidden="false" Comment=""/>
-        <Node Name="mLifetimeTicks" Type="13" Size="4" bHidden="false" Comment=""/>
+        <Node Name="mLifetime" Type="13" Size="4" bHidden="false" Comment=""/>
         <Node Name="N00000F78" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N00000F79" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N00000F7A" Type="4" Size="4" bHidden="false" Comment=""/>
-        <Node Name="N00000F7B" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="mMaxLifeTime" Type="13" Size="4" bHidden="false" Comment=""/>
         <Node Name="N00000F7C" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N00000F7D" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N00000F7E" Type="4" Size="4" bHidden="false" Comment=""/>
-        <Node Name="N00000F7F" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="mLifeTimeTicks" Type="13" Size="4" bHidden="false" Comment=""/>
         <Node Name="N00000F80" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N00000F81" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N00000F82" Type="4" Size="4" bHidden="false" Comment=""/>
@@ -577,6 +577,12 @@
         <Node Name="N00001029" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N0000102A" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N0000102B" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001E1F" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001E1E" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001E21" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001E20" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001E22" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001E23" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N0000102C" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N0000125E" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="mNegativeCurrentCDR" Type="13" Size="4" bHidden="false" Comment=""/>
@@ -608,16 +614,6 @@
         <Node Name="N00001279" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N0000127A" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N0000127B" Type="4" Size="4" bHidden="false" Comment=""/>
-        <Node Name="N0000127C" Type="4" Size="4" bHidden="false" Comment=""/>
-        <Node Name="N0000127D" Type="4" Size="4" bHidden="false" Comment=""/>
-        <Node Name="N0000127E" Type="4" Size="4" bHidden="false" Comment=""/>
-        <Node Name="N0000127F" Type="4" Size="4" bHidden="false" Comment=""/>
-        <Node Name="N00001280" Type="4" Size="4" bHidden="false" Comment=""/>
-        <Node Name="N00001281" Type="4" Size="4" bHidden="false" Comment=""/>
-        <Node Name="N00001282" Type="4" Size="4" bHidden="false" Comment=""/>
-        <Node Name="N00001283" Type="4" Size="4" bHidden="false" Comment=""/>
-        <Node Name="N00001284" Type="4" Size="4" bHidden="false" Comment=""/>
-        <Node Name="N00001285" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N00001286" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N00001287" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N00001288" Type="4" Size="4" bHidden="false" Comment=""/>
@@ -912,22 +908,18 @@
         <Node Name="N000024C0" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N000024C1" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N000024C2" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001E25" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001E24" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N000024C6" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N000024C7" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N000024C8" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N000024C9" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N000024CA" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N000024CB" Type="4" Size="4" bHidden="false" Comment=""/>
-        <Node Name="N000024CC" Type="4" Size="4" bHidden="false" Comment=""/>
-        <Node Name="N000024CD" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N000024CE" Type="4" Size="4" bHidden="false" Comment=""/>
-        <Node Name="N000024CF" Type="4" Size="4" bHidden="false" Comment=""/>
-        <Node Name="N000024D0" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N000024D1" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N000024D2" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N000024D3" Type="4" Size="4" bHidden="false" Comment=""/>
-        <Node Name="N000024D4" Type="4" Size="4" bHidden="false" Comment=""/>
-        <Node Name="N000024D6" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N000024D7" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N000024D9" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N000024DA" Type="4" Size="4" bHidden="false" Comment=""/>
@@ -935,6 +927,8 @@
         <Node Name="N000024E9" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N000024EA" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N000024EC" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001E26" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001E27" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N000024EE" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N000024EF" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N000024F0" Type="4" Size="4" bHidden="false" Comment=""/>
@@ -947,6 +941,18 @@
         <Node Name="N000024F9" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N000024FA" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N000024FB" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D1D" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D1E" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D1F" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D20" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D21" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D24" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D23" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D26" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D25" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D27" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D28" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D22" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N000024FC" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="mPercentCooldownCapMod" Type="13" Size="4" bHidden="false" Comment=""/>
         <Node Name="N000024FE" Type="4" Size="4" bHidden="false" Comment=""/>
@@ -3549,25 +3555,23 @@
         <Node Name="N000035C2" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N000035C3" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N000035C4" Type="4" Size="4" bHidden="false" Comment=""/>
-        <Node Name="mEvolvePoints" Type="10" Size="4" bHidden="false" Comment=""/>
+        <Node Name="mEvolvePoints" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N000035C6" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N000035C7" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N000035C8" Type="4" Size="4" bHidden="false" Comment=""/>
-        <Node Name="mEvolveFlag" Type="10" Size="4" bHidden="false" Comment=""/>
+        <Node Name="mEvolveFlag" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N000035CA" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N000035CB" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N000035CC" Type="4" Size="4" bHidden="false" Comment=""/>
-        <Node Name="mExp" Type="13" Size="4" bHidden="false" Comment=""/>
+        <Node Name="mExp" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N000035CE" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N000035CF" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N000035D0" Type="4" Size="4" bHidden="false" Comment=""/>
-        <Node Name="mLevelRef" Type="13" Size="4" bHidden="false" Comment=""/>
+        <Node Name="mLevelRef" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N000035D2" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N000035D3" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N000035D4" Type="4" Size="4" bHidden="false" Comment=""/>
-        <Node Name="mSkillUpLevelDeltaReplicate" Type="12" Size="1" bHidden="false" Comment=""/>
-        <Node Name="N0000365B" Type="6" Size="2" bHidden="false" Comment=""/>
-        <Node Name="N0000365C" Type="7" Size="1" bHidden="false" Comment=""/>
+        <Node Name="mSkillUpLevelDeltaReplicate" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N000035D6" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N000035D7" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N000035D8" Type="4" Size="4" bHidden="false" Comment=""/>
@@ -3689,23 +3693,25 @@
         <Node Name="N0000364C" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N0000364D" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N0000364E" Type="4" Size="4" bHidden="false" Comment=""/>
-        <Node Name="N0000364F" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="mEvolvePoints" Type="10" Size="4" bHidden="false" Comment=""/>
         <Node Name="N00003650" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N00003651" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N00003652" Type="4" Size="4" bHidden="false" Comment=""/>
-        <Node Name="N00003653" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="mEvolveFlag" Type="10" Size="4" bHidden="false" Comment=""/>
         <Node Name="N00003654" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N00003655" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N0000365D" Type="4" Size="4" bHidden="false" Comment=""/>
-        <Node Name="N0000365E" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="mExp" Type="13" Size="4" bHidden="false" Comment=""/>
         <Node Name="N0000365F" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N00003660" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N00003661" Type="4" Size="4" bHidden="false" Comment=""/>
-        <Node Name="N00003662" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="mLevelRef" Type="13" Size="4" bHidden="false" Comment=""/>
         <Node Name="N00003663" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N00003664" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N00003665" Type="4" Size="4" bHidden="false" Comment=""/>
-        <Node Name="N00003666" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="mSkillUpLevelDeltaReplicate" Type="12" Size="1" bHidden="false" Comment=""/>
+        <Node Name="N00001E34" Type="6" Size="2" bHidden="false" Comment=""/>
+        <Node Name="N00001E35" Type="7" Size="1" bHidden="false" Comment=""/>
         <Node Name="N00003667" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N00003668" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N00003669" Type="4" Size="4" bHidden="false" Comment=""/>
@@ -3999,7 +4005,7 @@
         <Node Name="N00003789" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N0000378A" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N0000378B" Type="4" Size="4" bHidden="false" Comment=""/>
-        <Node Name="N0000378C" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="mVisionScore" Type="13" Size="4" bHidden="false" Comment=""/>
         <Node Name="N0000378D" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N0000378E" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N0000378F" Type="4" Size="4" bHidden="false" Comment=""/>
@@ -4144,7 +4150,6 @@
         <Node Name="N0000381A" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N0000381B" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N0000381C" Type="4" Size="4" bHidden="false" Comment=""/>
-        <Node Name="mNumNeutralMinionsKilled" Type="10" Size="4" bHidden="false" Comment=""/>
         <Node Name="N0000381E" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N0000381F" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N00003820" Type="4" Size="4" bHidden="false" Comment=""/>
@@ -4153,11 +4158,9 @@
         <Node Name="N00003823" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N00003824" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N00003825" Type="4" Size="4" bHidden="false" Comment=""/>
-        <Node Name="mInputLocks" Type="10" Size="4" bHidden="false" Comment=""/>
         <Node Name="N00003827" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N00003828" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N00003829" Type="4" Size="4" bHidden="false" Comment=""/>
-        <Node Name="mHealthBarCharacterIDForIcon" Type="10" Size="4" bHidden="false" Comment=""/>
         <Node Name="N0000382B" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N0000382C" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N0000382D" Type="4" Size="4" bHidden="false" Comment=""/>
@@ -4285,6 +4288,9 @@
         <Node Name="N000038AA" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N000038AB" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N000038AC" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001E2F" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001E30" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001E31" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N000038AD" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N000038AE" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N000038AF" Type="4" Size="4" bHidden="false" Comment=""/>
@@ -4300,7 +4306,7 @@
         <Node Name="N000038B9" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N000038BA" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N000038BB" Type="4" Size="4" bHidden="false" Comment=""/>
-        <Node Name="N000038BC" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="mNumNeutralMinionsKilled" Type="10" Size="4" bHidden="false" Comment=""/>
         <Node Name="N000038BD" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N000038BE" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N000038BF" Type="4" Size="4" bHidden="false" Comment=""/>
@@ -4309,11 +4315,11 @@
         <Node Name="N000038C2" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N000038C3" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N000038C4" Type="4" Size="4" bHidden="false" Comment=""/>
-        <Node Name="N000038C5" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="mInputLocks" Type="10" Size="4" bHidden="false" Comment=""/>
         <Node Name="N000038C6" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N000038C7" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N000038C8" Type="4" Size="4" bHidden="false" Comment=""/>
-        <Node Name="N000038C9" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="mHealthBarCharacterIDForIcon" Type="10" Size="4" bHidden="false" Comment=""/>
         <Node Name="N000038CA" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N000038CB" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N000038CC" Type="4" Size="4" bHidden="false" Comment=""/>
@@ -4488,17 +4494,270 @@
         <Node Name="N00003975" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N00003976" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N00003977" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001E28" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001E27" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001E26" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001E25" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001E24" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001E23" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001E22" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001E21" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001E20" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001E1F" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001E1E" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001E1D" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001E1C" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001E1B" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001E1A" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001E19" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001E18" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001E17" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001E16" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001E15" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001E14" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001E13" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001E12" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001E11" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001E10" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001E0F" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001E0E" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001E0D" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001E0C" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001E0B" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001E0A" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001E09" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001E08" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001E07" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001E06" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001E05" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001E04" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001E03" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001E02" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001E01" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001E00" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DFF" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DFE" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DFD" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DFC" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DFB" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DFA" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DF9" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DF8" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DF7" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DF6" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DF5" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DF4" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DF3" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DF2" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DF1" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DF0" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DEF" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DEE" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DED" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DEC" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DEB" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DEA" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DE9" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DE8" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DE7" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DE6" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DE5" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DE4" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DE3" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DE2" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DE1" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DE0" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DDF" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DDE" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DDD" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DDC" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DDB" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DDA" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DD9" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DD8" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DD7" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DD6" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DD5" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DD4" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DD3" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DD2" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DD1" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DD0" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DCF" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DCE" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DCD" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DCC" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DCB" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DCA" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DC9" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DC8" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DC7" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DC6" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DC5" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DC4" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DC3" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DC2" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DC1" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DC0" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DBF" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DBE" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DBD" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DBC" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DBB" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DBA" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DB9" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DB8" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DB7" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DB6" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DB5" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DB4" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DB3" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DB2" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DB1" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DB0" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DAF" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DAE" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DAD" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DAC" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DAB" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DAA" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DA9" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DA8" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DA7" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DA6" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DA5" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DA4" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DA3" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DA2" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DA1" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001DA0" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D9F" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D9E" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D9D" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D9C" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D9B" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D9A" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D99" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D98" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D97" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D96" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D95" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D94" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D93" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D92" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D91" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D90" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D8F" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D8E" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D8D" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D8C" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D8B" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="mPhysicalDamageTaken" Type="13" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D89" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D88" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D87" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="mMagicDamageTaken" Type="13" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D85" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D84" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D83" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="mTrueDamageTaken" Type="13" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D81" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D80" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D7F" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D7E" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D7D" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D7C" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D7B" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D7A" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D79" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D78" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D77" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D76" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D75" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D74" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D73" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D72" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D71" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D70" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D6F" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D6E" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D6D" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D6C" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D6B" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D6A" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D69" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D68" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D67" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D66" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D65" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D64" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D63" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D62" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D61" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D60" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D5F" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D5E" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D5D" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D5C" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D5B" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D5A" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D59" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D58" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D57" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D56" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D55" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D54" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D53" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D52" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D51" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D50" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D4F" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D4E" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D4D" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D4C" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D4B" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D4A" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D49" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D48" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D47" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D46" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D45" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D44" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D43" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D42" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D41" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D40" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D3F" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D3E" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D3D" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D3C" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D3B" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D3A" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D39" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D38" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D37" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D36" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D35" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D34" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D33" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D32" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D31" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D30" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D2F" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D2E" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D2D" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D2C" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D2B" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D2A" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001D29" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N00003978" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N00003979" Type="4" Size="4" bHidden="false" Comment=""/>
-        <Node Name="mPhysicalDamageTaken" Type="13" Size="4" bHidden="false" Comment=""/>
         <Node Name="N0000397B" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N0000397C" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N0000397D" Type="4" Size="4" bHidden="false" Comment=""/>
-        <Node Name="mMagicDamageTaken" Type="13" Size="4" bHidden="false" Comment=""/>
         <Node Name="N0000397F" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N00003980" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N00003981" Type="4" Size="4" bHidden="false" Comment=""/>
-        <Node Name="mTrueDamageTaken" Type="13" Size="4" bHidden="false" Comment=""/>
         <Node Name="N00003983" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N00003984" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N00003985" Type="4" Size="4" bHidden="false" Comment=""/>
@@ -5263,7 +5522,7 @@
         <Node Name="N000023A7" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N000023A8" Type="4" Size="4" bHidden="false" Comment=""/>
     </Class>
-    <Class Name="spellCastDataBase" Type="28" Comment="" Offset="59436816" strOffset="038AEF10" Code="int getSpellRank() {
+    <Class Name="spellCastDataBase" Type="28" Comment="" Offset="59436000" strOffset="038aebe0" Code="int getSpellRank() {
 	return this-&gt;mSpellRank + 1;
 }">
         <Node Name="mSpellData" Type="8" Size="4" bHidden="false" Comment="" Pointer="spellData"/>
@@ -5555,15 +5814,16 @@
         <Node Name="mAnimationTime" Type="13" Size="4" bHidden="false" Comment=""/>
         <Node Name="mSpellCoolDown" Type="13" Size="4" bHidden="false" Comment=""/>
         <Node Name="N00002979" Type="4" Size="4" bHidden="false" Comment=""/>
-        <Node Name="mIsSpellCast" Type="12" Size="1" bHidden="false" Comment=""/>
+        <Node Name="mIsSpellCast" Type="17" Size="1" bHidden="false" Comment=""/>
         <Node Name="N00002EC9" Type="7" Size="1" bHidden="false" Comment=""/>
         <Node Name="N00002ED9" Type="7" Size="1" bHidden="false" Comment=""/>
         <Node Name="N00002ECA" Type="7" Size="1" bHidden="false" Comment=""/>
         <Node Name="N0000297B" Type="7" Size="1" bHidden="false" Comment=""/>
-        <Node Name="mIsAutoAttack" Type="12" Size="1" bHidden="false" Comment=""/>
-        <Node Name="N00002ED6" Type="7" Size="1" bHidden="false" Comment=""/>
-        <Node Name="N00002ED4" Type="7" Size="1" bHidden="false" Comment=""/>
-        <Node Name="N0000297C" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="mIsAutoAttack" Type="17" Size="1" bHidden="false" Comment=""/>
+        <Node Name="N00001D3D" Type="6" Size="2" bHidden="false" Comment=""/>
+        <Node Name="N00001D3E" Type="7" Size="1" bHidden="false" Comment=""/>
+        <Node Name="N00001D2B" Type="6" Size="2" bHidden="false" Comment=""/>
+        <Node Name="N00001D2C" Type="7" Size="1" bHidden="false" Comment=""/>
         <Node Name="mSpellSlot" Type="13" Size="4" bHidden="false" Comment=""/>
         <Node Name="N0000297E" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="mManaCost" Type="13" Size="4" bHidden="false" Comment=""/>
@@ -5858,6 +6118,7 @@
         <Node Name="N00003D80" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N00003D81" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N00003D82" Type="4" Size="4" bHidden="false" Comment=""/>
+        <Node Name="N00001E28" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N00003D83" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N00003D84" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="N00003D85" Type="4" Size="4" bHidden="false" Comment=""/>
@@ -7510,8 +7771,5 @@ static spellInst* getSpellInst(DWORD unit, int slot) {
     <Class Name="Obj_AI_Base" Type="28" Comment="" Offset="10878976" strOffset="a60000" Code="">
         <Node Name="N00001FBF" Type="4" Size="4" bHidden="false" Comment=""/>
         <Node Name="AIHeroClient" Type="8" Size="4" bHidden="false" Comment="" Pointer="AIManager"/>
-    </Class>
-    <Class Name="N00001CF4" Type="28" Comment="" Offset="20774912" strOffset="13d0000" Code="">
-        <Node Name="N00001CF5" Type="4" Size="4" bHidden="false" Comment=""/>
     </Class>
 </ReClass>

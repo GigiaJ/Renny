@@ -17,12 +17,6 @@ float absVectorDistance(Vector arg1, Vector arg2);
 
 float absObjectDistanceApart(object* unitOne, object*unitTwo);
 
-void applyActiveAutoCastInfo(DWORD arg1);
-
-void applyActiveSpellCastInfo(DWORD arg1);
-
-void applyCastInfo(DWORD arg1);
-
 void getListOfEnemyChamps(object* myPlayer);
 
 object* getClosestEnemy(object* myPlayer, float range, float castRadius);

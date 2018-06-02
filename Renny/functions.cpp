@@ -29,7 +29,7 @@ float modifySign(float numberToCheck, float numberToModify) {
 		return abs(numberToModify);
 	}
 	if (isZero(numberToCheck)) {
-		return 0;
+		return 0.0f;
 	}
 	return NULL;
 }
@@ -50,18 +50,6 @@ float absObjectDistanceApart(object* unitOne, object*unitTwo) {
 	float unitSizesAdded = (unitOne->getUnitSize() / 2) + (unitTwo->getUnitSize() / 2);
 	float absoluteCentersApart = absVectorDistance(unitOne->mUnitPos, unitTwo->mUnitPos);
 	return (absoluteCentersApart - unitSizesAdded);
-}
-
-void applyActiveAutoCastInfo(DWORD address) {
-	autoAttackData = (spellCastDataBase*)(address);
-}
-
-void applyActiveSpellCastInfo(DWORD address) {
-	spellCastData = (spellCastDataBase*)(address);
-}
-
-void applyCastInfo(DWORD address) {
-	spellCastData = reinterpret_cast<spellCastDataBase*>(address);
 }
 
 void getListOfEnemyChamps(object* myPlayer)

@@ -17,7 +17,6 @@ FILE_LOCATION = "C:\\Users\\gigia\\source\\repos\Renny\\Project Scripts\\"
 Functions = []
 Objects = []
 
-
 def SignatureSearch():
 	class Function:	
 
@@ -231,4 +230,6 @@ def GenerateAddresses():
 		else:
 			if int(x.Type) == 1: PrintWrapper(x.Alias, FindOffsetPattern(x.Reference, int(x.Operand)), 0)
 	print("")
+	
+GenerateAddresses()
 	

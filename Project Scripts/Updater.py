@@ -1,8 +1,13 @@
+from idc import BADADDR, INF_BASEADDR, SEARCH_DOWN, FUNCATTR_START, FUNCATTR_END
+import idc 
+import idaapi
+import datetime
 from OffsetGenerator import *
 from AddressGenerator import *
+import AddressGenerator
 
-j_CReplInfo32Address = 0x1F7910
-CReplInfo32Address = 0x2060F0
+j_CReplInfo32Address = 0x1F7020
+CReplInfo32Address = 0x205270
 
 
 IgnoreOffsetList = ["mReplicatedSpellCanCastBitsUpper1", "mMaxMP", "mMP", "mReplicatedSpellCanCastBitsLower1", "ReplicatedSecondWordSpellCanCastBitsLower1"]
@@ -39,7 +44,7 @@ def CreateCharDataOffsets():
 			
 	
 def Initialize():
-	CreateAddresses()
+	#CreateAddresses()
 	CreateCharDataOffsets()
-	
+	#UPDATE TO USE A KEYPRESS AND COMBINE WITH SIGSEARCHMAKE AND SPLIT THOSE UP INTO MODULES TO BE REUSED //JUST MAKE ONE MAIN SCRIPT AND HAVE THE OTHERS BE MODULES
 Initialize()

@@ -14,7 +14,13 @@ struct Slope {
 	}
 };
 
-void autododge(object* myPlayer);
+struct Triangle {
+	float hypotenuse;
+	float opposite;
+	float adjacent;
+};
+
+void autododge(object* myPlayer, const spellCastDataBase* currentSpellData);
 
 void autoComboer(object* myPlayer);
 

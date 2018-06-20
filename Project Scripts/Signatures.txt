@@ -32,7 +32,7 @@
 	
 	["IssueOrder", "E8 ?? ?? ?? ?? 80 7C 24 ?? ?? 0F 84 97 00 00 00 ", 2, True], #Can be found in EventMoveMouseClick, the caller of the caller of CreatePath
 	
-	["OnMoveMouseClick", "E8 ?? ?? ?? ?? 5D 5B 5F B0 01 5E 83 C4 ?? C2 1C 00 FF 74 24 ?? ", 2, True],
+	["OnMoveMouseClick", "F3 0F ?? ?? ?? ?? ?? ?? 83 EC ?? F3 0F ?? ?? ?? ?? ?? ?? 56 8B F1 ", 1, True],
 	
 	["CheckIfInitialClickIsAvaliable", "83 EC ?? F3 ?? ?? ?? ?? ?? 8B C1 53 ", 1, True], #Can be found in CreatePath, returns a bool and returns a true on clicking a wall
 		
@@ -101,7 +101,7 @@
 	
 	["UpdateBuff", "80 7C 24 ?? ?? 75 04 84 DB ", 1, True], #Caller can be found with "ALE-DEFF93BD" "ALE-CFFAE012", the call is in the loc after "ALE-DEFF93BD" third call from the bottom
 	
-	["DoEmote", "E9 E3 FE FF FF CC CC CC ", 2, True], #Can be found by using IDA search feature and searching "evtEmoteDance" cancelling the search and then searching next text twice, after stepping into the sub being pushed after the push 0 the sub being jumped to is DoEmote
+	["DoEmote", "A1 ?? ?? ?? ?? 83 EC ?? 8B 48 ?? E8 ?? ?? ?? ?? 84 C0 74 08 ", 1, True], #Can be found by using IDA search feature and searching "evtEmoteDance" cancelling the search and then searching next text twice, after stepping into the sub being pushed after the push 0 the sub being jumped to is DoEmote
 	#Is a call within DoEmote but setting it as a pattern makes it bring up the DoEmote address
 	
 	["DoMasteryBadge", "81 EC ?? ?? 00 00 A1 ?? ?? ?? ?? 33 C4 89 84 24 ?? ?? 00 00 53 8B 9C 24 ?? ?? 00 00 55 8B E9 8B 8C 24 ?? ?? 00 00 ", 1, True], #Can be found with "ALE-A6219283"

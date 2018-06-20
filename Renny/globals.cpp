@@ -12,6 +12,8 @@ float vGameTime = *(reinterpret_cast<float*> (base + oGameTime));
 std::vector<object*> listOfEnemyChamps = {};
 
 volatile DWORD isWall = 0x00000000;
+object* latestObject = {};
+
 int enemyTeam = 0;
 
 int firstSpell = 0;

@@ -1,85 +1,87 @@
-#define fnLogger 0x17A5C0
-#define fnLogUIEvents 0x17E870
-#define fnCastSpell 0x534BE0
-#define fnGetHealthbarPos 0x1C1DE0
-#define fnEventHandler 0x243AA0
-#define fnMainLoop 0x7410A0
-#define fnDrawTurretRange 0x205580
-#define fnLevelUpSpell 0x536F80
-#define fnSetSkin 0x208750
-#define fnGetSpellData 0x52A3E0
-#define fnPrintChat 0x5619B0
-#define fnOpenChat 0x560EE0
-#define fnDisplayChat 0x550000
-#define fnSendChat 0x635A00
-#define fnSetChatScale 0x55F100
-#define fnIssueOrder 0x1C9A40
-#define fnOnMoveMouseClick 0x5A4740
-#define fnCheckIfInitialClickIsAvaliable 0x75BD60
-#define fnOnProcessSpell 0x52B250
-#define fnOnProcessSpellW 0x535F20
-#define fnOnSpellCast 0x1CFA70
-#define fnOnAutoAttack 0x1E49A0
-#define fnSetPath 0x2162C0
-#define fnCreatePath 0x751E40
-#define fnOnUpdatePath 0x8656D0
-#define fnIsWallOfGrass 0x7593A0
-#define fnDispatchEvent 0x2C74E0
-#define fnLoadTexture 0x7EAE50
-#define fnOnProcessPacket 0x32F9F0
-#define fnInitEvent 0x2352C0
-#define fnOnLoadHero 0x33DCF0
-#define fnOnLoadChampion 0x1BDFB0
-#define fnOnTeleport 0x1E7600
-#define fnOnDisconnect 0x5CC230
-#define fnOnAfk 0x5CC580
-#define fnSmartPing 0x649EC0
-#define fnGameUpdate 0x3167C0
-#define fnClientMain 0x28DC20
-#define fnPlaySound 0x274C40
-#define fnGetBasicAttack 0x1C0FE0
-#define fnGetAttackDelay 0x53AD60
-#define fnGetAttackCastDelay 0x296400
-#define fnUseObject 0x198B80
-#define fnCreateObject 0x2E7E90
-#define fnIdentifyObject 0x249C70
-#define fnDeleteObject 0x2D70B0
-#define fnAddRemoveBuff 0x525390
-#define fnLevelUp 0x228700
-#define fnAssignNetworkID 0x2E2900
-#define fnUpdateBuff 0x50B140
-#define fnDoEmote 0x61AF40
-#define fnDoMasteryBadge 0x575670
-#define fnOnSurrenderVote 0x6380B0
-#define fnUpdateChargeableSpell 0x536C60
-#define fnApplySpellCD 0x52E8C0
-#define fnStopCast 0x5363D0
-#define fnGetBoundingRadius 0x1F4180
-#define fnWorldToScreen 0x7F1B60
-#define fnScreenToWorld 0x7F1C40
-#define fnMapToWorld 0x606B30
-#define fnWorld2Map 0x28BF40
-#define fnGetTacticalMap 0x1C8AF0
-#define j_CReplInfo32__AddVar 0x1F7020
-#define CReplInfo32_AddVar 0x205270
-
-#define oLocalPlayer 0x2E2345C
-#define oChatClientPtr 0x2E2C138
-#define oObjManager 0x2E227F8
-#define oRenderer 0x2E49528
-#define oZoomClass 0x2E1F568
-#define oUnderMouseObject 0x21CBF0C
-#define oCursor 0x157AFB8
-#define oMissionInfo 0x2E4ED84
-#define oGameState 0x2E1FE90
-#define oVersion 0x2E2A7C0
-#define oNetClient 0x2E25BEC
-#define oTexturePack 0x2E27718
-#define oGameTime 0x2E1F614
+#define fnLogger 0x17ABF0
+#define fnLogUIEvents 0x17ED00
+#define fnCastSpell 0x54E480
+#define fnGetHealthbarPos 0x1C1FB0
+#define fnEventHandler 0x247EC0
+#define fnMainLoop 0x75B510
+#define fnDrawTurretRange 0x206720
+#define fnLevelUpSpell 0x5508C0
+#define fnSetSkin 0x209EA0
+#define fnGetSpellData 0x543930
+#define fnPrintChat 0x57B860
+#define fnOpenChat 0x57AE00
+#define fnDisplayChat 0x56A390
+#define fnSendChat 0x64E840
+#define fnSetChatScale 0x579060
+#define fnIssueOrder 0x1C9B10
+#define fnOnMoveMouseClick 0x5BBB80
+#define fnCheckIfInitialClickIsAvaliable 0x7769D0
+#define fnOnProcessSpell 0x544730
+#define fnOnProcessSpellW 0x54F850
+#define fnOnSpellCast 0x1CFA10
+#define fnOnAutoAttack 0x1E5A40
+#define fnSetPath 0x218560
+#define fnCreatePath 0x76CAB0
+#define fnOnUpdatePath 0x87FA60
+#define fnIsWallOfGrass 0x774010
+#define fnDispatchEvent 0x2C92E0
+#define fnLoadTexture 0x804940
+#define fnOnProcessPacket 0x331780
+#define fnInitEvent 0x239D50
+#define fnOnLoadHero 0x340770
+#define fnOnLoadChampion 0x1BE030
+#define fnOnTeleport 0x1E80F0
+#define fnOnDisconnect 0x5E3A80
+#define fnOnAfk 0x5E3DD0
+#define fnSmartPing 0x662CC0
+#define fnGameUpdate 0x317C60
+#define fnClientMain 0x292160
+#define fnPlaySound 0x2793E0
+#define fnGetBasicAttack 0x1C1160
+#define fnGetAttackDelay 0x554CE0
+#define fnGetAttackCastDelay 0x29AC20
+#define fnUseObject 0x199970
+#define fnCreateObject 0x2E79C0
+#define fnIdentifyObject 0x21D480
+#define fnDeleteObject 0x2D80B0
+#define fnAddRemoveBuff 0x53E6F0
+#define fnLevelUp 0x22CEF0
+#define fnAssignNetworkID 0x2E2710
+#define fnUpdateBuff 0x5223E0
+#define fnDoEmote 0x6336D0
+#define fnDoMasteryBadge 0x58F610
+#define fnOnSurrenderVote 0x650FD0
+#define fnUpdateChargeableSpell 0x550590
+#define fnApplySpellCD 0x547DE0
+#define fnStopCast 0x54FD00
+#define fnGetBoundingRadius 0x1F4440
+#define fnWorldToScreen 0x80B6A0
+#define fnScreenToWorld 0x80B780
+#define fnMapToWorld 0x61E3C0
+#define fnWorld2Map 0x290550
+#define fnGetTacticalMap 0x1C8CF0
+#define j_CReplInfo32__AddVar 0x1F72A0
+#define CReplInfo32_AddVar 0x206320
 
 
+#define oLocalPlayer 0x2E3B2E0
+#define oChatClientPtr 0x2E442A8
+#define oObjManager 0x2E3A678
+#define oRenderer 0x2E616B0
+#define oZoomClass 0x2E371F0
+#define oUnderMouseObject 0x21E3C64
+#define oCursor 0x1592CFC
+#define oMissionInfo 0x2E66F04
+#define oGameState 0x2E37CBC
+#define oVersion 0x2E428E0
+#define oNetClient 0x2E3DA78
+#define oTexturePack 0x2E3F5A0
+#define oGameTime 0x2E3739C
 
-#define pSpellBookPtr 0x1CB8
+
+
+
+#define pSpellBookPtr 0x1CD8
 
 // Generated using ReClass 2016
 
@@ -134,7 +136,10 @@ public:
 class object
 {
 public:
-	unsigned char pad_0x0000[0x14]; //0x0000
+	unsigned char pad_0x0000[0x8]; //0x0000
+	short mIndex; //0x0008 
+	short mNextIndex; //0x000A 
+	unsigned char pad_0x000C[0x8]; //0x000C
 	int mTeam; //0x0014 
 	int mUnitType; //0x0018 
 	unsigned char pad_0x001C[0x18]; //0x001C
@@ -148,217 +153,226 @@ public:
 	Vector mUnitPos; //0x00CC 
 	unsigned char pad_0x00D8[0x18]; //0x00D8
 	bool mIsDead; //0x00F0 
-	unsigned char pad_0x00F1[0x1BF]; //0x00F1
-	bool isVisible; //0x02B0 
-	unsigned char pad_0x02B1[0x13]; //0x02B1
-	float mPAR; //0x02C4 
-	unsigned char pad_0x02C8[0xC]; //0x02C8
-	float mMaxPAR; //0x02D4 
-	unsigned char pad_0x02D8[0xC]; //0x02D8
-	bool mPAREnabled; //0x02E4 
-	unsigned char pad_0x02E5[0x1F]; //0x02E5
-	int mPARState; //0x0304 
-	unsigned char pad_0x0308[0x1C]; //0x0308
-	float mSAR; //0x0324 
-	unsigned char pad_0x0328[0xC]; //0x0328
-	float mMaxSAR; //0x0334 
-	unsigned char pad_0x0338[0xC]; //0x0338
-	bool mSAREnabled; //0x0344 
-	unsigned char pad_0x0345[0xF]; //0x0345
-	bool mEMpoweredBitField; //0x0354 
-	unsigned char pad_0x0355[0xF]; //0x0355
-	int mSARState; //0x0364 
-	unsigned char pad_0x0368[0x200]; //0x0368
-	float mLifetime; //0x0568 
-	unsigned char pad_0x056C[0xC]; //0x056C
-	float mMaxLifeTime; //0x0578 
-	unsigned char pad_0x057C[0xC]; //0x057C
-	float mLifeTimeTicks; //0x0588 
-	unsigned char pad_0x058C[0x28]; //0x058C
-	float mPhysicalDamagePercentageModifier; //0x05B4 
-	unsigned char pad_0x05B8[0xC]; //0x05B8
-	float mMagicalDamagePercentageModifier; //0x05C4 
-	unsigned char pad_0x05C8[0x1C]; //0x05C8
-	bool mIsUntargetableToEnemies; //0x05E4 
-	unsigned char pad_0x05E5[0xF]; //0x05E5
-	bool mIsUntargetableToAllies; //0x05F4 
-	unsigned char pad_0x05F5[0xF]; //0x05F5
-	bool mIsTargetable; //0x0604 
-	unsigned char pad_0x0605[0xF]; //0x0605
-	bool mIsTargetableToTeamFlags; //0x0614 
-	unsigned char pad_0x0615[0x5B]; //0x0615
-	float mHP; //0x0670 
-	unsigned char pad_0x0674[0xC]; //0x0674
-	float mMaxHP; //0x0680 
-	unsigned char pad_0x0684[0xC]; //0x0684
-	float mHPMaxPenalty; //0x0690 
-	unsigned char pad_0x0694[0x1C]; //0x0694
-	float mAllShield; //0x06B0 
-	unsigned char pad_0x06B4[0xC]; //0x06B4
-	float mPhysicalShield; //0x06C0 
-	unsigned char pad_0x06C4[0xC]; //0x06C4
-	float mMagicalShield; //0x06D0 
-	unsigned char pad_0x06D4[0xC]; //0x06D4
-	float mChampSpecificHealth; //0x06E0 
-	unsigned char pad_0x06E4[0xC]; //0x06E4
-	int mStopShieldFade; //0x06F0 
-	unsigned char pad_0x06F4[0x168]; //0x06F4
-	float mNegativeCurrentCDR; //0x085C 
-	unsigned char pad_0x0860[0xC]; //0x0860
-	float mNegativeMaxCDR; //0x086C 
-	unsigned char pad_0x0870[0x5B0]; //0x0870
-	float mPercentCooldownCapMod; //0x0E20 
-	unsigned char pad_0x0E24[0xC]; //0x0E24
-	float mPassiveCooldownEndTime; //0x0E30 
-	unsigned char pad_0x0E34[0xC]; //0x0E34
-	float mPassiveCooldownTotalTime; //0x0E40 
-	unsigned char pad_0x0E44[0xC]; //0x0E44
-	float mPercentDamageToBarracksMinionMod; //0x0E50 
-	unsigned char pad_0x0E54[0xC]; //0x0E54
-	float mFlatDamageReductionFromBarracksMinionMod; //0x0E60 
-	unsigned char pad_0x0E64[0xC]; //0x0E64
-	float mFlatPhysicalDamageMod; //0x0E70 
-	unsigned char pad_0x0E74[0xC]; //0x0E74
-	float mPercentPhysicalDamageMod; //0x0E80 
-	unsigned char pad_0x0E84[0x1C]; //0x0E84
-	float mPercentBasePhysicalDamageAsFlatBonusMod; //0x0EA0 
-	unsigned char pad_0x0EA4[0xC]; //0x0EA4
-	float mFlatMagicDamageMod; //0x0EB0 
-	unsigned char pad_0x0EB4[0xC]; //0x0EB4
-	float mPercentMagicDamageMod; //0x0EC0 
-	unsigned char pad_0x0EC4[0xC]; //0x0EC4
-	float mFlatMagicReduction; //0x0ED0 
-	unsigned char pad_0x0ED4[0xC]; //0x0ED4
-	float mPercentMagicReduction; //0x0EE0 
-	unsigned char pad_0x0EE4[0xC]; //0x0EE4
-	float mFlatCastRangeMod; //0x0EF0 
-	unsigned char pad_0x0EF4[0xC]; //0x0EF4
-	float mAttackSpeedMod; //0x0F00 
-	unsigned char pad_0x0F04[0xC]; //0x0F04
-	float mPercentAttackSpeedMod; //0x0F10 
-	unsigned char pad_0x0F14[0xC]; //0x0F14
-	float mPercentMultiplicativeAttackSpeedMod; //0x0F20 
-	unsigned char pad_0x0F24[0xC]; //0x0F24
-	float mBaseAttackDamage; //0x0F30 
-	unsigned char pad_0x0F34[0xC]; //0x0F34
-	float mBaseAttackDamageSansPercentScale; //0x0F40 
-	unsigned char pad_0x0F44[0xC]; //0x0F44
-	float mFlatBaseAttackDamageMod; //0x0F50 
-	unsigned char pad_0x0F54[0xC]; //0x0F54
-	float mPercentBaseAttackDamageMod; //0x0F60 
-	unsigned char pad_0x0F64[0xC]; //0x0F64
-	float mBaseAbilityDamage; //0x0F70 
-	unsigned char pad_0x0F74[0xC]; //0x0F74
-	float mScaleSkinCoef; //0x0F80 
-	unsigned char pad_0x0F84[0xC]; //0x0F84
-	float mDodge; //0x0F90 
-	unsigned char pad_0x0F94[0xC]; //0x0F94
-	float mCrit; //0x0FA0 
-	unsigned char pad_0x0FA4[0xC]; //0x0FA4
-	float mArmor; //0x0FB0 
-	unsigned char pad_0x0FB4[0xC]; //0x0FB4
-	float mBonusArmor; //0x0FC0 
-	unsigned char pad_0x0FC4[0xC]; //0x0FC4
-	float mSpellBlock; //0x0FD0 
-	unsigned char pad_0x0FD4[0xC]; //0x0FD4
-	float mBonusSpellBlock; //0x0FE0 
-	unsigned char pad_0x0FE4[0xC]; //0x0FE4
-	float mHPRegenRate; //0x0FF0 
-	unsigned char pad_0x0FF4[0xC]; //0x0FF4
-	float mBaseHPRegenRate; //0x1000 
-	unsigned char pad_0x1004[0xC]; //0x1004
-	float mMoveSpeed; //0x1010 
-	unsigned char pad_0x1014[0xC]; //0x1014
-	float mMoveSpeedBaseIncrease; //0x1020 
-	unsigned char pad_0x1024[0xC]; //0x1024
-	float mAttackRange; //0x1030 
-	unsigned char pad_0x1034[0xC]; //0x1034
-	float mFlatBubbleRadiusMod; //0x1040 
-	unsigned char pad_0x1044[0xC]; //0x1044
-	float mPercentBubbleRadiusMod; //0x1050 
-	unsigned char pad_0x1054[0xC]; //0x1054
-	float mFlatArmorPenetration; //0x1060 
-	unsigned char pad_0x1064[0xC]; //0x1064
-	float mPhysicalLethality; //0x1070 
-	unsigned char pad_0x1074[0xC]; //0x1074
-	float mPercentArmorPenetration; //0x1080 
-	unsigned char pad_0x1084[0xC]; //0x1084
-	float mPercentBonusArmorPenetration; //0x1090 
-	unsigned char pad_0x1094[0xC]; //0x1094
-	float mPercentCritBonusArmorPenetration; //0x10A0 
-	unsigned char pad_0x10A4[0xC]; //0x10A4
-	float mPercentCritTotalArmorPenetration; //0x10B0 
-	unsigned char pad_0x10B4[0xC]; //0x10B4
-	float mFlatMagicPenetration; //0x10C0 
-	unsigned char pad_0x10C4[0xC]; //0x10C4
-	float mMagicLethality; //0x10D0 
-	unsigned char pad_0x10D4[0xC]; //0x10D4
-	float mPercentMagicPenetration; //0x10E0 
-	unsigned char pad_0x10E4[0xC]; //0x10E4
-	float mPercentBonusMagicPenetration; //0x10F0 
-	unsigned char pad_0x10F4[0xC]; //0x10F4
-	float mPercentLifeStealMod; //0x1100 
-	unsigned char pad_0x1104[0xC]; //0x1104
-	float mPercentSpellVampMod; //0x1110 
-	unsigned char pad_0x1114[0x1C]; //0x1114
-	float mPercentCCReduction; //0x1130 
-	unsigned char pad_0x1134[0xC]; //0x1134
-	float mPercentEXPBonus; //0x1140 
-	unsigned char pad_0x1144[0xC]; //0x1144
-	float mPrimaryARRegenRateRep; //0x1150 
-	unsigned char pad_0x1154[0xC]; //0x1154
-	float mPrimaryARBaseRegenRateRep; //0x1160 
-	unsigned char pad_0x1164[0xC]; //0x1164
-	float mSecondaryARRegenRateRep; //0x1170 
-	unsigned char pad_0x1174[0xC]; //0x1174
-	float mSecondaryARBaseRegenRateRep; //0x1180 
-	unsigned char pad_0x1184[0xC4]; //0x1184
-	float mGold; //0x1248 
-	unsigned char pad_0x124C[0xC]; //0x124C
-	float mGoldTotal; //0x1258 
-	unsigned char pad_0x125C[0xC]; //0x125C
-	float mMinimumGold; //0x1268 
-	unsigned char pad_0x126C[0x164]; //0x126C
-	Vector mDirectionFaced; //0x13D0 
-	unsigned char pad_0x13DC[0x3B8]; //0x13DC
-	Obj_AI_Base* mCharData; //0x1794 
-	unsigned char pad_0x1798[0x540]; //0x1798
-	activeSpell* mActiveSpell; //0x1CD8 
-	unsigned char pad_0x1CDC[0x50C]; //0x1CDC
-	spellInst* mSpellInstArray[4]; //0x21E8 
-	spellInst* mPartOfSpellInst1; //0x21EC 
-	spellInst* mPartOfSpellInst2; //0x21F0 
-	spellInst* mPartOfSpellInst4; //0x21F4 
-	unsigned char pad_0x21F8[0x16FC]; //0x21F8
-	int mEvolvePoints; //0x38F4 
-	unsigned char pad_0x38F8[0xC]; //0x38F8
-	int mEvolveFlag; //0x3904 
-	unsigned char pad_0x3908[0xC]; //0x3908
-	float mExp; //0x3914 
+	unsigned char pad_0x00F1[0x13]; //0x00F1
+	spellData* mSpellData; //0x0104 
+	unsigned char pad_0x0108[0x1C]; //0x0108
+	short mCasterIndex; //0x0124 
+	unsigned char pad_0x0126[0x16]; //0x0126
+	Vector mStartPosition; //0x013C 
+	Vector mTargetPosition; //0x0148 
+	unsigned char pad_0x0154[0xC]; //0x0154
+	Vector mSpellDirection; //0x0160 
+	unsigned char pad_0x016C[0x14C]; //0x016C
+	bool isVisible; //0x02B8 
+	unsigned char pad_0x02B9[0x13]; //0x02B9
+	float mPAR; //0x02CC 
+	unsigned char pad_0x02D0[0xC]; //0x02D0
+	float mMaxPAR; //0x02DC 
+	unsigned char pad_0x02E0[0xC]; //0x02E0
+	bool mPAREnabled; //0x02EC 
+	unsigned char pad_0x02ED[0x1F]; //0x02ED
+	int mPARState; //0x030C 
+	unsigned char pad_0x0310[0x1C]; //0x0310
+	float mSAR; //0x032C 
+	unsigned char pad_0x0330[0xC]; //0x0330
+	float mMaxSAR; //0x033C 
+	unsigned char pad_0x0340[0xC]; //0x0340
+	bool mSAREnabled; //0x034C 
+	unsigned char pad_0x034D[0xF]; //0x034D
+	bool mEMpoweredBitField; //0x035C 
+	unsigned char pad_0x035D[0xF]; //0x035D
+	int mSARState; //0x036C 
+	unsigned char pad_0x0370[0x200]; //0x0370
+	float mLifetime; //0x0570 
+	unsigned char pad_0x0574[0xC]; //0x0574
+	float mMaxLifeTime; //0x0580 
+	unsigned char pad_0x0584[0xC]; //0x0584
+	float mLifeTimeTicks; //0x0590 
+	unsigned char pad_0x0594[0x28]; //0x0594
+	float mPhysicalDamagePercentageModifier; //0x05BC 
+	unsigned char pad_0x05C0[0xC]; //0x05C0
+	float mMagicalDamagePercentageModifier; //0x05CC 
+	unsigned char pad_0x05D0[0x1C]; //0x05D0
+	bool mIsUntargetableToEnemies; //0x05EC 
+	unsigned char pad_0x05ED[0xF]; //0x05ED
+	bool mIsUntargetableToAllies; //0x05FC 
+	unsigned char pad_0x05FD[0xF]; //0x05FD
+	bool mIsTargetable; //0x060C 
+	unsigned char pad_0x060D[0xF]; //0x060D
+	bool mIsTargetableToTeamFlags; //0x061C 
+	unsigned char pad_0x061D[0x5B]; //0x061D
+	float mHP; //0x0678 
+	unsigned char pad_0x067C[0xC]; //0x067C
+	float mMaxHP; //0x0688 
+	unsigned char pad_0x068C[0xC]; //0x068C
+	float mHPMaxPenalty; //0x0698 
+	unsigned char pad_0x069C[0x1C]; //0x069C
+	float mAllShield; //0x06B8 
+	unsigned char pad_0x06BC[0xC]; //0x06BC
+	float mPhysicalShield; //0x06C8 
+	unsigned char pad_0x06CC[0xC]; //0x06CC
+	float mMagicalShield; //0x06D8 
+	unsigned char pad_0x06DC[0xC]; //0x06DC
+	float mChampSpecificHealth; //0x06E8 
+	unsigned char pad_0x06EC[0xC]; //0x06EC
+	int mStopShieldFade; //0x06F8 
+	unsigned char pad_0x06FC[0x168]; //0x06FC
+	float mNegativeCurrentCDR; //0x0864 
+	unsigned char pad_0x0868[0xC]; //0x0868
+	float mNegativeMaxCDR; //0x0874 
+	unsigned char pad_0x0878[0x5B0]; //0x0878
+	float mPercentCooldownCapMod; //0x0E28 
+	unsigned char pad_0x0E2C[0xC]; //0x0E2C
+	float mPassiveCooldownEndTime; //0x0E38 
+	unsigned char pad_0x0E3C[0xC]; //0x0E3C
+	float mPassiveCooldownTotalTime; //0x0E48 
+	unsigned char pad_0x0E4C[0xC]; //0x0E4C
+	float mPercentDamageToBarracksMinionMod; //0x0E58 
+	unsigned char pad_0x0E5C[0xC]; //0x0E5C
+	float mFlatDamageReductionFromBarracksMinionMod; //0x0E68 
+	unsigned char pad_0x0E6C[0xC]; //0x0E6C
+	float mFlatPhysicalDamageMod; //0x0E78 
+	unsigned char pad_0x0E7C[0xC]; //0x0E7C
+	float mPercentPhysicalDamageMod; //0x0E88 
+	unsigned char pad_0x0E8C[0x1C]; //0x0E8C
+	float mPercentBasePhysicalDamageAsFlatBonusMod; //0x0EA8 
+	unsigned char pad_0x0EAC[0xC]; //0x0EAC
+	float mFlatMagicDamageMod; //0x0EB8 
+	unsigned char pad_0x0EBC[0xC]; //0x0EBC
+	float mPercentMagicDamageMod; //0x0EC8 
+	unsigned char pad_0x0ECC[0xC]; //0x0ECC
+	float mFlatMagicReduction; //0x0ED8 
+	unsigned char pad_0x0EDC[0xC]; //0x0EDC
+	float mPercentMagicReduction; //0x0EE8 
+	unsigned char pad_0x0EEC[0xC]; //0x0EEC
+	float mFlatCastRangeMod; //0x0EF8 
+	unsigned char pad_0x0EFC[0xC]; //0x0EFC
+	float mAttackSpeedMod; //0x0F08 
+	unsigned char pad_0x0F0C[0xC]; //0x0F0C
+	float mPercentAttackSpeedMod; //0x0F18 
+	unsigned char pad_0x0F1C[0xC]; //0x0F1C
+	float mPercentMultiplicativeAttackSpeedMod; //0x0F28 
+	unsigned char pad_0x0F2C[0xC]; //0x0F2C
+	float mBaseAttackDamage; //0x0F38 
+	unsigned char pad_0x0F3C[0xC]; //0x0F3C
+	float mBaseAttackDamageSansPercentScale; //0x0F48 
+	unsigned char pad_0x0F4C[0xC]; //0x0F4C
+	float mFlatBaseAttackDamageMod; //0x0F58 
+	unsigned char pad_0x0F5C[0xC]; //0x0F5C
+	float mPercentBaseAttackDamageMod; //0x0F68 
+	unsigned char pad_0x0F6C[0xC]; //0x0F6C
+	float mBaseAbilityDamage; //0x0F78 
+	unsigned char pad_0x0F7C[0xC]; //0x0F7C
+	float mScaleSkinCoef; //0x0F88 
+	unsigned char pad_0x0F8C[0xC]; //0x0F8C
+	float mDodge; //0x0F98 
+	unsigned char pad_0x0F9C[0xC]; //0x0F9C
+	float mCrit; //0x0FA8 
+	unsigned char pad_0x0FAC[0xC]; //0x0FAC
+	float mArmor; //0x0FB8 
+	unsigned char pad_0x0FBC[0xC]; //0x0FBC
+	float mBonusArmor; //0x0FC8 
+	unsigned char pad_0x0FCC[0xC]; //0x0FCC
+	float mSpellBlock; //0x0FD8 
+	unsigned char pad_0x0FDC[0xC]; //0x0FDC
+	float mBonusSpellBlock; //0x0FE8 
+	unsigned char pad_0x0FEC[0xC]; //0x0FEC
+	float mHPRegenRate; //0x0FF8 
+	unsigned char pad_0x0FFC[0xC]; //0x0FFC
+	float mBaseHPRegenRate; //0x1008 
+	unsigned char pad_0x100C[0xC]; //0x100C
+	float mMoveSpeed; //0x1018 
+	unsigned char pad_0x101C[0xC]; //0x101C
+	float mMoveSpeedBaseIncrease; //0x1028 
+	unsigned char pad_0x102C[0xC]; //0x102C
+	float mAttackRange; //0x1038 
+	unsigned char pad_0x103C[0xC]; //0x103C
+	float mFlatBubbleRadiusMod; //0x1048 
+	unsigned char pad_0x104C[0xC]; //0x104C
+	float mPercentBubbleRadiusMod; //0x1058 
+	unsigned char pad_0x105C[0xC]; //0x105C
+	float mFlatArmorPenetration; //0x1068 
+	unsigned char pad_0x106C[0xC]; //0x106C
+	float mPhysicalLethality; //0x1078 
+	unsigned char pad_0x107C[0xC]; //0x107C
+	float mPercentArmorPenetration; //0x1088 
+	unsigned char pad_0x108C[0xC]; //0x108C
+	float mPercentBonusArmorPenetration; //0x1098 
+	unsigned char pad_0x109C[0xC]; //0x109C
+	float mPercentCritBonusArmorPenetration; //0x10A8 
+	unsigned char pad_0x10AC[0xC]; //0x10AC
+	float mPercentCritTotalArmorPenetration; //0x10B8 
+	unsigned char pad_0x10BC[0xC]; //0x10BC
+	float mFlatMagicPenetration; //0x10C8 
+	unsigned char pad_0x10CC[0xC]; //0x10CC
+	float mMagicLethality; //0x10D8 
+	unsigned char pad_0x10DC[0xC]; //0x10DC
+	float mPercentMagicPenetration; //0x10E8 
+	unsigned char pad_0x10EC[0xC]; //0x10EC
+	float mPercentBonusMagicPenetration; //0x10F8 
+	unsigned char pad_0x10FC[0xC]; //0x10FC
+	float mPercentLifeStealMod; //0x1108 
+	unsigned char pad_0x110C[0xC]; //0x110C
+	float mPercentSpellVampMod; //0x1118 
+	unsigned char pad_0x111C[0x1C]; //0x111C
+	float mPercentCCReduction; //0x1138 
+	unsigned char pad_0x113C[0xC]; //0x113C
+	float mPercentEXPBonus; //0x1148 
+	unsigned char pad_0x114C[0xC]; //0x114C
+	float mPrimaryARRegenRateRep; //0x1158 
+	unsigned char pad_0x115C[0xC]; //0x115C
+	float mPrimaryARBaseRegenRateRep; //0x1168 
+	unsigned char pad_0x116C[0xC]; //0x116C
+	float mSecondaryARRegenRateRep; //0x1178 
+	unsigned char pad_0x117C[0xC]; //0x117C
+	float mSecondaryARBaseRegenRateRep; //0x1188 
+	unsigned char pad_0x118C[0xC4]; //0x118C
+	float mGold; //0x1250 
+	unsigned char pad_0x1254[0xC]; //0x1254
+	float mGoldTotal; //0x1260 
+	unsigned char pad_0x1264[0xC]; //0x1264
+	float mMinimumGold; //0x1270 
+	unsigned char pad_0x1274[0x164]; //0x1274
+	Vector mDirectionFaced; //0x13D8 
+	unsigned char pad_0x13E4[0x3D0]; //0x13E4
+	Obj_AI_Base* mCharData; //0x17B4 
+	unsigned char pad_0x17B8[0x540]; //0x17B8
+	activeSpell* mActiveSpell; //0x1CF8 
+	unsigned char pad_0x1CFC[0x50C]; //0x1CFC
+	spellInst* mSpellInstArray[4]; //0x2208 
+	spellInst* mPartOfSpellInst1; //0x220C 
+	spellInst* mPartOfSpellInst2; //0x2210 
+	spellInst* mPartOfSpellInst4; //0x2214 
+	unsigned char pad_0x2218[0x16FC]; //0x2218
+	int mEvolvePoints; //0x3914 
 	unsigned char pad_0x3918[0xC]; //0x3918
-	float mLevelRef; //0x3924 
+	int mEvolveFlag; //0x3924 
 	unsigned char pad_0x3928[0xC]; //0x3928
-	bool mSkillUpLevelDeltaReplicate; //0x3934 
-	unsigned char pad_0x3935[0x497]; //0x3935
-	float mVisionScore; //0x3DCC 
-	unsigned char pad_0x3DD0[0x4B0]; //0x3DD0
-	int mNumNeutralMinionsKilled; //0x4280 
-	unsigned char pad_0x4284[0x20]; //0x4284
-	int mInputLocks; //0x42A4 
-	unsigned char pad_0x42A8[0xC]; //0x42A8
-	int mHealthBarCharacterIDForIcon; //0x42B4 
-	unsigned char pad_0x42B8[0x530]; //0x42B8
-	float mPhysicalDamageTaken; //0x47E8 
-	unsigned char pad_0x47EC[0xC]; //0x47EC
-	float mMagicDamageTaken; //0x47F8 
-	unsigned char pad_0x47FC[0xC]; //0x47FC
-	float mTrueDamageTaken; //0x4808 
-	unsigned char pad_0x480C[0x538]; //0x480C
+	float mExp; //0x3934 
+	unsigned char pad_0x3938[0xC]; //0x3938
+	float mLevelRef; //0x3944 
+	unsigned char pad_0x3948[0xC]; //0x3948
+	bool mSkillUpLevelDeltaReplicate; //0x3954 
+	unsigned char pad_0x3955[0x497]; //0x3955
+	float mVisionScore; //0x3DEC 
+	unsigned char pad_0x3DF0[0x4B0]; //0x3DF0
+	int mNumNeutralMinionsKilled; //0x42A0 
+	unsigned char pad_0x42A4[0x20]; //0x42A4
+	int mInputLocks; //0x42C4 
+	unsigned char pad_0x42C8[0xC]; //0x42C8
+	int mHealthBarCharacterIDForIcon; //0x42D4 
+	unsigned char pad_0x42D8[0x530]; //0x42D8
+	float mPhysicalDamageTaken; //0x4808 
+	unsigned char pad_0x480C[0xC]; //0x480C
+	float mMagicDamageTaken; //0x4818 
+	unsigned char pad_0x481C[0xC]; //0x481C
+	float mTrueDamageTaken; //0x4828 
+	unsigned char pad_0x482C[0x538]; //0x482C
 
 	float getUnitSize() {
 		return (this->mEdgePos2.x - this->mEdgePos1.x);
 	}
-}; //Size=0x4D44
+}; //Size=0x4D64
 
 class objectManager
 {
@@ -418,7 +432,9 @@ public:
 class spellData
 {
 public:
-	unsigned char pad_0x0000[0x38]; //0x0000
+	unsigned char pad_0x0000[0x18]; //0x0000
+	char* mSpellName; //0x0018 
+	unsigned char pad_0x001C[0x1C]; //0x001C
 	spellInfo* mSpellInfo; //0x0038 
 	unsigned char pad_0x003C[0x3CC]; //0x003C
 
@@ -436,22 +452,22 @@ public:
 class spellInfo
 {
 public:
-	unsigned char pad_0x0000[0x1F4]; //0x0000
-	float mAnimationTime; //0x01F4 
-	float mCastTime; //0x01F8 
-	unsigned char pad_0x01FC[0x78]; //0x01FC
-	ReClassFloat mCoolDownTime[7]; //0x0274 
-	unsigned char pad_0x0290[0x100]; //0x0290
-	ReClassFloat mMaxRangeForPlacement[7]; //0x0390 
-	ReClassFloat mMaxRange[7]; //0x03AC 
-	ReClassFloat mCastRadius[7]; //0x03C8 
-	unsigned char pad_0x03E4[0x48]; //0x03E4
-	float mMissileSpeed; //0x042C 
-	unsigned char pad_0x0430[0x30]; //0x0430
-	float mMissileWidth; //0x0460 
-	unsigned char pad_0x0464[0x20C]; //0x0464
+	unsigned char pad_0x0000[0x200]; //0x0000
+	float mAnimationTime; //0x0200 
+	float mCastTime; //0x0204 
+	unsigned char pad_0x0208[0x78]; //0x0208
+	ReClassFloat mCoolDownTime[7]; //0x0280 
+	unsigned char pad_0x029C[0x100]; //0x029C
+	ReClassFloat mMaxRangeForPlacement[7]; //0x039C 
+	ReClassFloat mMaxRange[7]; //0x03B8 
+	ReClassFloat mCastRadius[7]; //0x03D4 
+	unsigned char pad_0x03F0[0x48]; //0x03F0
+	float mMissileSpeed; //0x0438 
+	unsigned char pad_0x043C[0x30]; //0x043C
+	float mMissileWidth; //0x046C 
+	unsigned char pad_0x0470[0x20C]; //0x0470
 
-}; //Size=0x0670
+}; //Size=0x067C
 
 class AIManager
 {

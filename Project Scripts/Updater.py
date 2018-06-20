@@ -6,8 +6,8 @@ from OffsetGenerator import *
 from AddressGenerator import *
 import AddressGenerator
 
-j_CReplInfo32Address = 0x1F7020
-CReplInfo32Address = 0x205270
+j_CReplInfo32__AddVar = 0x1F75E0
+CReplInfo32_AddVar = 0x2056A0
 
 
 IgnoreOffsetList = ["mReplicatedSpellCanCastBitsUpper1", "mMaxMP", "mMP", "mReplicatedSpellCanCastBitsLower1", "ReplicatedSecondWordSpellCanCastBitsLower1"]
@@ -16,8 +16,8 @@ def CreateAddresses():
 	GenerateAddresses()
 
 def CreateCharDataOffsets():
-	GenerateList(j_CReplInfo32Address)
-	GenerateList(CReplInfo32Address)
+	GenerateList(j_CReplInfo32__AddVar)
+	GenerateList(CReplInfo32_AddVar)
 	temp = OrderedDict(sorted(Offsets.items(), key=lambda t: t[1]))
 	
 	IntegerOffsets = ["mEvolveFlag", "mEvolvePoints", "mNumNeutralMinionsKilled", "mInputLocks", "mHealthBarCharacterIDForIcon", "mSARState", "mPARState", "mNetworkId", "mTeam"]

@@ -4,11 +4,11 @@
 
 
 int hookLength = 7;
-DWORD hookAddress = base + fnOnSpellCast + 0x2CB;
+DWORD hookAddress = base + fnOnSpellCast + 0x2B2;
 DWORD BackAddy1 = hookAddress + hookLength;
 
 int hookLength2 = 10;
-DWORD hookAddress2 = base + fnOnAutoAttack + 0x24C;
+DWORD hookAddress2 = base + fnOnAutoAttack + 0x1DC;
 DWORD BackAddy2 = hookAddress2 + hookLength2;
 
 int hookLength3 = 9;
@@ -20,6 +20,11 @@ int hookLength4 = 5;
 DWORD hookAddress4 = base + fnCreatePath + 0x2A6;
 DWORD BackAddy4 = hookAddress4 + hookLength4;
 DWORD callAddy4 = base + fnCheckIfInitialClickIsAvaliable;
+
+int hookLength5 = 6;
+DWORD hookAddress5 = base + fnCreateObject + 0x88;
+DWORD BackAddy5 = hookAddress5 + hookLength5;
+DWORD objectManagerAddress = oObjManager + base;
 
 bool Hook(void * toHook, void * ourFunct, int len) {
 	if (len < 5) {
@@ -53,6 +58,8 @@ void applyHooks() {
 		//Hook((void*)hookAddress3, onCast, hookLength3);
 
 		Hook((void*)hookAddress4, onWallClick, hookLength4);
+
+		Hook((void*)hookAddress5, onObjectCreation, hookLength5);
 	}
 }
 
@@ -91,7 +98,7 @@ void __declspec(naked) onAutoAttack() {
 
 	__asm {
 		popad
-		push dword ptr ss : [esp + 0Ch]
+		push dword ptr ss : [esp + 8]
 		pushad
 	}
 
@@ -104,7 +111,7 @@ void __declspec(naked) onAutoAttack() {
 
 	__asm {
 		popad
-		lea ecx, [ebp + pSpellBookPtr]
+		lea ecx, [ebx + pSpellBookPtr]
 	}
 
 	__asm jmp BackAddy2
@@ -118,7 +125,7 @@ void __declspec(naked) onSpellCast() {
 
 	__asm {
 		push eax
-		lea ecx, dword ptr ss : [ebp - 1268h]
+		lea ecx, dword ptr ss : [ebx - 1268h]
 	}
 
 	__asm jmp BackAddy1
@@ -131,4 +138,14 @@ void _declspec(naked) onWallClick() {
 	_asm mov isWall, eax
 
 	_asm jmp BackAddy4
+}
+
+void _declspec(naked) onObjectCreation() {
+	
+	_asm {
+		mov		latestObject, esi
+		push    esi
+		mov     ecx, objectManagerAddress
+		jmp		BackAddy5
+	}
 }

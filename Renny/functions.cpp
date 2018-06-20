@@ -54,8 +54,6 @@ float absObjectDistanceApart(object* unitOne, object*unitTwo) {
 
 void getListOfEnemyChamps(object* myPlayer)
 {
-	std::ofstream myfile;
-	myfile.open("C:\\Users\\gigia\\Desktop\\Script Development\\output.txt");
 	for (int i = 0; i < objMgr->mArrayHighestIndex; i++) {
 		if (objMgr->mObjectManagerArray[i] != NULL) {
 			object* TemporaryObject = objMgr->mObjectManagerArray[i];
@@ -63,7 +61,7 @@ void getListOfEnemyChamps(object* myPlayer)
 			{
 				if (TemporaryObject->mIsTargetable)
 				{
-					if (TemporaryObject->mUnitType == 5121)
+					if (TemporaryObject->mUnitType == static_cast<int>(UnitType::HERO_UNIT))
 					{				
 						listOfEnemyChamps.push_back(TemporaryObject);
 					}
@@ -71,7 +69,6 @@ void getListOfEnemyChamps(object* myPlayer)
 			}
 		}
 	}
-	myfile.close();
 }
 
 object* getClosestEnemy(object* myPlayer, float range, float castRadius) {

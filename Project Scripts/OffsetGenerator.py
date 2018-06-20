@@ -7,9 +7,6 @@ import idaapi
 import random
 
 MAX_XREFS = 500
-j_CReplInfo32Address = 0x1F3C80
-CReplInfo32Address = 0x202010
-
 
 Offsets = {}
 
@@ -70,7 +67,6 @@ def FindCallOffsetValue(address):
 		pass
 	return trueOffset
 	
-
 def FindBaseOffsetValue(address, subOffset):
 	ea = get_name_ea_simple(get_func_name(address))
 	
@@ -127,7 +123,6 @@ def CreateOffsets(address, currentAddress, leadAddy, i, checkPoint):
 		
 		if i == checkPoint:
 			if currentInstruction.find("push    edi") == -1 and currentInstruction.find("push    esi") == -1 and currentInstruction.find("push    ebp") == -1 and currentInstruction.find("push    ebx") == -1 and currentInstruction.find("push    esp") == -1:
-				#print(generate_disasm_line(address, 0))
 				checkPoint = checkPoint + 1
 			else:
 				instructionBeforeLine = generate_disasm_line(idc.prev_head(address, minea=0), 0)
@@ -166,7 +161,7 @@ def CreateOffsets(address, currentAddress, leadAddy, i, checkPoint):
 			else: 
 				break
 		
-		if get_first_fcref_to(address) != 4294967295:
+		if get_first_fcref_to(address) != 4294967295: 
 			testAddressForCall = get_first_fcref_to(address)
 			if generate_disasm_line(testAddressForCall, 0).find("call") == -1:
 				if offset == None or nameOfOffset == "":
@@ -197,8 +192,7 @@ def CreateOffsets(address, currentAddress, leadAddy, i, checkPoint):
 def GenerateList(ea):
 	xrefs = list(XrefsTo(ea, 0))
 	xrefs = list(filter(lambda xref: SegName(xref.frm) != ".rdata", xrefs))
-	
-	
+
 	for xref in xrefs:
 		address = xref.frm
 		currentAddress = address
@@ -206,18 +200,3 @@ def GenerateList(ea):
 		i = 0		
 		leadAddy = ""
 		CreateOffsets(address, currentAddress, leadAddy, i, checkPoint)
-
-def CreateObjectOffsets():
-	GenerateList(j_CReplInfo32Address)
-	GenerateList(CReplInfo32Address)
-			
-def Initialize():
-	CreateObjectOffsets()
-	
-	count = 0
-	temp = OrderedDict(sorted(Offsets.items(), key=lambda t: t[1]))
-	for key,val in temp.items():
-		print(key + " 0x" + "%0.2X " % val)
-		count = count + 1
-	
-Initialize()

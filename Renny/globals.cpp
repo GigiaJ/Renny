@@ -2,7 +2,7 @@
 #include "operations.h"
 
 DWORD base = (DWORD)(GetModuleHandleA(NULL));
-objectManager* objMgr = (objectManager*)(base + oObjectManager);
+objectManager* objMgr = (objectManager*)(base + oObjManager);
 DWORD lPlayer = *(DWORD*)(base + oLocalPlayer);
 DWORD Mouse = *(DWORD*)(base + oCursor);
 spellCastDataBase* autoAttackData;
@@ -12,6 +12,9 @@ float vGameTime = *(reinterpret_cast<float*> (base + oGameTime));
 std::vector<object*> listOfEnemyChamps = {};
 
 volatile DWORD isWall = 0x00000000;
+object* latestObject = {};
+
+int enemyTeam = 0;
 
 int firstSpell = 0;
 int secondSpell = 1;

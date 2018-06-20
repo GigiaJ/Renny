@@ -4,15 +4,15 @@
 
 
 int hookLength = 7;
-DWORD hookAddress = base + fnOnSpellCast + 0x27C;
+DWORD hookAddress = base + fnOnSpellCast + 0x2B2;
 DWORD BackAddy1 = hookAddress + hookLength;
 
 int hookLength2 = 10;
-DWORD hookAddress2 = base + fnOnAutoAttack + 0x286;
+DWORD hookAddress2 = base + fnOnAutoAttack + 0x1DC;
 DWORD BackAddy2 = hookAddress2 + hookLength2;
 
 int hookLength3 = 9;
-DWORD hookAddress3 = base + fnOnProcessSpellW + 0x33;
+DWORD hookAddress3 = base + fnOnProcessSpellW + 0x38;
 DWORD BackAddy3 = hookAddress3 + hookLength3;
 
 
@@ -20,6 +20,11 @@ int hookLength4 = 5;
 DWORD hookAddress4 = base + fnCreatePath + 0x2A6;
 DWORD BackAddy4 = hookAddress4 + hookLength4;
 DWORD callAddy4 = base + fnCheckIfInitialClickIsAvaliable;
+
+int hookLength5 = 6;
+DWORD hookAddress5 = base + fnCreateObject + 0x88;
+DWORD BackAddy5 = hookAddress5 + hookLength5;
+DWORD objectManagerAddress = oObjManager + base;
 
 bool Hook(void * toHook, void * ourFunct, int len) {
 	if (len < 5) {
@@ -46,13 +51,15 @@ void applyHooks() {
 	if (doOnce) {
 		doOnce = false;
 
-		//Hook((void*)hookAddress, onSpellCast, hookLength);
+		Hook((void*)hookAddress, onSpellCast, hookLength);
 
-		//Hook((void*)hookAddress2, onAutoAttack, hookLength2);
+		Hook((void*)hookAddress2, onAutoAttack, hookLength2);
 
-		Hook((void*)hookAddress3, onCast, hookLength3);
+		//Hook((void*)hookAddress3, onCast, hookLength3);
 
 		Hook((void*)hookAddress4, onWallClick, hookLength4);
+
+		Hook((void*)hookAddress5, onObjectCreation, hookLength5);
 	}
 }
 
@@ -91,20 +98,16 @@ void __declspec(naked) onAutoAttack() {
 
 	__asm {
 		popad
-		push dword ptr ss : [esp + 0Ch]
+		push dword ptr ss : [esp + 8]
 		pushad
 	}
-
-	DWORD autoAttackInfo;
 
 	__asm {
 		mov edx, ebx
 		mov ebx, [esp + 10h]
-		mov autoAttackInfo, ebx
+		mov autoAttackData, ebx
 		mov ebx, edx
 	}
-
-	applyActiveAutoCastInfo(autoAttackInfo);
 
 	__asm {
 		popad
@@ -115,23 +118,12 @@ void __declspec(naked) onAutoAttack() {
 }
 
 void __declspec(naked) onSpellCast() {
-	__asm {
-		pushad
-	}
-
-	DWORD spellCastInfo;
-
 
 	__asm {
-		mov spellCastInfo, eax
-	}
-
-	if (spellCastInfo != 0x3) {
-		applyActiveSpellCastInfo(spellCastInfo);
+		mov spellCastData, eax
 	}
 
 	__asm {
-		popad
 		push eax
 		lea ecx, dword ptr ss : [ebx - 1268h]
 	}
@@ -146,4 +138,14 @@ void _declspec(naked) onWallClick() {
 	_asm mov isWall, eax
 
 	_asm jmp BackAddy4
+}
+
+void _declspec(naked) onObjectCreation() {
+	
+	_asm {
+		mov		latestObject, esi
+		push    esi
+		mov     ecx, objectManagerAddress
+		jmp		BackAddy5
+	}
 }

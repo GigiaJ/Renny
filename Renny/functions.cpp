@@ -12,16 +12,13 @@ bool isZero(float number) {
 	return (number == 0);
 }
 
-int setEnemyTeam(object* myPlayer) {
-	int enemyTeam = 0;
-
+void setEnemyTeam(object* myPlayer) {
 	if (myPlayer->mTeam == 200) {
 		enemyTeam = 100;
 	}
 	else {
 		enemyTeam = 200;
 	}
-	return enemyTeam;
 }
 
 float modifySign(float numberToCheck, float numberToModify) {
@@ -32,7 +29,7 @@ float modifySign(float numberToCheck, float numberToModify) {
 		return abs(numberToModify);
 	}
 	if (isZero(numberToCheck)) {
-		return 0;
+		return 0.0f;
 	}
 	return NULL;
 }
@@ -44,8 +41,8 @@ float calculateEnemyFuturePosition(float distanceTravelledDuringCast, float sumS
 float absVectorDistance(Vector firstVector, Vector secondVector) {
 	float distanceFromEachotherX = secondVector.x - firstVector.x;
 	float distanceFromEachotherZ =  secondVector.z - firstVector.z;
-	float absoluteDistanceFromEachotherX = static_cast<float>(std::fabs(distanceFromEachotherX));
-	float absoluteDistanceFromEachotherZ = static_cast<float>(std::fabs(distanceFromEachotherZ));
+	float absoluteDistanceFromEachotherX = std::abs(distanceFromEachotherX);
+	float absoluteDistanceFromEachotherZ = std::abs(distanceFromEachotherZ);
 	return  absoluteDistanceFromEachotherX + absoluteDistanceFromEachotherZ;
 }
 
@@ -55,23 +52,8 @@ float absObjectDistanceApart(object* unitOne, object*unitTwo) {
 	return (absoluteCentersApart - unitSizesAdded);
 }
 
-void applyActiveAutoCastInfo(DWORD address) {
-	autoAttackData = (spellCastDataBase*)(address);
-}
-
-void applyActiveSpellCastInfo(DWORD address) {
-	spellCastData = (spellCastDataBase*)(address);
-}
-
-void applyCastInfo(DWORD address) {
-	spellCastData = reinterpret_cast<spellCastDataBase*>(address);
-}
-
 void getListOfEnemyChamps(object* myPlayer)
 {
-	std::ofstream myfile;
-	myfile.open("C:\\Users\\gigia\\Desktop\\Script Development\\output.txt");
-	int enemyTeam = setEnemyTeam(myPlayer);
 	for (int i = 0; i < objMgr->mArrayHighestIndex; i++) {
 		if (objMgr->mObjectManagerArray[i] != NULL) {
 			object* TemporaryObject = objMgr->mObjectManagerArray[i];
@@ -79,7 +61,7 @@ void getListOfEnemyChamps(object* myPlayer)
 			{
 				if (TemporaryObject->mIsTargetable)
 				{
-					if (TemporaryObject->mUnitType == 5121)
+					if (TemporaryObject->mUnitType == static_cast<int>(UnitType::HERO_UNIT))
 					{				
 						listOfEnemyChamps.push_back(TemporaryObject);
 					}
@@ -87,7 +69,6 @@ void getListOfEnemyChamps(object* myPlayer)
 			}
 		}
 	}
-	myfile.close();
 }
 
 object* getClosestEnemy(object* myPlayer, float range, float castRadius) {

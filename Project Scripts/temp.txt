@@ -1,0 +1,106 @@
+get_func_off_str(ea)
+	 
+
+Convert address to 'funcname+offset' string
+
+Parameters:
+
+        ea - address to convert
+
+Returns:
+    if the address belongs to a function then return a string formed as 'name+offset' where 'name' is a function name 'offset' is offset within the function else return null string 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+offset = None
+		nameOfOffset = ""
+		lastInstruction = ""
+		while i < 6:
+			address = idc.prev_head(address, minea=0)
+			currentInstruction = generate_disasm_line(address, 0)
+			if lastInstruction == "align 10h":
+				if currentInstruction == "retn    4":
+					break
+			lastInstruction = currentInstruction
+						
+			if currentInstruction.find("push    offset ") != -1:
+				currentInstruction = currentInstruction.replace("push    offset ", "")
+				endIndex = currentInstruction.find(";")
+				currentInstruction = currentInstruction[:endIndex]
+				addressOfName = get_name_ea_simple(currentInstruction)
+				nameOfOffset = GetString(addressOfName, -1, 0)
+			
+			if i == checkPoint:
+				if currentInstruction.find("push    esi") == -1 and currentInstruction.find("push    edi") == -1:
+					#print(generate_disasm_line(address, 0))
+					checkPoint = checkPoint + 1
+				else:
+					leadAddy = print_operand(address, 0)
+								
+			
+			if currentInstruction.find("add     ") != -1:
+				temp = print_operand(address, 1)
+				additionSignIndex = temp.find("+") + 1
+				subOffset = temp[additionSignIndex:].replace("h", "") 
+				functionAddress = get_name_ea_simple(get_func_name(address))
+				trueOffset = None
+				if functionAddress in BaseOffsets:
+					try:
+						trueOffset = int(BaseOffsets.get(functionAddress), 16) + int(subOffset, 16)
+					except ValueError:
+						pass
+					if trueOffset != None:
+						offset = trueOffset
+				if trueOffset == None:
+					offset = FindBaseOffsetValue(address, subOffset)
+				
+					
+			if currentInstruction.find("lea     " + leadAddy) != -1:
+				temp = print_operand(address, 1)
+				additionSignIndex = temp.find("+") + 1
+				if currentInstruction.find("h") != -1:				
+					offset = temp[additionSignIndex:].replace("h]", "")
+					offset = int(offset, 16)	
+				else: 
+					break
+					
+			if get_first_fcref_to(address) != 4294967295:
+				testAddressForCall = get_first_fcref_to(address)
+				if generate_disasm_line(testAddressForCall, 0).find("call") == -1:
+					address = testAddressForCall
+					print("Address To: " + "%0.2X " % get_first_fcref_to(address))
+					print("Actual Address: " + "%0.2X " % address)
+			i = i + 1
+		
+		if nameOfOffset == "":
+			nameOfOffset = "NO NAME"
+		if offset == None:
+			if nameOfOffset != "NO NAME":
+				offset = FindCallOffsetValue(currentAddress)
+			if offset == None:
+				offset = 65535
+		if nameOfOffset not in Offsets:
+			if nameOfOffset != "NO NAME":
+				if offset != 65535:
+					Offsets[nameOfOffset] = offset
+		else:
+			if nameOfOffset != "NO NAME":
+				if Offsets.get(nameOfOffset) == 65535:
+					Offsets[nameOfOffset] = offset
+				if offset != 65535:
+					Offsets[nameOfOffset] = offset

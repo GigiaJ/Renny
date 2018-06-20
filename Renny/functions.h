@@ -7,7 +7,7 @@ bool isNegative(float number);
 
 bool isZero(float number);
 
-int setEnemyTeam(object* myPlayer);
+void setEnemyTeam(object* myPlayer);
 
 float modifySign(float numberToCheck, float numberToModify);
 
@@ -16,12 +16,6 @@ float calculateEnemyFuturePosition(float arg1, float arg2, float arg3, float arg
 float absVectorDistance(Vector arg1, Vector arg2);
 
 float absObjectDistanceApart(object* unitOne, object*unitTwo);
-
-void applyActiveAutoCastInfo(DWORD arg1);
-
-void applyActiveSpellCastInfo(DWORD arg1);
-
-void applyCastInfo(DWORD arg1);
 
 void getListOfEnemyChamps(object* myPlayer);
 

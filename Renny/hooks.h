@@ -10,4 +10,6 @@ void onCast();
 
 void onWallClick();
 
+void onObjectCreation();
+
 void applyHooks();
